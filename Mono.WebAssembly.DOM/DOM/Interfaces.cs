@@ -884,5 +884,52 @@ namespace Mono.WebAssembly.DOM
         bool ShiftKey { get; set; }
     }
 
+    public interface IURLSearchParams
+    {
+        [Export("append")]
+        void Append(string name, string value);
+        [Export("delete")]
+        void Delete(string name);
+        [Export("get")]
+        string Get(string name);
+        [Export("getAll")]
+        string[] GetAll(string name);
+        [Export("has")]
+        bool Has(string name);
+        [Export("set")]
+        void Set(string name, string value);
+    }
+
+    public interface IURL
+    {
+        [Export("hash")]
+        string Hash { get; set; }
+        [Export("host")]
+        string Host { get; set; }
+        [Export("hostname")]
+        string Hostname { get; set; }
+        [Export("href")]
+        string Href { get; set; }
+        [Export("origin")]
+        string Origin { get; }
+        [Export("password")]
+        string Password { get; set; }
+        [Export("pathname")]
+        string Pathname { get; set; }
+        [Export("port")]
+        string Port { get; set; }
+        [Export("protocol")]
+        string Protocol { get; set; }
+        [Export("search")]
+        string Search { get; set; }
+        [Export("username")]
+        string Username { get; set; }
+        [Export("searchParams")]
+        URLSearchParams SearchParams { get; }
+        [Export("toString")]
+        string ToString();
+    }
+
+
 
 }

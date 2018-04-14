@@ -553,10 +553,10 @@ namespace Mono.WebAssembly.DOM
         public Window Top => GetProperty<Window>("top");
         [Export("window")]
         public Window IWindow => GetProperty<Window>("window");
-        // [Export("URL")]
-        // public URL Url { get => GetProperty<URL>("URL"); set => SetProperty<URL>("URL", value); }
-        // [Export("URLSearchParams")]
-        // public URLSearchParams UrlSearchParams { get => GetProperty<URLSearchParams>("URLSearchParams"); set => SetProperty<URLSearchParams>("URLSearchParams", value); }
+         [Export("URL")]
+         public URL Url { get => GetProperty<URL>("URL"); set => SetProperty<URL>("URL", value); }
+         [Export("URLSearchParams")]
+         public URLSearchParams UrlSearchParams { get => GetProperty<URLSearchParams>("URLSearchParams"); set => SetProperty<URLSearchParams>("URLSearchParams", value); }
         // [Export("Blob")]
         // public Blob Blob { get => GetProperty<Blob>("Blob"); set => SetProperty<Blob>("Blob", value); }
         // [Export("customElements")]
