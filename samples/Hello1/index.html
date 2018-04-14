@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>WebAssembly Hello1 Example</title>
+</head>
+<body>
+    <script src="wasm-dom.js"></script>
+    <script type='text/javascript'>
+            MonoDOMRuntime.onWasmDOMInitialized.push(
+                function() {
+                    console.log("Initialized");
+                    MonoDOMRuntime.applicationAssemblies.push(["hello.dll"]);
+                }
+            )
+            MonoDOMRuntime.onWasmDOMStarted.push(
+                function() {
+                    console.log("Started");
+
+                    try {
+                        var res = MonoDOMRuntime.runMainClass("hello", "Hello", "Program", "Main", "Hello from C#.");
+                        if (res)
+                            console.log(MonoDOMRuntime.conv_string (res));
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                }
+
+            )
+    </script>
+
+    <script defer src="mono.js"></script>
+</body>
+</html>

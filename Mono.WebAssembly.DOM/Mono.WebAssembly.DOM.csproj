@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CBB6864C-7D13-493F-815B-9DFFDC461253}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mono.WebAssembly.DOM</RootNamespace>
+    <AssemblyName>Mono.WebAssembly.DOM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="mscorlib">
+      <HintPath>..\mono\sdks\bcl\mscorlib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClrFuncReflectionWrap.cs" />
+    <Compile Include="MiniJSON.cs" />
+    <Compile Include="Runtime.cs" />
+    <Compile Include="RuntimeUtilities.cs" />
+    <Compile Include="DOM\Attr.cs" />
+    <Compile Include="DOM\BarProp.cs" />
+    <Compile Include="DOM\Document.cs" />
+    <Compile Include="DOM\Element.cs" />
+    <Compile Include="DOM\Enums.cs" />
+    <Compile Include="DOM\ExportAttribute.cs" />
+    <Compile Include="DOM\History.cs" />
+    <Compile Include="DOM\HTMLPage.cs" />
+    <Compile Include="DOM\Interfaces.cs" />
+    <Compile Include="DOM\JSObject.cs" />
+    <Compile Include="DOM\Location.cs" />
+    <Compile Include="DOM\NamedNodeMap.cs" />
+    <Compile Include="DOM\Node.cs" />
+    <Compile Include="DOM\NodeList.cs" />
+    <Compile Include="DOM\Performance.cs" />
+    <Compile Include="DOM\PerformanceNavigation.cs" />
+    <Compile Include="DOM\PerformanceTiming.cs" />
+    <Compile Include="DOM\Strings.cs" />
+    <Compile Include="DOM\WebKitPoint.cs" />
+    <Compile Include="DOM\Window.cs" />
+    <Compile Include="DOM\DOMTokenList.cs" />
+    <Compile Include="DOM\HTMLCollection.cs" />
+    <Compile Include="DOM\HTMLElement.cs" />
+    <Compile Include="DOM\HTMLCollectionOf.cs" />
+    <Compile Include="DOM\NodeListOf.cs" />
+    <Compile Include="DOM\HTMLLinkElement.cs" />
+    <Compile Include="DOM\StyleSheet.cs" />
+    <Compile Include="DOM\Extensions.cs" />
+    <Compile Include="DOM\HTMLTemplateElement.cs" />
+    <Compile Include="DOM\DocumentFragment.cs" />
+    <Compile Include="DOM\HTMLParagraphElement.cs" />
+    <Compile Include="DOM\HTMLButtonElement.cs" />
+    <Compile Include="DOM\EventTarget.cs" />
+    <Compile Include="DOM\Events.cs" />
+    <Compile Include="RuntimeEventManager.cs" />
+    <Compile Include="DOM\DOMEventHandler.cs" />
+    <Compile Include="DOM\DOMEventArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wasm-dom.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
