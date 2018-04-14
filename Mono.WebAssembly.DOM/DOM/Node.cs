@@ -81,7 +81,6 @@ namespace Mono.WebAssembly.DOM
         public Node PreviousSibling => GetProperty<Node>("previousSibling");
         [Export("textContent")]
         public string TextContent { get => GetProperty<string>("textContent"); set => SetProperty<string>("textContent", value); }
-
         [Export("appendChild")]
         public T AppendChild<T>(T newChild) where T : Node
         {
@@ -112,6 +111,13 @@ namespace Mono.WebAssembly.DOM
         {
             return InvokeMethod<bool>("hasChildNodes");
         }
+
+        [Export("insertBefore")]
+        public T InsertBefore<T>(T newChild, Node refChild) where T : Node
+        {
+            return InvokeMethod<T>("insertBefore", newChild, refChild);
+        }
+
         [Export("isDefaultNamespace")]
         public bool IsDefaultNamespace(string namespaceURI)
         {

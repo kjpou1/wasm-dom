@@ -16,6 +16,12 @@ namespace Mono.WebAssembly.DOM
         void DispatchDOMEvent(string type, string eventType, string UID, string eventHandle, string eventInfo = null);
     }
 
+    public interface INode
+    {
+        // needs to be generated again
+    }
+
+
     public interface INamedNodeMap
     {
         [Export("length")]
@@ -929,6 +935,45 @@ namespace Mono.WebAssembly.DOM
         [Export("toString")]
         string ToString();
     }
+
+    public interface IHTMLDivElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("noWrap")]
+        bool NoWrap { get; set; }
+    }
+
+
+    public interface IText : ICharacterData
+    {
+        [Export("wholeText")]
+        string WholeText { get; }
+        //[Export("assignedSlot")]
+        //HTMLSlotElement AssignedSlot { get; }
+        //[Export("splitText")]
+        //IText SplitText(double offset);
+    }
+
+    public interface ICharacterData : INode, IChildNode
+    {
+        [Export("data")]
+        string Data { get; set; }
+        [Export("length")]
+        double Length { get; }
+        [Export("appendData")]
+        void AppendData(string arg);
+        [Export("deleteData")]
+        void DeleteData(double offset, double count);
+        [Export("insertData")]
+        void InsertData(double offset, string arg);
+        [Export("replaceData")]
+        void ReplaceData(double offset, double count, string arg);
+        [Export("substringData")]
+        string SubstringData(double offset, double count);
+    }
+
+
 
 
 

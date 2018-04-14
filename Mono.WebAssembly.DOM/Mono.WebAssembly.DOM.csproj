@@ -78,6 +78,9 @@
     <Compile Include="DOM\DOMEventArgs.cs" />
     <Compile Include="DOM\URL.cs" />
     <Compile Include="DOM\URLSearchParams.cs" />
+    <Compile Include="DOM\HTMLDivElement.cs" />
+    <Compile Include="DOM\Text.cs" />
+    <Compile Include="DOM\CharacterData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wasm-dom.js">

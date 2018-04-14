@@ -927,6 +927,22 @@ namespace Mono.WebAssembly.DOM
             {
                 tagName = "button";
             }
+            else if (typeof(HTMLDivElement) == typeOfT)
+            {
+                tagName = "div";
+            }
+            else if (typeof(HTMLLinkElement) == typeOfT)
+            {
+                tagName = "link";
+            }
+            else if (typeof(HTMLParagraphElement) == typeOfT)
+            {
+                tagName = "p";
+            }
+            else if (typeof(HTMLTemplateElement) == typeOfT)
+            {
+                tagName = "template";
+            }
             else
                 throw new NotSupportedException($"Element of type {typeOfT} is not supported yet.  Please use the method CreateElement(tagName).");
 
@@ -960,15 +976,11 @@ namespace Mono.WebAssembly.DOM
         // {
         //     return InvokeMethod<Range>("createRange");
         // }
-        /**
-         * Creates a text string from the specified value.
-         * @param data String that specifies the nodeValue property of the text node.
-         */
-        // [Export("createTextNode")]
-        // public Text CreateTextNode(string data)
-        // {
-        //     return InvokeMethod<Text>("createTextNode", data);
-        // }
+         [Export("createTextNode")]
+         public Text CreateTextNode(string data)
+         {
+             return InvokeMethod<Text>("createTextNode", data);
+         }
         // [Export("createTouch")]
         // public Touch CreateTouch(Window view, EventTarget target, double identifier, double pageX, double pageY, double screenX, double screenY)
         // {
