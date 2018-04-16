@@ -26,11 +26,11 @@ namespace DragNDrop
 
 
             document.OnDragEnd += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
-                ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("opacity", "");
+                ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("opacity", null);
             };
 
             document.OnDragLeave += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
-                ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("opacity", "");
+                ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("opacity", null);
             };
 
 

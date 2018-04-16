@@ -201,9 +201,9 @@ var MonoDOMRuntime = {
                 return ;
         }
         //console.log('set attribute -> ' + attribute + ' [ ' + value + ' ]');
-        if (typeof(value) === "undefined" || value === null)
+        if (typeof(value) === "undefined")
         {
-            requireObject.removeAttribute(prop.attribute);
+            requireObject.removeAttribute(attribute);
         }
         else
         {
@@ -231,7 +231,14 @@ var MonoDOMRuntime = {
                 return ;
         }
         
-        requireObject.style[attribute] = value;
+        if (typeof(value) === "undefined")
+        {
+            requireObject.style[attribute] = "";
+        }
+        else
+        {
+            requireObject.style[attribute] = value;
+        }
         
         return true;
     },

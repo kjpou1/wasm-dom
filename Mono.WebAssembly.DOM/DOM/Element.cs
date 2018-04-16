@@ -324,11 +324,6 @@ namespace Mono.WebAssembly.DOM
         {
             InvokeMethod<object>("releasePointerCapture", pointerId);
         }
-        [Export("removeAttribute")]
-        public void RemoveAttribute(string qualifiedName)
-        {
-            InvokeMethod<object>("removeAttribute", qualifiedName);
-        }
         [Export("removeAttributeNode")]
         public Attr RemoveAttributeNode(Attr oldAttr)
         {
@@ -445,40 +440,72 @@ namespace Mono.WebAssembly.DOM
         #region Attribute and Style methods
 
         [Export("getAttribute")]
-        public string GetAttribute(string attributeName)
+        public string GetAttribute(string qualifiedName)
         {
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
 
-            var getAttributeFor = "MonoDOMRuntime.mono_wasm_get_attribute(" + Handle + ",\"" + attributeName + "\")";
+            var getAttributeFor = "MonoDOMRuntime.mono_wasm_get_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             return Runtime.ExecuteJavaScript(getAttributeFor);
 
         }
 
         [Export("setAttribute")]
-        public void SetAttribute(string attributeName, string value)
+        public void SetAttribute(string qualifiedName, string value)
         {
 
-            var setAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + attributeName + "\", \"" + value + "\")";
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
+
+            var setAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
             Runtime.ExecuteJavaScript(setAttributeFor);
 
         }
 
-
-        public void SetStyleAttribute(string styleName, string value)
+        [Export("removeAttribute")]
+        public void RemoveAttribute(string qualifiedName)
         {
 
-            var setStyleFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + styleName + "\", \"" + value + "\")";
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
+
+            var removeAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            Runtime.ExecuteJavaScript(removeAttributeFor);
+        }
+
+        public void SetStyleAttribute(string qualifiedName, string value)
+        {
+
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
+
+            var setStyleFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
             Runtime.ExecuteJavaScript(setStyleFor);
 
         }
 
 
-        public string GetStyleAttribute(string styleName)
+        public string GetStyleAttribute(string qualifiedName)
         {
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
 
-            var getStyleFor = "MonoDOMRuntime.mono_wasm_get_style_attribute(" + Handle + ",\"" + styleName + "\")";
+
+            var getStyleFor = "MonoDOMRuntime.mono_wasm_get_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             return Runtime.ExecuteJavaScript(getStyleFor);
 
         }
+
+
+        public void RemoveStyleAttribute(string qualifiedName)
+        {
+            if (string.IsNullOrEmpty(qualifiedName))
+                throw new ArgumentNullException(nameof(qualifiedName));
+
+            var removeAttributeFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            Runtime.ExecuteJavaScript(removeAttributeFor);
+        }
+
 
         #endregion
 
