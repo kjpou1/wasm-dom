@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using System.Linq;
-using Mono.WebAssembly.DOM;
+using Mono.WebAssembly.Browser.DOM;
 
 namespace DOMElement
 {

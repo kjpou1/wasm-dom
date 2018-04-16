@@ -9,7 +9,7 @@ DOM_CONF=debug
 WASM_BCL_DIR=$(TOP)/mono/sdks/bcl
 DEPLOY_DIR=$(TOP)/mono
 MANAGED_DEPLOY_DIR=$(TOP)/mono/sdks/bcl
-MANAGED_WASM_DOM_DIR=$(TOP)/Mono.WebAssembly.DOM/bin/$(DOM_CONF)
+MANAGED_WASM_DOM_DIR=$(TOP)/Mono.WebAssembly.Browser/bin/$(DOM_CONF)
 
 BCL_ASSEMBLIES= \
         mscorlib.dll    \
@@ -21,7 +21,7 @@ APP_SOURCES = \
 	./Program.cs
 
 MANAGED_ASSEMBLIES= \
-        Mono.WebAssembly.DOM.dll
+        Mono.WebAssembly.Browser.dll
 
 TEST_DEPS = $(patsubst %,managed/%,$(BCL_ASSEMBLIES))
 TEST_CSC_DEPS = $(patsubst %,-r:%, $(TEST_DEPS))

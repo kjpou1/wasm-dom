@@ -1,5 +1,5 @@
 ﻿using System;
-using Mono.WebAssembly.DOM;
+using Mono.WebAssembly.Browser.DOM;
 
 namespace CreateElement
 {

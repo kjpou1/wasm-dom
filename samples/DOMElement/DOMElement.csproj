@@ -41,13 +41,13 @@
     <None Include="sections\section2.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mono.WebAssembly.DOM\Mono.WebAssembly.DOM.csproj">
-      <Project>{CBB6864C-7D13-493F-815B-9DFFDC461253}</Project>
-      <Name>Mono.WebAssembly.DOM</Name>
-    </ProjectReference>
+    <Folder Include="sections\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="sections\" />
+    <ProjectReference Include="..\..\Mono.WebAssembly.Browser\Mono.WebAssembly.Browser.csproj">
+      <Project>{CBB6864C-7D13-493F-815B-9DFFDC461253}</Project>
+      <Name>Mono.WebAssembly.Browser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
