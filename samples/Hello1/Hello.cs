@@ -41,16 +41,16 @@ namespace Hello
             };
 
             // Make a list
-            var ul = document.CreateElement("ul");
+            var ul = document.CreateElement<HTMLUListElement>();
             document.Body.AppendChild(ul);
 
-            var li1 = document.CreateElement("li");
-            var li2 = document.CreateElement("li");
+            var li1 = document.CreateElement<HTMLLIElement>();
+            var li2 = document.CreateElement<HTMLLIElement>();
             ul.AppendChild(li1);
             ul.AppendChild(li2);
 
             ul.OnClick += (JSObject sender, DOMEventArgs args2) => {
-                args2.EventObject.Target.ConvertTo<HTMLElement>().Hidden = true;
+                args2.EventObject.Target.ConvertTo<HTMLElement>().SetStyleAttribute("visibility", "hidden");
             };
 
 

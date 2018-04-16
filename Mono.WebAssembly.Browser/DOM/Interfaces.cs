@@ -1049,8 +1049,30 @@ namespace Mono.WebAssembly.Browser.DOM
         string SubstringData(double offset, double count);
     }
 
+    public interface IHTMLUListElement : IHTMLElement
+    {
+        [Export("compact")]
+        bool Compact { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
 
 
+    public interface IHTMLLIElement : IHTMLElement
+    {
+        [Export("type")]
+        string Type { get; set; }
+        [Export("value")]
+        double Value { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
 
 
 }

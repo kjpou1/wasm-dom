@@ -8,7 +8,7 @@ namespace Mono.WebAssembly.Browser.DOM
 
 
     [Export("EventTarget", typeof(Mono.WebAssembly.JSObject))]
-    public class EventTarget : JSObject, IEventTarget
+    public partial class EventTarget : JSObject, IEventTarget
     {
         public EventTarget(int handle) : base(handle) { }
 
@@ -60,41 +60,6 @@ namespace Mono.WebAssembly.Browser.DOM
         public void RemoveEventListener(string type, DOMEventHandler listener, object options)
         {
 
-        }
-
-		protected internal override object ConvertTo(Type targetType)
-		{
-
-            if (targetType.IsAssignableFrom(base.GetType()))
-            {
-                return this;
-            }
-            else if (targetType.IsSubclassOf(this.GetType()))
-            {
-                return CreateJSObjectFrom(targetType, this);
-            }
-
-            return base.ConvertTo(targetType);
-		}
-
-        public void DispatchDOMEvent(string type, string typeOfEvent, string UID, string eventHandle, string eventInfo = null)
-        {
-
-//#if DEBUG
-            //Console.WriteLine($"EventType: {type} TypeOfEvent: {typeOfEvent}, Event Id: {UID}, Event Handle: {eventHandle}, Event Info: {eventInfo}");
-//#endif
-
-            var eventArgs = new DOMEventArgs(this, type, typeOfEvent, eventHandle, eventInfo);
-
-
-            lock (eventHandlers)
-            {
-                DOMEventHandler eventHandler;
-                if (eventHandlers.TryGetValue(type, out eventHandler))
-                {
-                    eventHandler?.Invoke(this, eventArgs);
-                }
-            }
         }
 
     }

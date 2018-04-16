@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("Document", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class Document : Node
+    public sealed partial class Document : Node
     {
         internal Document(int handle) : base(handle) { }
 
@@ -703,36 +703,7 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             return InvokeMethod<HTMLElement>("createElement", tagName);
         }
-        [Export("createElement")]
-        public T CreateElement<T>() 
-        {
-            var tagName = string.Empty;
-            var typeOfT = typeof(T);
-            if (typeof(HTMLButtonElement) == typeOfT)
-            {
-                tagName = "button";
-            }
-            else if (typeof(HTMLDivElement) == typeOfT)
-            {
-                tagName = "div";
-            }
-            else if (typeof(HTMLLinkElement) == typeOfT)
-            {
-                tagName = "link";
-            }
-            else if (typeof(HTMLParagraphElement) == typeOfT)
-            {
-                tagName = "p";
-            }
-            else if (typeof(HTMLTemplateElement) == typeOfT)
-            {
-                tagName = "template";
-            }
-            else
-                throw new NotSupportedException($"Element of type {typeOfT} is not supported yet.  Please use the method CreateElement(tagName).");
 
-            return InvokeMethod<T>("createElement", tagName);
-        }
         // [Export("createExpression")]
         // public XPathExpression CreateExpression(string expression, XPathNSResolver resolver)
         // {
