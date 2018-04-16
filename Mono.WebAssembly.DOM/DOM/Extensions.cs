@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+
 namespace Mono.WebAssembly.DOM
 {
     public static class Extensions
@@ -6,9 +8,19 @@ namespace Mono.WebAssembly.DOM
         public static T As<T>(this Element htmlElement) where T : Element
         {
             var type = typeof(T);
-            var instance = Activator.CreateInstance(type, new object[] { htmlElement.Handle });
+            var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null, new Type[] { typeof(Int32) }, null);
 
-            return (T)instance;
+            return (T)jsobjectnew.Invoke(new object[] { htmlElement.Handle });
+        }
+
+        public static T As<T>(this EventTarget eventTarget) where T : EventTarget
+        {
+            var type = typeof(T);
+            var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null, new Type[] { typeof(Int32) }, null);
+
+            return (T)jsobjectnew.Invoke(new object[] { eventTarget.Handle });
         }
     }
 }

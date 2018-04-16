@@ -33,6 +33,10 @@ namespace Mono.WebAssembly.DOM
             {
                 EventObject = new MouseEvent(Convert.ToInt32(eventHandle));
             }
+            else if (typeOfEvent == "DragEvent")
+            {
+                EventObject = new DragEvent(Convert.ToInt32(eventHandle));
+            }
             else 
             {
                 EventObject = new Event(Convert.ToInt32(eventHandle));

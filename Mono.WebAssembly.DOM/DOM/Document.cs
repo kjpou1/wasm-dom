@@ -13,9 +13,6 @@ namespace Mono.WebAssembly.DOM
 
         [Export("activeElement")]
         public Element ActiveElement => GetProperty<Element>("activeElement");
-        /**
-         * Sets or gets the color of all active links in the document.
-         */
         [Export("alinkColor")]
         public string AlinkColor { get => GetProperty<string>("alinkColor"); set => SetProperty<string>("alinkColor", value); }
         /**
@@ -112,55 +109,31 @@ namespace Mono.WebAssembly.DOM
         public bool MsCapsLockWarningOff { get => GetProperty<bool>("msCapsLockWarningOff"); set => SetProperty<bool>("msCapsLockWarningOff", value); }
         [Export("msCSSOMElementFloatMetrics")]
         public bool MsCssomElementFloatMetrics { get => GetProperty<bool>("msCSSOMElementFloatMetrics"); set => SetProperty<bool>("msCSSOMElementFloatMetrics", value); }
-        /**
-         * Fires when the user aborts the download.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnAbort
         {
             add => AddEventListener("abort", value, false);
             remove => RemoveEventListener("abort", value, false);
         }
-        /**
-         * Fires when the object is set as the active element.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnActivate
         {
             add => AddEventListener("activate", value, false);
             remove => RemoveEventListener("activate", value, false);
         }
-        /**
-         * Fires immediately before the object is set as the active element.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnBeforeactivate
         {
             add => AddEventListener("beforeactivate", value, false);
             remove => RemoveEventListener("beforeactivate", value, false);
         }
-        /**
-         * Fires immediately before the activeElement is changed from the current object to another object in the parent document.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnBeforedeactivate
         {
             add => AddEventListener("beforedeactivate", value, false);
             remove => RemoveEventListener("beforedeactivate", value, false);
         }
-        /**
-         * Fires when the object loses the input focus.
-         * @param ev The focus event.
-         */
         public event DOMEventHandler OnBlur
         {
             add => AddEventListener("blur", value, false);
             remove => RemoveEventListener("blur", value, false);
         }
-        /**
-         * Occurs when playback is possible, but would require further buffering.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnCanplay
         {
             add => AddEventListener("canplay", value, false);
@@ -171,101 +144,57 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("canplaythrough", value, false);
             remove => RemoveEventListener("canplaythrough", value, false);
         }
-        /**
-         * Fires when the contents of the object or selection have changed.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnChange
         {
             add => AddEventListener("change", value, false);
             remove => RemoveEventListener("change", value, false);
         }
-        /**
-         * Fires when the user clicks the left mouse button on the object
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnClick
         {
             add => AddEventListener("click", value, false);
             remove => RemoveEventListener("click", value, false);
         }
-        /**
-         * Fires when the user clicks the right mouse button in the client area, opening the context menu.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnContextmenu
         {
             add => AddEventListener("contextmenu", value, false);
             remove => RemoveEventListener("contextmenu", value, false);
         }
-        /**
-         * Fires when the user double-clicks the object.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnDblclick
         {
             add => AddEventListener("dblclick", value, false);
             remove => RemoveEventListener("dblclick", value, false);
         }
-        /**
-         * Fires when the activeElement is changed from the current object to another object in the parent document.
-         * @param ev The UI Event
-         */
         public event DOMEventHandler OnDeactivate
         {
             add => AddEventListener("deactivate", value, false);
             remove => RemoveEventListener("deactivate", value, false);
         }
-        /**
-         * Fires on the source object continuously during a drag operation.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnDrag
         {
             add => AddEventListener("drag", value, false);
             remove => RemoveEventListener("drag", value, false);
         }
-        /**
-         * Fires on the source object when the user releases the mouse at the close of a drag operation.
-         * @param ev The event.
-         */
-        public event DOMEventHandler OnDragend
+        public event DOMEventHandler OnDragEnd
         {
             add => AddEventListener("dragend", value, false);
             remove => RemoveEventListener("dragend", value, false);
         }
-        /**
-         * Fires on the target element when the user drags the object to a valid drop target.
-         * @param ev The drag event.
-         */
-        public event DOMEventHandler OnDragenter
+        public event DOMEventHandler OnDragEnter
         {
             add => AddEventListener("dragenter", value, false);
             remove => RemoveEventListener("dragenter", value, false);
         }
-        /**
-         * Fires on the target object when the user moves the mouse out of a valid drop target during a drag operation.
-         * @param ev The drag event.
-         */
-        public event DOMEventHandler OnDragleave
+        public event DOMEventHandler OnDragLeave
         {
             add => AddEventListener("dragleave", value, false);
             remove => RemoveEventListener("dragleave", value, false);
         }
-        /**
-         * Fires on the target element continuously while the user drags the object over a valid drop target.
-         * @param ev The event.
-         */
-        public event DOMEventHandler OnDragover
+        public event DOMEventHandler OnDragOver
         {
             add => AddEventListener("dragover", value, false);
             remove => RemoveEventListener("dragover", value, false);
         }
-        /**
-         * Fires on the source object when the user starts to drag a text selection or selected object.
-         * @param ev The event.
-         */
-        public event DOMEventHandler OnDragstart
+        public event DOMEventHandler OnDragStart
         {
             add => AddEventListener("dragstart", value, false);
             remove => RemoveEventListener("dragstart", value, false);
@@ -275,46 +204,26 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("drop", value, false);
             remove => RemoveEventListener("drop", value, false);
         }
-        /**
-         * Occurs when the duration attribute is updated.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnDurationchange
         {
             add => AddEventListener("durationchange", value, false);
             remove => RemoveEventListener("durationchange", value, false);
         }
-        /**
-         * Occurs when the media element is reset to its initial state.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnEmptied
         {
             add => AddEventListener("emptied", value, false);
             remove => RemoveEventListener("emptied", value, false);
         }
-        /**
-         * Occurs when the end of playback is reached.
-         * @param ev The event
-         */
         public event DOMEventHandler OnEnded
         {
             add => AddEventListener("ended", value, false);
             remove => RemoveEventListener("ended", value, false);
         }
-        /**
-         * Fires when an error occurs during object loading.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnError
         {
             add => AddEventListener("error", value, false);
             remove => RemoveEventListener("error", value, false);
         }
-        /**
-         * Fires when the object receives focus.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnFocus
         {
             add => AddEventListener("focus", value, false);
@@ -340,118 +249,66 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("invalid", value, false);
             remove => RemoveEventListener("invalid", value, false);
         }
-        /**
-         * Fires when the user presses a key.
-         * @param ev The keyboard event
-         */
         public event DOMEventHandler OnKeydown
         {
             add => AddEventListener("keydown", value, false);
             remove => RemoveEventListener("keydown", value, false);
         }
-        /**
-         * Fires when the user presses an alphanumeric key.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnKeypress
         {
             add => AddEventListener("keypress", value, false);
             remove => RemoveEventListener("keypress", value, false);
         }
-        /**
-         * Fires when the user releases a key.
-         * @param ev The keyboard event
-         */
         public event DOMEventHandler OnKeyup
         {
             add => AddEventListener("keyup", value, false);
             remove => RemoveEventListener("keyup", value, false);
         }
-        /**
-         * Fires immediately after the browser loads the object.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnLoad
         {
             add => AddEventListener("load", value, false);
             remove => RemoveEventListener("load", value, false);
         }
-        /**
-         * Occurs when media data is loaded at the current playback position.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnLoadeddata
         {
             add => AddEventListener("loadeddata", value, false);
             remove => RemoveEventListener("loadeddata", value, false);
         }
-        /**
-         * Occurs when the duration and dimensions of the media have been determined.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnLoadedmetadata
         {
             add => AddEventListener("loadedmetadata", value, false);
             remove => RemoveEventListener("loadedmetadata", value, false);
         }
-        /**
-         * Occurs when Internet Explorer begins looking for media data.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnLoadstart
         {
             add => AddEventListener("loadstart", value, false);
             remove => RemoveEventListener("loadstart", value, false);
         }
-        /**
-         * Fires when the user clicks the object with either mouse button.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnMousedown
         {
             add => AddEventListener("mousedown", value, false);
             remove => RemoveEventListener("mousedown", value, false);
         }
-        /**
-         * Fires when the user moves the mouse over the object.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnMousemove
         {
             add => AddEventListener("mousemove", value, false);
             remove => RemoveEventListener("mousemove", value, false);
         }
-        /**
-         * Fires when the user moves the mouse pointer outside the boundaries of the object.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnMouseout
         {
             add => AddEventListener("mouseout", value, false);
             remove => RemoveEventListener("mouseout", value, false);
         }
-        /**
-         * Fires when the user moves the mouse pointer into the object.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnMouseover
         {
             add => AddEventListener("mouseover", value, false);
             remove => RemoveEventListener("mouseover", value, false);
         }
-        /**
-         * Fires when the user releases a mouse button while the mouse is over the object.
-         * @param ev The mouse event.
-         */
         public event DOMEventHandler OnMouseup
         {
             add => AddEventListener("mouseup", value, false);
             remove => RemoveEventListener("mouseup", value, false);
         }
-        /**
-         * Fires when the wheel button is rotated.
-         * @param ev The mouse event
-         */
         public event DOMEventHandler OnMousewheel
         {
             add => AddEventListener("mousewheel", value, false);
@@ -542,46 +399,26 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("mspointerup", value, false);
             remove => RemoveEventListener("mspointerup", value, false);
         }
-        /**
-         * Occurs when an item is removed from a Jump List of a webpage running in Site Mode.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnMssitemodejumplistitemremoved
         {
             add => AddEventListener("mssitemodejumplistitemremoved", value, false);
             remove => RemoveEventListener("mssitemodejumplistitemremoved", value, false);
         }
-        /**
-         * Occurs when a user clicks a button in a Thumbnail Toolbar of a webpage running in Site Mode.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnMsthumbnailclick
         {
             add => AddEventListener("msthumbnailclick", value, false);
             remove => RemoveEventListener("msthumbnailclick", value, false);
         }
-        /**
-         * Occurs when playback is paused.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnPause
         {
             add => AddEventListener("pause", value, false);
             remove => RemoveEventListener("pause", value, false);
         }
-        /**
-         * Occurs when the play method is requested.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnPlay
         {
             add => AddEventListener("play", value, false);
             remove => RemoveEventListener("play", value, false);
         }
-        /**
-         * Occurs when the audio or video has started playing.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnPlaying
         {
             add => AddEventListener("playing", value, false);
@@ -597,82 +434,46 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("pointerlockerror", value, false);
             remove => RemoveEventListener("pointerlockerror", value, false);
         }
-        /**
-         * Occurs to indicate progress while downloading media data.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnProgress
         {
             add => AddEventListener("progress", value, false);
             remove => RemoveEventListener("progress", value, false);
         }
-        /**
-         * Occurs when the playback rate is increased or decreased.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnRatechange
         {
             add => AddEventListener("ratechange", value, false);
             remove => RemoveEventListener("ratechange", value, false);
         }
-        /**
-         * Fires when the state of the object has changed.
-         * @param ev The event
-         */
         public event DOMEventHandler OnReadystatechange
         {
             add => AddEventListener("readystatechange", value, false);
             remove => RemoveEventListener("readystatechange", value, false);
         }
-        /**
-         * Fires when the user resets a form.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnReset
         {
             add => AddEventListener("reset", value, false);
             remove => RemoveEventListener("reset", value, false);
         }
-        /**
-         * Fires when the user repositions the scroll box in the scroll bar on the object.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnScroll
         {
             add => AddEventListener("scroll", value, false);
             remove => RemoveEventListener("scroll", value, false);
         }
-        /**
-         * Occurs when the seek operation ends.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnSeeked
         {
             add => AddEventListener("seeked", value, false);
             remove => RemoveEventListener("seeked", value, false);
         }
-        /**
-         * Occurs when the current playback position is moved.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnSeeking
         {
             add => AddEventListener("seeking", value, false);
             remove => RemoveEventListener("seeking", value, false);
         }
-        /**
-         * Fires when the current selection changes.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnSelect
         {
             add => AddEventListener("select", value, false);
             remove => RemoveEventListener("select", value, false);
         }
-        /**
-         * Fires when the selection state of a document changes.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnSelectionchange
         {
             add => AddEventListener("selectionchange", value, false);
@@ -683,19 +484,11 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("selectstart", value, false);
             remove => RemoveEventListener("selectstart", value, false);
         }
-        /**
-         * Occurs when the download has stopped.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnStalled
         {
             add => AddEventListener("stalled", value, false);
             remove => RemoveEventListener("stalled", value, false);
         }
-        /**
-         * Fires when the user clicks the Stop button or leaves the Web page.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnStop
         {
             add => AddEventListener("stop", value, false);
@@ -706,19 +499,11 @@ namespace Mono.WebAssembly.DOM
             add => AddEventListener("submit", value, false);
             remove => RemoveEventListener("submit", value, false);
         }
-        /**
-         * Occurs if the load operation has been intentionally halted.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnSuspend
         {
             add => AddEventListener("suspend", value, false);
             remove => RemoveEventListener("suspend", value, false);
         }
-        /**
-         * Occurs to indicate the current playback position.
-         * @param ev The event.
-         */
         public event DOMEventHandler OnTimeupdate
         {
             add => AddEventListener("timeupdate", value, false);
@@ -968,9 +753,6 @@ namespace Mono.WebAssembly.DOM
         // {
         //     return InvokeMethod<ProcessingInstruction>("createProcessingInstruction", target, data);
         // }
-        /**
-         *  Returns an empty range object that has both of its boundary points positioned at the beginning of the document.
-         */
         // [Export("createRange")]
         // public Range CreateRange()
         // {
@@ -1082,9 +864,6 @@ namespace Mono.WebAssembly.DOM
         // {
         //     return InvokeMethod<Selection>("getSelection");
         // }
-        /**
-         * Gets a value indicating whether the object currently has focus.
-         */
         [Export("hasFocus")]
         public bool HasFocus()
         {

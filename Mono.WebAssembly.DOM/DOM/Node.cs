@@ -148,6 +148,17 @@ namespace Mono.WebAssembly.DOM
         {
             InvokeMethod<object>("normalize");
         }
+
+        [Export("removeChild")]
+        public T RemoveChild<T>(T oldChild) where T : Node
+        {
+            return InvokeMethod<T>("removeChild", oldChild);
+        }
+        [Export("replaceChild")]
+        public T ReplaceChild<T>(T newChild, Node oldChile) where T : Node
+        {
+            return InvokeMethod<T>("replaceChild", newChild, oldChile);
+        }
         [Export("toString")]
         public override string ToString()
         {

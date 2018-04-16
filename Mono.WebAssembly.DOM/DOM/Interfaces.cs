@@ -856,6 +856,17 @@ namespace Mono.WebAssembly.DOM
         double DeltaZ { get; set; }
     }
 
+    public interface IDragEvent : IMouseEvent
+    {
+        [Export("dataTransfer")]
+        DataTransfer DataTransfer { get; }
+        //[Export("initDragEvent")]
+        //void InitDragEvent(string typeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, double detailArg, double screenXArg, double screenYArg, double clientXArg, double clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, double buttonArg, EventTarget relatedTargetArg, IDataTransfer dataTransferArg);
+        //[Export("msConvertURL")]
+        //void MsConvertUrl(File file, string targetType, string targetURL);
+    }
+
+
     public interface IEventModifierInit : IUIEventInit
     {
         [Export("altKey")]
@@ -889,6 +900,61 @@ namespace Mono.WebAssembly.DOM
         [Export("shiftKey")]
         bool ShiftKey { get; set; }
     }
+
+    public interface IDataTransfer
+    {
+        [Export("dropEffect")]
+        string DropEffect { get; set; }
+        [Export("effectAllowed")]
+        string EffectAllowed { get; set; }
+        //[Export("files")]
+        //FileList Files { get; }
+        [Export("items")]
+        DataTransferItemList Items { get; }
+        [Export("types")]
+        string[] Types { get; }
+        [Export("clearData")]
+        bool ClearData(string format);
+        [Export("getData")]
+        string GetData(string format);
+        [Export("setData")]
+        bool SetData(string format, string data);
+        [Export("setDragImage")]
+        void SetDragImage(Element image, double x, double y);
+    }
+
+    public interface IDataTransferItem
+    {
+        [Export("kind")]
+        string Kind { get; }
+        [Export("type")]
+        string Type { get; }
+        //[Export("getAsFile")]
+        //File GetAsFile();
+        //[Export("getAsString")]
+        //void GetAsString(FunctionStringCallback _callback);
+        //[Export("webkitGetAsEntry")]
+        //Object WebkitGetAsEntry();
+    }
+
+    public interface IDataTransferItemList
+    {
+        [Export("length")]
+        double Length { get; }
+        //[Export("add")]
+        //IDataTransferItem Add(File data);
+        [Export("clear")]
+        void Clear();
+        [Export("item")]
+        DataTransferItem Item(double index);
+        [Export("remove")]
+        void Remove(double index);
+        [IndexerName("TheItem")]
+        DataTransferItem this[double index] { get; set; }
+    }
+
+
+
 
     public interface IURLSearchParams
     {

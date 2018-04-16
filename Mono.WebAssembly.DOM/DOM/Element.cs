@@ -234,11 +234,6 @@ namespace Mono.WebAssembly.DOM
         public Element PreviousElementSibling => GetProperty<Element>("previousElementSibling");
         [Export("children")]
         public HTMLCollection Children => GetProperty<HTMLCollection>("children");
-        [Export("getAttribute")]
-        public string GetAttribute(string name)
-        {
-            return InvokeMethod<string>("getAttribute", name);
-        }
         [Export("getAttributeNode")]
         public Attr GetAttributeNode(string name)
         {
@@ -354,11 +349,6 @@ namespace Mono.WebAssembly.DOM
         {
             InvokeMethod<object>("requestPointerLock");
         }
-        [Export("setAttribute")]
-        public void SetAttribute(string name, string value)
-        {
-            InvokeMethod<object>("setAttribute", name, value);
-        }
         [Export("setAttributeNode")]
         public Attr SetAttributeNode(Attr newAttr)
         {
@@ -449,6 +439,50 @@ namespace Mono.WebAssembly.DOM
         {
             InvokeMethod<object>("remove");
         }
+
+
+        // Special Attribute and Style methods
+        #region Attribute and Style methods
+
+        [Export("getAttribute")]
+        public string GetAttribute(string attributeName)
+        {
+
+            var getAttributeFor = "MonoDOMRuntime.mono_wasm_get_attribute(" + Handle + ",\"" + attributeName + "\")";
+            return Runtime.ExecuteJavaScript(getAttributeFor);
+
+        }
+
+        [Export("setAttribute")]
+        public void SetAttribute(string attributeName, string value)
+        {
+
+            var setAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + attributeName + "\", \"" + value + "\")";
+            Runtime.ExecuteJavaScript(setAttributeFor);
+
+        }
+
+
+        public void SetStyleAttribute(string styleName, string value)
+        {
+
+            var setStyleFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + styleName + "\", \"" + value + "\")";
+            Runtime.ExecuteJavaScript(setStyleFor);
+
+        }
+
+
+        public string GetStyleAttribute(string styleName)
+        {
+
+            var getStyleFor = "MonoDOMRuntime.mono_wasm_get_style_attribute(" + Handle + ",\"" + styleName + "\")";
+            return Runtime.ExecuteJavaScript(getStyleFor);
+
+        }
+
+        #endregion
+
+
     }
 
 

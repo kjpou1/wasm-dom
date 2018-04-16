@@ -81,6 +81,10 @@
     <Compile Include="DOM\HTMLDivElement.cs" />
     <Compile Include="DOM\Text.cs" />
     <Compile Include="DOM\CharacterData.cs" />
+    <Compile Include="DOM\DragEvent.cs" />
+    <Compile Include="DOM\DataTransferItemList.cs" />
+    <Compile Include="DOM\DataTransferItem.cs" />
+    <Compile Include="DOM\DataTransfer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wasm-dom.js">

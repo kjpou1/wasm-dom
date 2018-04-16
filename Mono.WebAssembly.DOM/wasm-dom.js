@@ -1,7 +1,7 @@
 
 var MonoDOMRuntime = {
 
-    mono_wasm_debug : true,
+    mono_wasm_debug : false,
     mono_wasm_object_registry: {},
     mono_wasm_ref_counter: 0,
     mono_wasm_free_list: [],
@@ -192,6 +192,26 @@ var MonoDOMRuntime = {
         }
         return requireObject.getAttribute(attribute);
     },
+    mono_wasm_set_attribute: function (handle, attribute, value) {
+        var requireObject = this.mono_wasm_require_handle(handle);
+        if (typeof(requireObject) === 'undefined')
+        {
+            // We should probably throw an error here but for now
+            // we will just set the result
+                return ;
+        }
+        //console.log('set attribute -> ' + attribute + ' [ ' + value + ' ]');
+        if (typeof(value) === "undefined" || value === null)
+        {
+            requireObject.removeAttribute(prop.attribute);
+        }
+        else
+        {
+            requireObject.setAttribute(attribute, value);
+        }
+        
+        return true;
+    },
     mono_wasm_get_style_attribute: function (handle, attribute) {
         var requireObject = this.mono_wasm_require_handle(handle);
         if (typeof(requireObject) === 'undefined')
@@ -201,6 +221,19 @@ var MonoDOMRuntime = {
                 return ;
         }
         return requireObject.style[attribute];
+    },
+    mono_wasm_set_style_attribute: function (handle, attribute, value) {
+        var requireObject = this.mono_wasm_require_handle(handle);
+        if (typeof(requireObject) === 'undefined')
+        {
+            // We should probably throw an error here but for now
+            // we will just set the result
+                return ;
+        }
+        
+        requireObject.style[attribute] = value;
+        
+        return true;
     },
     mono_wasm_invoke: function (handle, methodName, args) {
         var requireObject = this.mono_wasm_require_handle(handle);
@@ -382,8 +415,23 @@ var MonoDOMRuntime = {
             });
     
             eventStruct["typeOfEvent"] = "MouseEvent";
+
+            if (e instanceof DragEvent)
+            {
+                MonoDOMRuntime.mono_wasm_event_helper.fillDragEventData(eventStruct, e, target);
+            }
+
         },        
-        
+        fillDragEventData: function (eventStruct, e, target)
+        {
+            var DOMDragEventProps = [];
+    
+            DOMDragEventProps.forEach(function (prop) {
+                eventStruct[prop] = e[prop];
+            });
+    
+            eventStruct["typeOfEvent"] = "DragEvent";
+        },     
     },
     runMainClass: function (assembly, name_Space, name, entryPoint, args)
     {
