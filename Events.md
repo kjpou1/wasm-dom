@@ -17,7 +17,7 @@ These are the most common event objects:
 | Animation Event | :x: | The parent of all event objects |
 | ClipboardEvent | :x: | For modification of the clipboard |
 | DragEvent | :heavy_check_mark: | For drag and drop interaction |
-| FocusEvent | :x: | For focus-related events |
+| FocusEvent | :heavy_check_mark: | For focus-related events |
 | HashChangeEvent | :x: | For changes in the anchor part of the URL |
 | InputEvent | :x: | For user input |
 | KeyboardEvent | :x: | For keyboard interaction |
@@ -29,6 +29,6 @@ These are the most common event objects:
 | TouchEvent | :x: | For touch interaction |
 | TransitionEvent | :x| For CSS transitions |
 | UiEvent | :heavy_check_mark: | For user interface interaction |
-| WheelEvent | :x: | For mousewheel interaction |
+| WheelEvent | :heavy_check_mark: | For mousewheel interaction |
 
 

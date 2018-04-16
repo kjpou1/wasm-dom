@@ -399,6 +399,10 @@ var MonoDOMRuntime = {
             {
                 MonoDOMRuntime.mono_wasm_event_helper.fillMouseEventData(eventStruct, e, target);
             }
+            else if (e instanceof UIEvent)
+            {
+                MonoDOMRuntime.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
+            }
     
             return eventStruct;
         },
@@ -438,6 +442,32 @@ var MonoDOMRuntime = {
             });
     
             eventStruct["typeOfEvent"] = "DragEvent";
+        },     
+        fillUIEventData: function (eventStruct, e, target)
+        {
+            var DOMUIEventProps = []
+    
+            DOMUIEventProps.forEach(function (prop) {
+                eventStruct[prop] = e[prop];
+            });
+    
+            eventStruct["typeOfEvent"] = "UIEvent";
+
+            if (e instanceof FocusEvent)
+            {
+                MonoDOMRuntime.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
+            }
+
+        },        
+        fillFocusEventData: function (eventStruct, e, target)
+        {
+            var DOMFocusEventProps = [];
+    
+            DOMFocusEventProps.forEach(function (prop) {
+                eventStruct[prop] = e[prop];
+            });
+    
+            eventStruct["typeOfEvent"] = "focusEvent";
         },     
     },
     runMainClass: function (assembly, name_Space, name, entryPoint, args)

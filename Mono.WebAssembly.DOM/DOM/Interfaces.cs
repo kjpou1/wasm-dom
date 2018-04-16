@@ -867,6 +867,15 @@ namespace Mono.WebAssembly.DOM
         //void MsConvertUrl(File file, string targetType, string targetURL);
     }
 
+    public interface IFocusEvent : IUIEvent
+    {
+        [Export("relatedTarget")]
+        EventTarget RelatedTarget { get; }
+        //[Export("initFocusEvent")]
+        //void InitFocusEvent(string typeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, double detailArg, EventTarget relatedTargetArg);
+    }
+
+
 
     public interface IEventModifierInit : IUIEventInit
     {

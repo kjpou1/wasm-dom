@@ -38,6 +38,10 @@ namespace Mono.WebAssembly.DOM
             {
                 EventObject = new DragEvent(Convert.ToInt32(eventHandle));
             }
+            else if (typeOfEvent == "FocusEvent")
+            {
+                EventObject = new FocusEvent(Convert.ToInt32(eventHandle));
+            }
             else 
             {
                 EventObject = new Event(Convert.ToInt32(eventHandle));

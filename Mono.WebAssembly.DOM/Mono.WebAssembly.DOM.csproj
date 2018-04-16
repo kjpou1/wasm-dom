@@ -89,6 +89,7 @@
     <Compile Include="DOM\Events\MouseEvent.cs" />
     <Compile Include="DOM\Events\PointerEvent.cs" />
     <Compile Include="DOM\Events\WheelEvent.cs" />
+    <Compile Include="DOM\Events\FocusEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wasm-dom.js">
