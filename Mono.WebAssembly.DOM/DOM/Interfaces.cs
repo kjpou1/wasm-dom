@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Mono.WebAssembly;
+using Mono.WebAssembly.DOM.Events;
 
 namespace Mono.WebAssembly.DOM
 {

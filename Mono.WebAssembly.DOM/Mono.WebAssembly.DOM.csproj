@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CBB6864C-7D13-493F-815B-9DFFDC461253}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mono.WebAssembly.DOM</RootNamespace>
+    <RootNamespace>Mono.WebAssembly</RootNamespace>
     <AssemblyName>Mono.WebAssembly.DOM</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
   </PropertyGroup>
@@ -72,7 +72,6 @@
     <Compile Include="DOM\HTMLParagraphElement.cs" />
     <Compile Include="DOM\HTMLButtonElement.cs" />
     <Compile Include="DOM\EventTarget.cs" />
-    <Compile Include="DOM\Events.cs" />
     <Compile Include="RuntimeEventManager.cs" />
     <Compile Include="DOM\DOMEventHandler.cs" />
     <Compile Include="DOM\DOMEventArgs.cs" />
@@ -81,15 +80,23 @@
     <Compile Include="DOM\HTMLDivElement.cs" />
     <Compile Include="DOM\Text.cs" />
     <Compile Include="DOM\CharacterData.cs" />
-    <Compile Include="DOM\DragEvent.cs" />
     <Compile Include="DOM\DataTransferItemList.cs" />
     <Compile Include="DOM\DataTransferItem.cs" />
     <Compile Include="DOM\DataTransfer.cs" />
+    <Compile Include="DOM\Events\DragEvent.cs" />
+    <Compile Include="DOM\Events\Event.cs" />
+    <Compile Include="DOM\Events\UIEvent.cs" />
+    <Compile Include="DOM\Events\MouseEvent.cs" />
+    <Compile Include="DOM\Events\PointerEvent.cs" />
+    <Compile Include="DOM\Events\WheelEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wasm-dom.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DOM\Events\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

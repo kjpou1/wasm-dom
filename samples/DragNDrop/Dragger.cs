@@ -1,5 +1,6 @@
 ﻿using System;
 using Mono.WebAssembly.DOM;
+using Mono.WebAssembly.DOM.Events;
 
 namespace DragNDrop
 {
