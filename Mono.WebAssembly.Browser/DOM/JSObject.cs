@@ -9,6 +9,14 @@ namespace Mono.WebAssembly
         int handle;
         public int Handle { get => handle; private set {handle = value; } }
 
+        internal JSObject managedParentObject;
+
+        // Inheritance Chain
+        protected JSObject ManagedParentObject
+        {
+            get { return managedParentObject; }
+        }
+
         internal JSObject() { }
 
         internal JSObject(int reference)
@@ -241,6 +249,46 @@ namespace Mono.WebAssembly
         public override int GetHashCode()
         {
             return Handle;
+        }
+
+		public T ConvertTo<T>()
+		{
+			return (T)((object)this.ConvertTo(typeof(T)));
+		}
+
+		protected internal virtual object ConvertTo(Type targetType)
+		{
+			if (targetType.IsAssignableFrom(base.GetType()))
+			{
+				return this;
+			}
+            throw new ArgumentException($"Conversion Failed : {this.GetType()} to {targetType}");
+		}
+
+
+        static internal T CreateJSObject<T>(int objHandle)
+        {
+
+            var type = typeof(T);
+            var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null, new Type[] { typeof(Int32) }, null);
+
+            return (T)jsobjectnew.Invoke(new object[] { objHandle });
+
+        }
+
+        static internal object CreateJSObjectFrom(Type targetType, JSObject parentObject, bool inheritFrom = true)
+        {
+
+            var jsObjectConstructor = targetType.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                null, new Type[] { typeof(Int32) }, null);
+
+            var newJSObject = jsObjectConstructor.Invoke(new object[] { parentObject.handle });
+            if (inheritFrom)
+                ((JSObject)newJSObject).managedParentObject = parentObject;
+
+            return newJSObject;
+
         }
 
         public override string ToString()

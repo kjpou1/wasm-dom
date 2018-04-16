@@ -62,12 +62,27 @@ namespace Mono.WebAssembly.Browser.DOM
 
         }
 
+		protected internal override object ConvertTo(Type targetType)
+		{
+
+            if (targetType.IsAssignableFrom(base.GetType()))
+            {
+                return this;
+            }
+            else if (targetType.IsSubclassOf(this.GetType()))
+            {
+                return CreateJSObjectFrom(targetType, this);
+            }
+
+            return base.ConvertTo(targetType);
+		}
+
         public void DispatchDOMEvent(string type, string typeOfEvent, string UID, string eventHandle, string eventInfo = null)
         {
 
-#if DEBUG
+//#if DEBUG
             //Console.WriteLine($"EventType: {type} TypeOfEvent: {typeOfEvent}, Event Id: {UID}, Event Handle: {eventHandle}, Event Info: {eventInfo}");
-#endif
+//#endif
 
             var eventArgs = new DOMEventArgs(this, type, typeOfEvent, eventHandle, eventInfo);
 

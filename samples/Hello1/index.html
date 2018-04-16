@@ -6,6 +6,7 @@
 <body>
     <script src="wasm-dom.js"></script>
     <script type='text/javascript'>
+            MonoDOMRuntime.mono_wasm_debug = true;
             MonoDOMRuntime.onWasmDOMInitialized.push(
                 function() {
                     console.log("Initialized");

@@ -16,11 +16,7 @@ namespace Mono.WebAssembly.Browser.DOM
 
         public static T As<T>(this EventTarget eventTarget) where T : EventTarget
         {
-            var type = typeof(T);
-            var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                            null, new Type[] { typeof(Int32) }, null);
-
-            return (T)jsobjectnew.Invoke(new object[] { eventTarget.Handle });
+            return eventTarget.ConvertTo<T>();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Hello
                 {
                     Console.WriteLine("We have a MouseEvent");
                     var m = (MouseEvent)eventObject;
+                    //var = ()m.Target
                     Console.WriteLine($" Default Prevented   : {m.DefaultPrevented}");
                     args1.PreventDefault();
                     Console.WriteLine($" Default Prevented   : {m.DefaultPrevented}");
@@ -38,6 +39,21 @@ namespace Hello
                 ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++}";
 
             };
+
+            // Make a list
+            var ul = document.CreateElement("ul");
+            document.Body.AppendChild(ul);
+
+            var li1 = document.CreateElement("li");
+            var li2 = document.CreateElement("li");
+            ul.AppendChild(li1);
+            ul.AppendChild(li2);
+
+            ul.OnClick += (JSObject sender, DOMEventArgs args2) => {
+                args2.EventObject.Target.ConvertTo<HTMLElement>().Hidden = true;
+            };
+
+
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             System.Console.WriteLine($"elapsedMs: {elapsedMs}");
