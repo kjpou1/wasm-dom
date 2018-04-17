@@ -38,32 +38,37 @@
         </ul>
     </ul>
     <p id="loading"><i class="fa fa-refresh fa-spin" style="font-size:14px;margin-right:0.5em;"></i> Loading...</p>
+
+
+    <script src="mono-wasm-browser.js" defer></script>
+    <script src="sample_module.js"></script>
+    <script type='text/javascript'>
+            //Module.mono_wasm_debug = true;
+            Module.onWasmDOMInitialized.push(
+                function() {
+
+                    Module.applicationAssemblies.push(["DOMElement.dll"]);
+                    console.log("Initialized");
+                }
+            )
+            Module.onWasmDOMStarted.push(
+                function() {
+
+                    try {
+                        var res = Module.runMainClass("DOMElement", "DOMElement", "Program", "Main", "Hello from C#.");
+                        if (res)
+                            console.log(Module.conv_string (res));
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                    console.log("Started");
+                }
+            )
+    </script>  
+    <script defer src="mono.js"></script>        
+
   </body>
 
-  <script src="wasm-dom.js"></script>
-  <script type='text/javascript'>
-      MonoDOMRuntime.onWasmDOMInitialized.push(
-          function() {
-              console.log("Initialized");
-              MonoDOMRuntime.applicationAssemblies.push(["DOMElement.dll"]);
-          }
-      )
-      MonoDOMRuntime.onWasmDOMStarted.push(
-          function() {
-              console.log("Started");
 
-              try {
-                  var res = MonoDOMRuntime.runMainClass("DOMElement", "DOMElement", "Program", "Main", "Hello from C#.");
-                  if (res !== null)
-                      console.log(MonoDOMRuntime.conv_string (res));
-              } catch (e) {
-                  console.log(e);
-              }
-              
-          }
-
-      )
-  </script>
-    
-<script defer src="mono.js"></script>
 </html>

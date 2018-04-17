@@ -12,7 +12,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (string.IsNullOrEmpty(qualifiedName))
                 throw new ArgumentNullException(nameof(qualifiedName));
 
-            var getAttributeFor = "MonoDOMRuntime.mono_wasm_get_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            var getAttributeFor = "MonoWasmBrowserAPI.mono_wasm_get_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             return Runtime.ExecuteJavaScript(getAttributeFor);
 
         }
@@ -24,7 +24,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (string.IsNullOrEmpty(qualifiedName))
                 throw new ArgumentNullException(nameof(qualifiedName));
 
-            var setAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
+            var setAttributeFor = "MonoWasmBrowserAPI.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
             Runtime.ExecuteJavaScript(setAttributeFor);
 
         }
@@ -36,7 +36,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (string.IsNullOrEmpty(qualifiedName))
                 throw new ArgumentNullException(nameof(qualifiedName));
 
-            var removeAttributeFor = "MonoDOMRuntime.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            var removeAttributeFor = "MonoWasmBrowserAPI.mono_wasm_set_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             Runtime.ExecuteJavaScript(removeAttributeFor);
         }
 
@@ -46,7 +46,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (string.IsNullOrEmpty(qualifiedName))
                 throw new ArgumentNullException(nameof(qualifiedName));
 
-            var setStyleFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
+            var setStyleFor = "MonoWasmBrowserAPI.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\", \"" + value + "\")";
             Runtime.ExecuteJavaScript(setStyleFor);
 
         }
@@ -58,7 +58,7 @@ namespace Mono.WebAssembly.Browser.DOM
                 throw new ArgumentNullException(nameof(qualifiedName));
 
 
-            var getStyleFor = "MonoDOMRuntime.mono_wasm_get_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            var getStyleFor = "MonoWasmBrowserAPI.mono_wasm_get_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             return Runtime.ExecuteJavaScript(getStyleFor);
 
         }
@@ -69,7 +69,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (string.IsNullOrEmpty(qualifiedName))
                 throw new ArgumentNullException(nameof(qualifiedName));
 
-            var removeAttributeFor = "MonoDOMRuntime.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
+            var removeAttributeFor = "MonoWasmBrowserAPI.mono_wasm_set_style_attribute(" + Handle + ",\"" + qualifiedName + "\")";
             Runtime.ExecuteJavaScript(removeAttributeFor);
         }
 

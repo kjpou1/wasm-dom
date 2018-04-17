@@ -1,48 +1,40 @@
 
-var MonoDOMRuntime = {
+var MonoWasmBrowserAPI = {
 
-    mono_wasm_debug : false,
     mono_wasm_object_registry: {},
     mono_wasm_ref_counter: 0,
     mono_wasm_free_list: [],
-    onWasmDOMInitialized: [],
-    onWasmDOMStarted: [],
-    defaultBclLibraries: ["mscorlib.dll", "Mono.WebAssembly.Browser.dll", "System.dll", "System.Core.dll"],
-    applicationAssemblies: [],
-    onRuntimeInitialized: function ()
-    {
-        if (this.onWasmDOMInitialized) {
-            if (typeof this.onWasmDOMInitialized == 'function') this.onWasmDOMInitialized = [this.onWasmDOMInitialized];
-            while (this.onWasmDOMInitialized.length) {
-                this.onWasmDOMInitialized.shift()();
-            }
-        }           
-    },    
-    onBclLoaded: function () {
-        Module.print ("Done loading the BCL.");
-        
-        
-        this.load_runtime ("managed", 1);
+    mono_wasm_browser_assembly: function() { return "Mono.WebAssembly.Browser.dll" },
+    mono_wasm_browser_init: function() {  
+        this.mono_webassembly_browser = Module.assembly_load("Mono.WebAssembly.Browser");
+        if (!this.mono_webassembly_browser)
+            throw "Could not find assembly: " + "Mono.WebAssembly.Browser";
 
-        Module.print ("Done initializing the runtime.");
+        this.browser_event_manager = Module.find_class (this.mono_webassembly_browser, "Mono.WebAssembly", "RuntimeEventManager");
+        if (!this.browser_event_manager)
+            throw "Could not find: RuntimeEventManager in Mono.WebAssembly.Browser";
 
-        if (this.onWasmDOMStarted) {
-            if (typeof this.onWasmDOMStarted == 'function') this.onWasmDOMStarted = [this.onWasmDOMStarted];
-            while (this.onWasmDOMStarted.length) {
-                this.onWasmDOMStarted.shift()();
-            }
-        }                  
-        
+        this.browser_eventWrangler = Module.find_method (this.browser_event_manager, "EventWrangler", -1);
+        if (!this.browser_eventWrangler)
+            throw "Could not find: 'EventWrangler' in 'Runtime'";
+
+        var res = this.call_method (this.browser_eventWrangler, 
+            null, 
+            [Module.mono_string("initialize"), 
+            Module.mono_string("initialize"), 
+            Module.mono_string("-1")]);
+
+
     },
     conv_string: function (mono_obj) {
         if (mono_obj == 0)
             return null;
-        var raw = this.mono_string_get_utf8 (mono_obj);
+        var raw = Module.mono_string_get_utf8 (mono_obj);
         var res = Module.UTF8ToString (raw);
         Module._free (raw);
 
         return res;
-    },    
+    },        
     call_method: function (method, this_arg, args) {
         var args_mem = Module._malloc (args.length * 4);
         var eh_throw = Module._malloc (4);
@@ -50,7 +42,7 @@ var MonoDOMRuntime = {
             Module.setValue (args_mem + i * 4, args [i], "i32");
         Module.setValue (eh_throw, 0, "i32");
 
-        var res = this.invoke_method (method, this_arg, args_mem, eh_throw);
+        var res = Module.invoke_method (method, this_arg, args_mem, eh_throw);
 
         var eh_res = Module.getValue (eh_throw, "i32");
 
@@ -91,44 +83,6 @@ var MonoDOMRuntime = {
             }
         }
     },
-
-    // This routine will setup the correct wrapping of a function for execution 
-    // running in javascript as well as Node.js.  In the future this will provide
-    // the ability to hook back into Node.js so that 'require' can be used. 
-    mono_wasm_compile_function: function(dataPtr, is_exception) {
-        var str = UTF8ToString (dataPtr);
-        try {
-
-            var wrapper = '(function () { ' + str + ' })';
-            var compiledFunc = this.mono_wasm_eval_compile(str);
-            // Execute the function
-            var res = compiledFunc();
-            if (typeof res === 'undefined' || res === null)
-                return 0;
-            res = res.toString ();
-            setValue (is_exception, 0, "i32");
-        } catch (e) {
-            res = e.toString ();
-            Module.setValue (is_exception, 1, "i32");
-            if (typeof res === 'undefined' || res === null)
-                res = "unknown exception";
-        }
-        var buff = Module._malloc((res.length + 1) * 2);
-        stringToUTF16 (res, buff, (res.length + 1) * 2);
-        return buff;
-    },
-    mono_wasm_eval_compile: function (data) {
-        var wrapper = '(function () { ' + data + ' })';
-        //var funcFactory = this.globalEval(wrapper);
-        var funcFactory = eval(wrapper);
-        var func = funcFactory();
-        if (typeof func !== 'function') {
-            throw new Error('Eval code must return an instance of a JavaScript function. '
-                + 'Please use `return` statement to return a function.');
-        }
-    
-        return func;
-    },      
     mono_wasm_val_global: function (globalName) {
         function get_global() { return (function(){return Function;})()('return this')(); }
         var globalObj = get_global()[globalName];
@@ -329,23 +283,23 @@ var MonoDOMRuntime = {
                 // this may need to be used on windows and needs testing ??????
                 var e = event || window.event;
 
-                var eventStruct = MonoDOMRuntime.mono_wasm_event_helper.fillEventData(e, this);
+                var eventStruct = MonoWasmBrowserAPI.mono_wasm_event_helper.fillEventData(e, this);
 
                 // We will register the object on our object stack so PreventDefault, StopPropogation and other info
                 // methods will be available
-                var eventHandle = MonoDOMRuntime.mono_wasm_register_obj(e);
+                var eventHandle = MonoWasmBrowserAPI.mono_wasm_register_obj(e);
 
-                var res = MonoDOMRuntime.call_method (MonoDOMRuntime.dom_runtime_eventWrangler, null, 
-                    [MonoDOMRuntime.mono_string(eventStruct["type"]), 
-                        MonoDOMRuntime.mono_string(eventStruct["typeOfEvent"]), 
-                        MonoDOMRuntime.mono_string(eventHandler.uid.toString()),
-                        MonoDOMRuntime.mono_string(eventHandle.toString()),
-                        MonoDOMRuntime.mono_string(JSON.stringify(eventStruct)),
+                var res = MonoWasmBrowserAPI.call_method (MonoWasmBrowserAPI.browser_eventWrangler, null, 
+                    [Module.mono_string(eventStruct["type"]), 
+                        Module.mono_string(eventStruct["typeOfEvent"]), 
+                        Module.mono_string(eventHandler.uid.toString()),
+                        Module.mono_string(eventHandle.toString()),
+                        Module.mono_string(JSON.stringify(eventStruct)),
                     ]);
 
                 // We are now done with the event so we need to unregister the object from our object stack
                 // and free the handle for re-use. 
-                MonoDOMRuntime.mono_wasm_unregister_obj(e);
+                MonoWasmBrowserAPI.mono_wasm_unregister_obj(e);
             }
 
             eventHandler.target.addEventListener(eventHandler.eventTypeString, handler, false);
@@ -397,11 +351,11 @@ var MonoDOMRuntime = {
     
             if (e instanceof MouseEvent)
             {
-                MonoDOMRuntime.mono_wasm_event_helper.fillMouseEventData(eventStruct, e, target);
+                MonoWasmBrowserAPI.mono_wasm_event_helper.fillMouseEventData(eventStruct, e, target);
             }
             else if (e instanceof UIEvent)
             {
-                MonoDOMRuntime.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
+                MonoWasmBrowserAPI.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
             }
     
             return eventStruct;
@@ -429,7 +383,7 @@ var MonoDOMRuntime = {
 
             if (e instanceof DragEvent)
             {
-                MonoDOMRuntime.mono_wasm_event_helper.fillDragEventData(eventStruct, e, target);
+                MonoWasmBrowserAPI.mono_wasm_event_helper.fillDragEventData(eventStruct, e, target);
             }
 
         },        
@@ -455,7 +409,7 @@ var MonoDOMRuntime = {
 
             if (e instanceof FocusEvent)
             {
-                MonoDOMRuntime.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
+                MonoWasmBrowserAPI.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
             }
 
         },        
@@ -470,161 +424,4 @@ var MonoDOMRuntime = {
             eventStruct["typeOfEvent"] = "focusEvent";
         },     
     },
-    runMainClass: function (assembly, name_Space, name, entryPoint, args)
-    {
-        this.mono_webassembly_dom = MonoDOMRuntime.assembly_load("Mono.WebAssembly.Browser");
-        if (!this.mono_webassembly_dom)
-            throw "Could not find assembly: " + "Mono.WebAssembly.Browser";
-
-        this.dom_runtime_class = MonoDOMRuntime.find_class (this.mono_webassembly_dom, "Mono.WebAssembly", "RuntimeEventManager");
-        if (!this.dom_runtime_class)
-            throw "Could not find: Runtime in Mono.WebAssembly.Browser";
-
-        this.dom_runtime_eventWrangler = MonoDOMRuntime.find_method (this.dom_runtime_class, "EventWrangler", -1);
-        if (!this.dom_runtime_eventWrangler)
-            throw "Could not find: 'eventWrangler' in 'Runtime'";
-
-        var res = MonoDOMRuntime.call_method (this.dom_runtime_eventWrangler, null, [MonoDOMRuntime.mono_string("initialize"), MonoDOMRuntime.mono_string("initialize"), MonoDOMRuntime.mono_string("-1")]);
-
-        this.app_Assembly = MonoDOMRuntime.assembly_load (assembly);
-        if (!this.app_Assembly)
-            throw "Could not find assembly: " + assembly;
-
-        this.main_class = MonoDOMRuntime.find_class (this.app_Assembly, name_Space, name);
-        if (!this.main_class)
-            throw "Could not find: " + name_Space + "." + name + " in: " + assembly;
-
-        this.main_invoke = MonoDOMRuntime.find_method (this.main_class, entryPoint, -1);
-        if (!this.main_invoke)
-            throw "Could not find: " + entryPoint + " in: " + nameSpace + "." + name;
-        
-
-        if (typeof args === 'undefined')
-        {
-            args = [0];
-        }
-        else
-        {
-            var tempArgs;
-            if (typeof args === 'string' || args instanceof String)
-                tempArgs = args;
-            else
-            {
-                tempArgs = JSON.stringify(args);
-            }
-            args = [MonoDOMRuntime.mono_string(tempArgs)];
-        }
-
-        var res = MonoDOMRuntime.call_method (this.main_invoke, null, args);
-        return MonoDOMRuntime.conv_string (res);
-    }
-
-
-
 };
-
-var Module = {
-
-    print: function(x) { if (MonoDOMRuntime.mono_wasm_debug) console.log ("WASM-DOM: " + x) },
-    printErr: function(x) { if (MonoDOMRuntime.mono_wasm_debug) console.log ("WASM-DOM-ERR: " + x) },
-    startLoadTime: Date.now(),
-    runtimeLoadTime: null,
-    bclLoadTime: null,
-    onRuntimeInitialized: function ()
-    {
-        MonoDOMRuntime.onRuntimeInitialized();
-    },
-    mono_wasm_eval_hook: function (dataPtr, is_exception)
-    {
-        var str = UTF8ToString (dataPtr);
-        try {
-
-            var wrapper = '(function () { ' + str + ' })';
-            var compiledFunc = this.mono_wasm_eval_compile(str);
-            // Execute the function
-            var res = compiledFunc();
-            if (typeof res === 'undefined' || res === null)
-                return 0;
-            res = res.toString ();
-            setValue (is_exception, 0, "i32");
-        } catch (e) {
-            res = e.toString ();
-            Module.setValue (is_exception, 1, "i32");
-            if (typeof res === 'undefined' || res === null)
-                res = "unknown exception";
-        }
-        var buff = Module._malloc((res.length + 1) * 2);
-        stringToUTF16 (res, buff, (res.length + 1) * 2);
-        return buff;
-    },
-    mono_wasm_eval_compile: function (data) {
-        var wrapper = '(function () { ' + data + ' })';
-        //var funcFactory = this.globalEval(wrapper);
-        var funcFactory = eval(wrapper);
-        var func = funcFactory();
-        if (typeof func !== 'function') {
-            throw new Error('Eval code must return an instance of a JavaScript function. '
-                + 'Please use `return` statement to return a function.');
-        }
-    
-        return func;
-    },      
-};
-
-Module["preRun"] = [];
-Module["postRun"] = [];
-
-// override the preRun
-Module['preRun'].push(function() {
-
-    Module.print('preRun');
-
-    // it is ok to call cwrap before the runtime is loaded. we don't need the code
-    // and everything to be ready, since cwrap just prepares to call code, it 
-    // doesn't actually call it
-    MonoDOMRuntime.load_runtime = Module.cwrap ('mono_wasm_load_runtime', null, ['string'])
-    MonoDOMRuntime.assembly_load = Module.cwrap ('mono_wasm_assembly_load', 'number', ['string'])
-    MonoDOMRuntime.find_class = Module.cwrap ('mono_wasm_assembly_find_class', 'number', ['number', 'string', 'string'])
-    MonoDOMRuntime.find_method = Module.cwrap ('mono_wasm_assembly_find_method', 'number', ['number', 'string', 'number'])
-    MonoDOMRuntime.invoke_method = Module.cwrap ('mono_wasm_invoke_method', 'number', ['number', 'number', 'number'])
-    MonoDOMRuntime.mono_string_get_utf8 = Module.cwrap ('mono_wasm_string_get_utf8', 'number', ['number'])
-    MonoDOMRuntime.mono_string = Module.cwrap ('mono_wasm_string_from_js', 'number', ['string'])
-
-    
-});
-
-// override the postRun
-Module['postRun'].push(function() {
-
-    Module.print ("postRun");
-
-    Module.runtimeLoadTime = Date.now ();
-    Module.print ("Done with WASM module instantiation. Took " + (Module.runtimeLoadTime - Module.startLoadTime) + " ms");
-
-    Module.FS_createPath ("/", "managed", true, true);
-
-    var pending = 0;
-    var runAssemblies = MonoDOMRuntime.defaultBclLibraries;
-    if (MonoDOMRuntime.applicationAssemblies) {
-        runAssemblies = runAssemblies.concat(MonoDOMRuntime.applicationAssemblies);
-    }           
-
-    runAssemblies.forEach (function(asm_name) {
-        Module.print ("loading " + asm_name);
-        ++pending;
-        fetch ("managed/" + asm_name, { credentials: 'same-origin' }).then (function (response) {
-            if (!response.ok)
-                throw "failed to load Assembly '" + asm_name + "'";
-            return response['arrayBuffer']();
-        }).then (function (blob) {
-            var asm = new Uint8Array (blob);
-            Module.FS_createDataFile ("managed/" + asm_name, null, asm, true, true, true);
-            Module.print ("LOADED: " + asm_name);
-            --pending;
-            if (pending == 0)
-                MonoDOMRuntime.onBclLoaded ();
-        });
-    });
-
-});
-

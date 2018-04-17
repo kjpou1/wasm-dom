@@ -18,36 +18,38 @@
   <body id="docBody">
     <h1>DOMTree</h1>
 
-    This is the DOMTree Example
+    This is the DOMTree Example.  (See developer console for output.)
+
+    <script src="mono-wasm-browser.js" defer></script>
+    <script src="sample_module.js"></script>
+    <script type='text/javascript'>
+            Module.mono_wasm_debug = true;
+            Module.onWasmDOMInitialized.push(
+                function() {
+
+                    Module.applicationAssemblies.push(["DOMTree.dll"]);
+                    console.log("Initialized");
+                }
+            )
+            Module.onWasmDOMStarted.push(
+                function() {
+
+                    try {
+                        var res = Module.runMainClass("DOMTree", "DOMTree", "Program", "Main", "Hello from C#.");
+                        if (res)
+                            console.log(Module.conv_string (res));
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                    console.log("Started");
+                }
+            )
+    </script>  
+    <script defer src="mono.js"></script>        
 
   </body>
 
-  <script src="wasm-dom.js"></script>
-  <script type='text/javascript'>
-      MonoDOMRuntime.mono_wasm_debug = true;
-      MonoDOMRuntime.onWasmDOMInitialized.push(
-          function() {
-              console.log("Initialized");
-              MonoDOMRuntime.applicationAssemblies.push(["DOMTree.dll"]);
-          }
-      )
-      MonoDOMRuntime.onWasmDOMStarted.push(
-          function() {
-              console.log("Started");
 
-              try {
-                  var res = MonoDOMRuntime.runMainClass("DOMTree", "DOMTree", "Program", "Main", "Hello from C#.");
-                  if (res !== null)
-                      console.log(MonoDOMRuntime.conv_string (res));
-              } catch (e) {
-                  console.log(e);
-              }
-
-          }
-
-      )
-  </script>
-    
-<script defer src="mono.js"></script>
 </html>
 

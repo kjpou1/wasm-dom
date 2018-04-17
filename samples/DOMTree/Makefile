@@ -55,9 +55,10 @@ build: build-managed
 	cp $(DEPLOY_DIR)/$(DRIVER_CONF)/* publish/
 	cp $(MANAGED_DEPS) managed
 	cp -r managed publish/
-	cp $(MANAGED_WASM_DOM_DIR)/wasm-dom.js publish/
+	cp $(MANAGED_WASM_DOM_DIR)/mono-wasm-browser.js publish/
 	cp index.html publish/
-	cp $(DEPLOY_DIR)/sdks/server.py publish/	
+	cp $(TOP)/samples/sample_module.js publish/
+	cp $(DEPLOY_DIR)/sdks/server.py publish/
 
 clean:
 	rm -rf managed publish

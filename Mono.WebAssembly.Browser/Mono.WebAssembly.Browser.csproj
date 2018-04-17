@@ -98,12 +98,12 @@
     <Compile Include="DOM\HTMLUListElement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wasm-dom.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="DOM\Events\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DOM\Events\" />
+    <None Include="mono-wasm-browser.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

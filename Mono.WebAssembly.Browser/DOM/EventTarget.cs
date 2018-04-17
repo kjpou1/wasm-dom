@@ -44,7 +44,7 @@ namespace Mono.WebAssembly.Browser.DOM
 
                 RuntimeEventManager.RegisterEventTarget(UID, this);
 
-                var addEventListerFor = "MonoDOMRuntime.mono_wasm_addEventListener(" + Handle + ",\"" + type + "\"," + UID + ")";
+                var addEventListerFor = "MonoWasmBrowserAPI.mono_wasm_addEventListener(" + Handle + ",\"" + type + "\"," + UID + ")";
                 var res = Runtime.ExecuteJavaScript(addEventListerFor);
             }
         }

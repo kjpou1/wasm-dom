@@ -5,31 +5,33 @@
   </head>
   <body>
         <div id="div1">The text above has been created dynamically.</div>
-    <script src="wasm-dom.js"></script>
-    <script type='text/javascript'>
-        MonoDOMRuntime.onWasmDOMInitialized.push(
-            function() {
-                console.log("Initialized");
-                MonoDOMRuntime.applicationAssemblies.push(["CreateElement.exe"]);
-            }
-        )
-        MonoDOMRuntime.onWasmDOMStarted.push(
-            function() {
-                console.log("Started");
+        <script src="mono-wasm-browser.js"></script>
+        <script src="sample_module.js"></script>
+        <script type='text/javascript'>
+                //Module.mono_wasm_debug = true;
+                Module.onWasmDOMInitialized.push(
+                    function() {
 
-                try {
-                    var res = MonoDOMRuntime.runMainClass("CreateElement", "CreateElement", "MainClass", "Main", "Hello from C#.");
-                    if (res)
-                        console.log(MonoDOMRuntime.conv_string (res));
-                } catch (e) {
-                    console.log(e);
-                }
-
-            }
-
-        )
-    </script>
-          
+                        Module.applicationAssemblies.push(["CreateElement.exe"]);
+                        console.log("Initialized");
+                    }
+                )
+                Module.onWasmDOMStarted.push(
+                    function() {
+    
+                        try {
+                            var res = Module.runMainClass("CreateElement", "CreateElement", "MainClass", "Main", "Hello from C#.");
+                            if (res)
+                                console.log(Module.conv_string (res));
+                        } catch (e) {
+                            console.log(e);
+                        }
+    
+                        console.log("Started");
+                    }
+    
+                )
+        </script>          
     <script defer src="mono.js"></script>
   </body>
 </html>

@@ -84,8 +84,12 @@ void mono_add_internal_call (const char *name, const void* method);
 MonoString * mono_string_from_utf16 (char *data);
 MonoString* mono_string_new (MonoDomain *domain, const char *text);
 
-extern int mono_wasm_eval_hook(int data, int is_exception);
 void mono_wasm_enable_debugging (void);
+
+extern int mono_wasm_module_has_own_eval();
+extern int mono_wasm_eval_hook(int data, int is_exception);
+
+static int module_provides_eval_hook;
 
 static MonoDomain *root_domain;
 
@@ -123,6 +127,7 @@ mono_wasm_invoke_js (MonoString *str, int *is_exception)
 	MonoString *res = mono_string_from_utf16 (native_res);
 	free (native_res);
 	return res;
+	
 }
 
  static MonoString*
@@ -154,8 +159,11 @@ bool HasEnvironmentVariable(const char* variableName)
 
 void add_internal_calls()
 {
-	mono_add_internal_call ("WebAssembly.Runtime::InvokeJS", (const void*)&mono_wasm_invoke_js);
-	mono_add_internal_call ("WebAssembly.Runtime::InvokeJSHook", (const void*)&mono_wasm_invoke_eval_hook);
+	if (mono_wasm_module_has_own_eval())
+		mono_add_internal_call ("WebAssembly.Runtime::InvokeJS", (const void*)&mono_wasm_invoke_eval_hook);
+	else
+		mono_add_internal_call ("WebAssembly.Runtime::InvokeJS", (const void*)&mono_wasm_invoke_js);
+
 }
 
  EMSCRIPTEN_KEEPALIVE void

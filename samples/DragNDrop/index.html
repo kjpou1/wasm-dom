@@ -31,32 +31,34 @@
             }
         </style>    
 
-    <script src="wasm-dom.js"></script>
-    <script type='text/javascript'>
-        //MonoDOMRuntime.mono_wasm_debug = true;
-        MonoDOMRuntime.onWasmDOMInitialized.push(
-            function() {
-                MonoDOMRuntime.applicationAssemblies.push(["DragNDrop.exe"]);
-                console.log("Initialized");
-            }
-        )
-        MonoDOMRuntime.onWasmDOMStarted.push(
-            function() {
+        <script src="mono-wasm-browser.js" defer></script>
+        <script src="sample_module.js"></script>
+        <script type='text/javascript'>
+                //Module.mono_wasm_debug = true;
+                Module.onWasmDOMInitialized.push(
+                    function() {
 
-                try {
-                    var res = MonoDOMRuntime.runMainClass("DragNDrop", "DragNDrop", "MainClass", "Main", "Hello from C#.");
-                    console.log("Started");
-                    if (res)
-                        console.log(MonoDOMRuntime.conv_string (res));
-                } catch (e) {
-                    console.log(e);
-                }
+                        Module.applicationAssemblies.push(["DragNDrop.exe"]);
+                        console.log("Initialized");
+                    }
+                )
+                Module.onWasmDOMStarted.push(
+                    function() {
 
-            }
+                        try {
+                            var res = Module.runMainClass("DragNDrop", "DragNDrop", "MainClass", "Main", "Hello from C#.");
+                            if (res)
+                                console.log(Module.conv_string (res));
+                        } catch (e) {
+                            console.log(e);
+                        }
 
-        )
-    </script>
-          
-    <script defer src="mono.js"></script>
-  </body>
+                        console.log("Started");
+                    }
+                )
+        </script>  
+        <script defer src="mono.js"></script>        
+
+
+    </body>
 </html>

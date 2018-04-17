@@ -16,8 +16,7 @@ namespace Mono.WebAssembly
 #endif
 
             int exception = 0;
-            var wrappedFunction = "return function () { return " + str + "};";
-            var res = InvokeJSHook(wrappedFunction, out exception);
+            var res = InvokeJS(str, out exception);
             if (exception != 0)
                 throw new JSException(res);
             return res;
@@ -49,9 +48,6 @@ namespace WebAssembly
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern string InvokeJS(string str, out int exceptional_result);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern string InvokeJSHook(string str, out int exceptional_result);
 
     }
 }

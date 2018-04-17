@@ -4,10 +4,13 @@ using System.Reflection;
 
 namespace Mono.WebAssembly
 {
-    public class JSObject
+    public class JSObject : IDisposable
     {
         int handle;
         public int Handle { get => handle; private set {handle = value; } }
+
+        // Flag: Has Dispose already been called?
+        bool disposed = false;
 
         internal JSObject managedParentObject;
 
@@ -31,18 +34,18 @@ namespace Mono.WebAssembly
 
         protected static int GetGlobal(string str)
         {
-            var res = Runtime.ExecuteJavaScript("MonoDOMRuntime.mono_wasm_val_global(\"" + str + "\");");
+            var res = Runtime.ExecuteJavaScript("MonoWasmBrowserAPI.mono_wasm_val_global(\"" + str + "\");");
             return (res == null || res == "undefined") ? -1 : Int32.Parse(res);
         }
 
         protected T GetProperty<T>(string expr)
         {
-            var getPropOf = "MonoDOMRuntime.mono_wasm_get_property(" + Handle + ",\"" + expr + "\")";
+            var getPropOf = "MonoWasmBrowserAPI.mono_wasm_get_property(" + Handle + ",\"" + expr + "\")";
             object propertyValue = null;
             var type = typeof(T);
             if (type.IsSubclassOf(typeof(JSObject)) || typeof(JSObject) == type)
             {
-                propertyValue = Runtime.ExecuteJavaScript("MonoDOMRuntime.mono_wasm_register_obj(" 
+                propertyValue = Runtime.ExecuteJavaScript("MonoWasmBrowserAPI.mono_wasm_register_obj(" 
                     + getPropOf
                     + ");");
             }
@@ -55,7 +58,7 @@ namespace Mono.WebAssembly
 
         protected void SetProperty<T>(string expr, T value, bool createIfNotExists = true, bool hasOwnProperty = false)
         {
-            var setPropOf = "MonoDOMRuntime.mono_wasm_set_property(" + Handle + ",\"" + expr + "\",";
+            var setPropOf = "MonoWasmBrowserAPI.mono_wasm_set_property(" + Handle + ",\"" + expr + "\",";
             var setPropOptions = ", " + (createIfNotExists ? "true" : "false") + ", " + (hasOwnProperty ? "true" : "false") + ")";
             var objValue = WrapObject(value);
             Runtime.ExecuteJavaScript(setPropOf + objValue + setPropOptions);
@@ -100,7 +103,7 @@ namespace Mono.WebAssembly
                 }
                 else
                 {
-                    return "MonoDOMRuntime.mono_wasm_require_handle(" + ((JSObject)(object)obj).Handle + ")";
+                    return "MonoWasmBrowserAPI.mono_wasm_require_handle(" + ((JSObject)(object)obj).Handle + ")";
                 }
             }
             return "";
@@ -144,7 +147,7 @@ namespace Mono.WebAssembly
                 }
                 else
                 {
-                    return "MonoDOMRuntime.mono_wasm_require_handle(" + ((JSObject)(object)obj).Handle + ")";
+                    return "MonoWasmBrowserAPI.mono_wasm_require_handle(" + ((JSObject)(object)obj).Handle + ")";
                 }
             }
             return "";
@@ -210,7 +213,7 @@ namespace Mono.WebAssembly
         {
             var wrappedParms = new List<string>();
 
-            var invokeWith = "MonoDOMRuntime.mono_wasm_invoke(" + Handle + ",\"" + methodName + "\", [ ";
+            var invokeWith = "MonoWasmBrowserAPI.mono_wasm_invoke(" + Handle + ",\"" + methodName + "\", [ ";
             var invokeWithEnd = "])";
 
             for (int x =0; x < args.Length; x++)
@@ -225,7 +228,7 @@ namespace Mono.WebAssembly
 
             if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
-                invokeWith = "MonoDOMRuntime.mono_wasm_register_obj(" 
+                invokeWith = "MonoWasmBrowserAPI.mono_wasm_register_obj(" 
                     + invokeWith
                     + ");";
                 
@@ -294,6 +297,32 @@ namespace Mono.WebAssembly
         public override string ToString()
         {
             return $"JS Object {Handle}";
+        }
+
+        public void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                
+                // Free any other managed objects here.
+                //
+            }
+
+            // Free any unmanaged objects here.
+            //
+            disposed = true;
         }
 
     }

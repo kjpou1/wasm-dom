@@ -14,7 +14,7 @@ With that being said, the following are functioning:
 - Global Object access which includes javascrip objects like `Window` and `Document`. 
 - Property Getters and Setters
 - Method Invoke
-- Attributes and Attribute Styles (`Setters` are in progress)
+- Attributes and Attribute Styles Getters and Setters
 - AddEventListener and RemoveEventListener - These are made available via the `event DOMEventHandler` and `DOMEventArgs` classes.  C# event handlers code can be used to attach to these events that are made public.
     
 ## Contents
@@ -43,10 +43,9 @@ $ msbuild wasm-dom-library.sln
 
 ## Samples
 
-The [sampes](./samples) directory contains samples that can be run.
+The [samples](./samples) directory contains samples that can be run.
 
 ## Future Work
 
-- Support for dotnet projects
 - Project Templates
 - Generated NuGets to be made available

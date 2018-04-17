@@ -4,23 +4,24 @@
     <title>WebAssembly Hello1 Example</title>
 </head>
 <body>
-    <script src="wasm-dom.js"></script>
+    <script src="mono-wasm-browser.js"></script>
+    <script src="sample_module.js"></script>
     <script type='text/javascript'>
-            MonoDOMRuntime.mono_wasm_debug = true;
-            MonoDOMRuntime.onWasmDOMInitialized.push(
+            Module.mono_wasm_debug = true;
+            Module.onWasmDOMInitialized.push(
                 function() {
                     console.log("Initialized");
-                    MonoDOMRuntime.applicationAssemblies.push(["hello.dll"]);
+                    Module.applicationAssemblies.push(["hello.dll"]);
                 }
             )
-            MonoDOMRuntime.onWasmDOMStarted.push(
+            Module.onWasmDOMStarted.push(
                 function() {
                     console.log("Started");
 
                     try {
-                        var res = MonoDOMRuntime.runMainClass("hello", "Hello", "Program", "Main", "Hello from C#.");
+                        var res = Module.runMainClass("hello", "Hello", "Program", "Main", "Hello from C#.");
                         if (res)
-                            console.log(MonoDOMRuntime.conv_string (res));
+                            console.log(Module.conv_string (res));
                     } catch (e) {
                         console.log(e);
                     }
