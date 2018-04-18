@@ -23,19 +23,6 @@ namespace Hello
             button.OnClick += Button_OnClick;
             button.OnClick += (JSObject sender, DOMEventArgs args1) => {
 
-                var eventObject = args1.EventObject;
-
-                if (eventObject is MouseEvent)
-                {
-                    Console.WriteLine("We have a MouseEvent");
-                    var m = (MouseEvent)eventObject;
-                    //var = ()m.Target
-                    Console.WriteLine($" Default Prevented   : {m.DefaultPrevented}");
-                    args1.PreventDefault();
-                    Console.WriteLine($" Default Prevented   : {m.DefaultPrevented}");
-
-                }
-
                 ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++}";
 
             };

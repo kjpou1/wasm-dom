@@ -40,11 +40,11 @@ namespace Mono.WebAssembly.Browser.DOM
             if (addNativeEventListener)
             {
 
-                double UID = RuntimeUtilities.NextUID;
+                string UID = Guid.NewGuid().ToString();
 
                 RuntimeEventManager.RegisterEventTarget(UID, this);
 
-                var addEventListerFor = "MonoWasmBrowserAPI.mono_wasm_addEventListener(" + Handle + ",\"" + type + "\"," + UID + ")";
+                var addEventListerFor = "MonoWasmBrowserAPI.mono_wasm_addEventListener(" + Handle + ",\"" + type + "\",\"" + UID + "\")";
                 var res = Runtime.ExecuteJavaScript(addEventListerFor);
             }
         }
