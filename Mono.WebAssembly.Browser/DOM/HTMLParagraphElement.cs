@@ -5,11 +5,11 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLParagraphElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLParagraphElement : JSObject
+    public sealed class HTMLParagraphElement : HTMLElement
     {
         public HTMLParagraphElement(int handle) : base(handle) { }
 
-        public HTMLParagraphElement() { }
+        //public HTMLParagraphElement() { }
         [Export("align")]
         public string Align { get => GetProperty<string>("align"); set => SetProperty<string>("align", value); }
         [Export("clear")]
