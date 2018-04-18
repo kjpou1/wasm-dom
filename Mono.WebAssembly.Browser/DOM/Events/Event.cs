@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Mono.WebAssembly.Browser.DOM.Events
 {
     [Export("Event", typeof(Mono.WebAssembly.JSObject))]
