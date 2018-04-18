@@ -14,9 +14,9 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         [Export("CAPTURING_PHASE")]
         public double CapturingPhase => GetProperty<double>("CAPTURING_PHASE");
         [Export("bubbles")]
-        public bool Bubbles => GetProperty<bool>("bubbles");
+        public bool Bubbles { get; internal set; }
         [Export("cancelable")]
-        public bool Cancelable => GetProperty<bool>("cancelable");
+        public bool Cancelable { get; internal set; }
         [Export("cancelBubble")]
         public bool CancelBubble { get => GetProperty<bool>("cancelBubble"); set => SetProperty<bool>("cancelBubble", value); }
         [Export("currentTarget")]
@@ -24,9 +24,9 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         [Export("defaultPrevented")]
         public bool DefaultPrevented => GetProperty<bool>("defaultPrevented");
         [Export("eventPhase")]
-        public double EventPhase => GetProperty<double>("eventPhase");
+        public double EventPhase { get; internal set; }
         [Export("isTrusted")]
-        public bool IsTrusted => GetProperty<bool>("isTrusted");
+        public bool IsTrusted { get; internal set; }
         [Export("returnValue")]
         public bool ReturnValue { get => GetProperty<bool>("returnValue"); set => SetProperty<bool>("returnValue", value); }
         [Export("srcElement")]
@@ -34,16 +34,16 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         [Export("target")]
         public EventTarget Target => GetProperty<EventTarget>("target");
         [Export("timeStamp")]
-        public double TimeStamp => GetProperty<double>("timeStamp");
+        public double TimeStamp { get; internal set; }
         [Export("type")]
-        public string Type => GetProperty<string>("type");
+        public string Type { get; internal set; }
         [Export("scoped")]
-        public bool Scoped => GetProperty<bool>("scoped");
-        [Export("initEvent")]
-        public void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg)
-        {
-            InvokeMethod<object>("initEvent", eventTypeArg, canBubbleArg, cancelableArg);
-        }
+        public bool Scoped { get; internal set; }
+        //[Export("initEvent")]
+        //public void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg)
+        //{
+        //    InvokeMethod<object>("initEvent", eventTypeArg, canBubbleArg, cancelableArg);
+        //}
         [Export("preventDefault")]
         public void PreventDefault()
         {
@@ -64,5 +64,44 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         {
             return InvokeMethod<EventTarget[]>("deepPath");
         }
+
+        internal virtual void InitEvent(Dictionary<string, object> eventInfoDic)
+        {
+            Console.WriteLine("init event");
+            object value = null;
+
+            if (eventInfoDic.TryGetValue("bubbles", out value))
+            {
+                Bubbles = Convert.ToBoolean(value);
+            }
+
+            if (eventInfoDic.TryGetValue("cancelable", out value))
+            {
+                Cancelable = Convert.ToBoolean(value);
+            }
+
+            if (eventInfoDic.TryGetValue("timeStamp", out value))
+            {
+                TimeStamp = Convert.ToDouble(value);
+            }
+
+            if (eventInfoDic.TryGetValue("scoped", out value))
+            {
+                Scoped = Convert.ToBoolean(value);
+            }
+
+            if (eventInfoDic.TryGetValue("type", out value))
+            {
+                Type = Convert.ToString(value);
+            }
+
+
+            if (eventInfoDic.TryGetValue("eventPhase", out value))
+            {
+                EventPhase = Convert.ToDouble(value);
+            }
+
+        }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Mono.WebAssembly.Browser.DOM.Events
 {
 
@@ -17,6 +19,12 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         //{
         //    InvokeMethod<object>("initUIEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg);
         //}
+
+        internal override void InitEvent(Dictionary<string, object> eventInfoDic)
+        {
+            base.InitEvent(eventInfoDic);
+        }
+
     }
 
 }

@@ -51,65 +51,70 @@ namespace Mono.WebAssembly.Browser.DOM
             if (eventInfo != null)
             {
                 
-                var dict = Runtime.DeserializeJSON(eventInfo) as Dictionary<string, object>;
+                var eventInfoDic = Runtime.DeserializeJSON(eventInfo) as Dictionary<string, object>;
 
-                //foreach(var key in dict.Keys)
+                //foreach(var key in eventInfoDic.Keys)
                 //{
-                //    Console.WriteLine($"Key: {key} - Value: {dict[key]}");
+                //    Console.WriteLine($"Key: {key} - Value: {eventInfoDic[key]}");
                 //}
 
                 object value = null;
 
-                if (dict.TryGetValue("clientX", out value))
+                if (eventInfoDic.TryGetValue("clientX", out value))
                 {
                     ClientX = Convert.ToInt32(value);
                 }
 
-                if (dict.TryGetValue("clientY", out value))
+                if (eventInfoDic.TryGetValue("clientY", out value))
                 {
                     ClientY = Convert.ToInt32(value);
                 }
 
-                if (dict.TryGetValue("offsetX", out value))
+                if (eventInfoDic.TryGetValue("offsetX", out value))
                 {
                     OffsetX = Convert.ToInt32(value);
                 }
-                if (dict.TryGetValue("offsetY", out value))
+                if (eventInfoDic.TryGetValue("offsetY", out value))
                 {
                     OffsetY = Convert.ToInt32(value);
                 }
 
-                if (dict.TryGetValue("screenX", out value))
+                if (eventInfoDic.TryGetValue("screenX", out value))
                 {
                     ScreenX = Convert.ToInt32(value);
                 }
-                if (dict.TryGetValue("screenY", out value))
+                if (eventInfoDic.TryGetValue("screenY", out value))
                 {
                     ScreenY = Convert.ToInt32(value);
                 }
 
-                if (dict.TryGetValue("altKey", out value))
+                if (eventInfoDic.TryGetValue("altKey", out value))
                 {
                     AltKey = Convert.ToBoolean(value);
                 }
 
-                if (dict.TryGetValue("ctrlKey", out value))
+                if (eventInfoDic.TryGetValue("ctrlKey", out value))
                 {
                     CtrlKey = Convert.ToBoolean(value);
                 }
-                if (dict.TryGetValue("shiftKey", out value))
+                if (eventInfoDic.TryGetValue("shiftKey", out value))
                 {
                     ShiftKey = Convert.ToBoolean(value);
                 }
 
-                if (dict.TryGetValue("keyCode", out value))
+                if (eventInfoDic.TryGetValue("keyCode", out value))
                 {
                     KeyCode = Convert.ToInt32(value);
                 }
 
-                if (dict.TryGetValue("charCode", out value))
+                if (eventInfoDic.TryGetValue("charCode", out value))
                 {
                     CharCode = Convert.ToInt32(value);
+                }
+
+                if (eventInfoDic != null)
+                {
+                    EventObject.InitEvent(eventInfoDic);
                 }
 
             }

@@ -340,7 +340,10 @@ var MonoWasmBrowserAPI = {
             "pointerId",
             "pointerType",
             "screenX",
-            "screenY"]
+            "screenY",
+            "timeStamp",
+            "isTrusted",
+            "scoped"]
     
             var eventStruct = {};
             eventStruct["typeOfEvent"] = "Event";
@@ -373,7 +376,11 @@ var MonoWasmBrowserAPI = {
             "layerX",
             "layerY",
             "movementX",
-            "movementY"]
+            "movementY",
+            "metaKey",
+            "which",
+            "x",
+            "y"]
     
             DOMMouseEventProps.forEach(function (prop) {
                 eventStruct[prop] = e[prop];
