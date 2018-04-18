@@ -11,7 +11,7 @@
             Module.onWasmDOMInitialized.push(
                 function() {
                     console.log("Initialized");
-                    Module.applicationAssemblies.push(["hello.dll"]);
+                    Module.applicationAssemblies.push("hello.dll");
                 }
             )
             Module.onWasmDOMStarted.push(
