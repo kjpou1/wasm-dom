@@ -42,6 +42,10 @@ namespace Mono.WebAssembly.Browser.DOM
             {
                 EventObject = new FocusEvent(Convert.ToInt32(eventHandle));
             }
+            else if (typeOfEvent == "WheelEvent")
+            {
+                EventObject = new WheelEvent(Convert.ToInt32(eventHandle));
+            }
             else 
             {
                 EventObject = new Event(Convert.ToInt32(eventHandle));

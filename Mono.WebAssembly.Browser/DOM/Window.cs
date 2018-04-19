@@ -230,17 +230,17 @@ namespace Mono.WebAssembly.Browser.DOM
             add => AddEventListener("load", value, false);
             remove => RemoveEventListener("load", value, false);
         }
-        public event DOMEventHandler OnLoadeddata
+        public event DOMEventHandler OnLoadedData
         {
             add => AddEventListener("loadeddata", value, false);
             remove => RemoveEventListener("loadeddata", value, false);
         }
-        public event DOMEventHandler OnLoadedmetadata
+        public event DOMEventHandler OnLoadedMetaData
         {
             add => AddEventListener("loadedmetadata", value, false);
             remove => RemoveEventListener("loadedmetadata", value, false);
         }
-        public event DOMEventHandler OnLoadstart
+        public event DOMEventHandler OnLoadStart
         {
             add => AddEventListener("loadstart", value, false);
             remove => RemoveEventListener("loadstart", value, false);
@@ -250,47 +250,47 @@ namespace Mono.WebAssembly.Browser.DOM
             add => AddEventListener("message", value, false);
             remove => RemoveEventListener("message", value, false);
         }
-        public event DOMEventHandler OnMousedown
+        public event DOMEventHandler OnMouseDown
         {
             add => AddEventListener("mousedown", value, false);
             remove => RemoveEventListener("mousedown", value, false);
         }
-        public event DOMEventHandler OnMouseenter
+        public event DOMEventHandler OnMouseEnter
         {
             add => AddEventListener("mouseenter", value, false);
             remove => RemoveEventListener("mouseenter", value, false);
         }
-        public event DOMEventHandler OnMouseleave
+        public event DOMEventHandler OnMouseLeave
         {
             add => AddEventListener("mouseleave", value, false);
             remove => RemoveEventListener("mouseleave", value, false);
         }
-        public event DOMEventHandler OnMousemove
+        public event DOMEventHandler OnMouseMove
         {
             add => AddEventListener("mousemove", value, false);
             remove => RemoveEventListener("mousemove", value, false);
         }
-        public event DOMEventHandler OnMouseout
+        public event DOMEventHandler OnMouseOut
         {
             add => AddEventListener("mouseout", value, false);
             remove => RemoveEventListener("mouseout", value, false);
         }
-        public event DOMEventHandler OnMouseover
+        public event DOMEventHandler OnMouseOver
         {
             add => AddEventListener("mouseover", value, false);
             remove => RemoveEventListener("mouseover", value, false);
         }
-        public event DOMEventHandler OnMouseup
+        public event DOMEventHandler OnMouseUp
         {
             add => AddEventListener("mouseup", value, false);
             remove => RemoveEventListener("mouseup", value, false);
         }
-        public event DOMEventHandler OnMousewheel
+        public event DOMEventHandler OnMouseWheel
         {
             add => AddEventListener("mousewheel", value, false);
             remove => RemoveEventListener("mousewheel", value, false);
         }
-        public event DOMEventHandler OnMsgesturechange
+        public event DOMEventHandler OnMsgestureChange
         {
             add => AddEventListener("msgesturechange", value, false);
             remove => RemoveEventListener("msgesturechange", value, false);
@@ -375,17 +375,17 @@ namespace Mono.WebAssembly.Browser.DOM
             add => AddEventListener("online", value, false);
             remove => RemoveEventListener("online", value, false);
         }
-        public event DOMEventHandler OnOrientationchange
+        public event DOMEventHandler OnOrientationChange
         {
             add => AddEventListener("orientationchange", value, false);
             remove => RemoveEventListener("orientationchange", value, false);
         }
-        public event DOMEventHandler OnPagehide
+        public event DOMEventHandler OnPageHide
         {
             add => AddEventListener("pagehide", value, false);
             remove => RemoveEventListener("pagehide", value, false);
         }
-        public event DOMEventHandler OnPageshow
+        public event DOMEventHandler OnPageShow
         {
             add => AddEventListener("pageshow", value, false);
             remove => RemoveEventListener("pageshow", value, false);
@@ -405,7 +405,7 @@ namespace Mono.WebAssembly.Browser.DOM
             add => AddEventListener("playing", value, false);
             remove => RemoveEventListener("playing", value, false);
         }
-        public event DOMEventHandler OnPopstate
+        public event DOMEventHandler OnPopState
         {
             add => AddEventListener("popstate", value, false);
             remove => RemoveEventListener("popstate", value, false);
@@ -415,12 +415,12 @@ namespace Mono.WebAssembly.Browser.DOM
             add => AddEventListener("progress", value, false);
             remove => RemoveEventListener("progress", value, false);
         }
-        public event DOMEventHandler OnRatechange
+        public event DOMEventHandler OnRateChange
         {
             add => AddEventListener("ratechange", value, false);
             remove => RemoveEventListener("ratechange", value, false);
         }
-        public event DOMEventHandler OnReadystatechange
+        public event DOMEventHandler OnReadyStateChange
         {
             add => AddEventListener("readystatechange", value, false);
             remove => RemoveEventListener("readystatechange", value, false);

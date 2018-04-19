@@ -2,6 +2,8 @@ using System;
 using Mono.WebAssembly.Browser.DOM;
 using Mono.WebAssembly.Browser.DOM.Events;
 using Mono.WebAssembly;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Hello
 {
@@ -19,11 +21,28 @@ namespace Hello
             var button = document.CreateElement<HTMLButtonElement>();
             button.TextContent = "Click Me";
 
+            button.OnWheel += (JSObject sender, DOMEventArgs args1) => {
+                
+                var evt = (WheelEvent)args1.EventObject;
+                Console.WriteLine($"We gotsa wheel wwwhhheeeeee! {evt.DeltaMode}");
+            };
+
+
             document.Body.AppendChild(button);
             button.OnClick += Button_OnClick;
             button.OnClick += (JSObject sender, DOMEventArgs args1) => {
 
-                ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++}";
+                var evt = args1.EventObject;
+
+                ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes} times";
+
+                //Console.WriteLine("Application thread ID click: {0}",
+                //        Thread.CurrentThread.ManagedThreadId);
+                //var t2 = Task.Run(() => {
+                //    ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++} times";
+                //    Console.WriteLine("Task thread ID click: {0}",
+                //    Thread.CurrentThread.ManagedThreadId);
+                //});
 
             };
 

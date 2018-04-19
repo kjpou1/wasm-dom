@@ -1074,5 +1074,47 @@ namespace Mono.WebAssembly.Browser.DOM
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
+    public interface IHTMLFormElement : IHTMLElement
+    {
+        [Export("acceptCharset")]
+        string AcceptCharset { get; set; }
+        [Export("action")]
+        string Action { get; set; }
+        [Export("autocomplete")]
+        string Autocomplete { get; set; }
+        //[Export("elements")]
+        //HTMLFormControlsCollection Elements { get; }
+        [Export("encoding")]
+        string Encoding { get; set; }
+        [Export("enctype")]
+        string Enctype { get; set; }
+        [Export("length")]
+        double Length { get; }
+        [Export("method")]
+        string Method { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("noValidate")]
+        bool NoValidate { get; set; }
+        [Export("target")]
+        string Target { get; set; }
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("item")]
+        Object Item(Object name, Object index);
+        [Export("namedItem")]
+        Object NamedItem(string name);
+        [Export("reset")]
+        void Reset();
+        [Export("submit")]
+        void Submit();
+        [Export("reportValidity")]
+        bool ReportValidity();
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+        //Object this[string name] { get; set; }
+    }
 
 }

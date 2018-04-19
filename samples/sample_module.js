@@ -104,41 +104,6 @@ var Module = {
 
         return res;
     },    
-    mono_wasm_eval_hook: function (dataPtr, is_exception)
-    {
-        var str = UTF8ToString (dataPtr);
-        try {
-            var wrappedData = "return function () { return " + str + "};"
-            var wrapper = '(function () { ' + wrappedData + ' })';
-            var compiledFunc = this.mono_wasm_eval_compile(wrapper);
-            // Execute the function
-            var res = compiledFunc();
-            if (typeof res === 'undefined' || res === null)
-                return 0;
-            res = res.toString ();
-            setValue (is_exception, 0, "i32");
-        } catch (e) {
-            res = e.toString ();
-            Module.setValue (is_exception, 1, "i32");
-            if (typeof res === 'undefined' || res === null)
-                res = "unknown exception";
-        }
-        var buff = Module._malloc((res.length + 1) * 2);
-        stringToUTF16 (res, buff, (res.length + 1) * 2);
-        return buff;
-    },
-    mono_wasm_eval_compile: function (data) {
-        
-        //var funcFactory = this.globalEval(wrapper);
-        var funcFactory = eval(data);
-        var func = funcFactory();
-        if (typeof func !== 'function') {
-            throw new Error('Eval code must return an instance of a JavaScript function. '
-                + 'Please use `return` statement to return a function.');
-        }
-    
-        return func;
-    },      
 };
 
 Module["preRun"] = [];

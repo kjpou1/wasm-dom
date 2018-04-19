@@ -96,6 +96,7 @@
     <Compile Include="DOM\EventTarget.Convert.cs" />
     <Compile Include="DOM\HTMLLIElement.cs" />
     <Compile Include="DOM\HTMLUListElement.cs" />
+    <Compile Include="DOM\HTMLFormElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

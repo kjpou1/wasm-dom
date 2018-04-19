@@ -11,7 +11,7 @@ namespace Mono.WebAssembly.Browser.DOM.Events
 
         //        public UIEvent(string typeArg, IUIEventInit eventInitDict) { }
         [Export("detail")]
-        public double Detail => GetProperty<double>("detail");
+        public double Detail { get; internal set; }
         [Export("view")]
         public Window View => GetProperty<Window>("view");
         //[Export("initUIEvent")]
@@ -23,6 +23,13 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         internal override void InitEvent(Dictionary<string, object> eventInfoDic)
         {
             base.InitEvent(eventInfoDic);
+            object value = null;
+
+            if (eventInfoDic.TryGetValue("detail", out value))
+            {
+                Detail = Convert.ToInt32(value);
+            }
+
         }
 
     }

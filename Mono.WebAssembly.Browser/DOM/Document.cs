@@ -15,19 +15,10 @@ namespace Mono.WebAssembly.Browser.DOM
         public Element ActiveElement => GetProperty<Element>("activeElement");
         [Export("alinkColor")]
         public string AlinkColor { get => GetProperty<string>("alinkColor"); set => SetProperty<string>("alinkColor", value); }
-        /**
-         * Returns a reference to the collection of elements contained by the object.
-         */
         // [Export("all")]
         // public HTMLAllCollection All => GetProperty<HTMLAllCollection>("all");
-        /**
-         * Retrieves a collection of all a objects that have a name and/or id property. Objects in this collection are in HTML source order.
-         */
         // [Export("anchors")]
         // public HTMLCollectionOf<HTMLAnchorElement> Anchors { get => GetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors"); set => SetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors", value); }
-        /**
-         * Retrieves a collection of all applet objects in the document.
-         */
         // [Export("applets")]
         // public HTMLCollectionOf<HTMLAppletElement> Applets { get => GetProperty<HTMLCollectionOf<HTMLAppletElement>>("applets"); set => SetProperty<HTMLCollectionOf<HTMLAppletElement>>("applets", value); }
         /**
@@ -39,14 +30,8 @@ namespace Mono.WebAssembly.Browser.DOM
          public HTMLElement Body { get => GetProperty<HTMLElement>("body"); set => SetProperty<HTMLElement>("body", value); }
         [Export("characterSet")]
         public string CharacterSet => GetProperty<string>("characterSet");
-        /**
-         * Gets or sets the character set used to encode the object.
-         */
         [Export("charset")]
         public string Charset { get => GetProperty<string>("charset"); set => SetProperty<string>("charset", value); }
-        /**
-         * Gets a value that indicates whether standards-compliant mode is switched on for the object.
-         */
         [Export("compatMode")]
         public string CompatMode => GetProperty<string>("compatMode");
         [Export("cookie")]
@@ -55,34 +40,22 @@ namespace Mono.WebAssembly.Browser.DOM
         public object CurrentScript => GetProperty<object>("currentScript");
         [Export("defaultView")]
         public Window DefaultView => GetProperty<Window>("defaultView");
-        /**
-         * Sets or gets a value that indicates whether the document can be edited.
-         */
         [Export("designMode")]
         public string DesignMode { get => GetProperty<string>("designMode"); set => SetProperty<string>("designMode", value); }
-        /**
-         * Sets or retrieves a value that indicates the reading order of the object.
-         */
         [Export("dir")]
         public string Dir { get => GetProperty<string>("dir"); set => SetProperty<string>("dir", value); }
-        /**
-         * Gets an object representing the document type declaration associated with the current document.
-         */
         // [Export("doctype")]
         // public DocumentType Doctype => GetProperty<DocumentType>("doctype");
          [Export("documentElement")]
          public HTMLElement DocumentElement { get => GetProperty<HTMLElement>("documentElement"); set => SetProperty<HTMLElement>("documentElement", value); }
         [Export("domain")]
         public string Domain { get => GetProperty<string>("domain"); set => SetProperty<string>("domain", value); }
-        /**
-         * Retrieves a collection of all embed objects in the document.
-         */
         // [Export("embeds")]
         // public HTMLCollectionOf<HTMLEmbedElement> Embeds { get => GetProperty<HTMLCollectionOf<HTMLEmbedElement>>("embeds"); set => SetProperty<HTMLCollectionOf<HTMLEmbedElement>>("embeds", value); }
         [Export("fgColor")]
         public string FgColor { get => GetProperty<string>("fgColor"); set => SetProperty<string>("fgColor", value); }
-        // [Export("forms")]
-        // public HTMLCollectionOf<HTMLFormElement> Forms { get => GetProperty<HTMLCollectionOf<HTMLFormElement>>("forms"); set => SetProperty<HTMLCollectionOf<HTMLFormElement>>("forms", value); }
+        [Export("forms")]
+        public HTMLCollectionOf<HTMLFormElement> Forms { get => GetProperty<HTMLCollectionOf<HTMLFormElement>>("forms"); set => SetProperty<HTMLCollectionOf<HTMLFormElement>>("forms", value); }
         [Export("fullscreenElement")]
         public Element FullscreenElement => GetProperty<Element>("fullscreenElement");
         [Export("fullscreenEnabled")]

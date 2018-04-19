@@ -69,7 +69,6 @@ namespace Mono.WebAssembly.Browser.DOM.Events
 
         internal virtual void InitEvent(Dictionary<string, object> eventInfoDic)
         {
-            Console.WriteLine("init event");
             object value = null;
 
             if (eventInfoDic.TryGetValue("bubbles", out value))
