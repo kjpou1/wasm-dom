@@ -40,7 +40,7 @@ $(TOP)/sdks/:
 	mkdir -p $@
 
 .stamp-wasm-bcl: | $(TOP)/sdks
-	curl -L 'https://jenkins.mono-project.com/job/test-mono-mainline-webassembly/108/label=highsierra/Azure/processDownloadRequest/108/highsierra/sdks/wasm/mono-wasm-a14f41ca260.zip' -o "mono-wasm.zip" -#
+	curl -L 'https://xamjenkinsartifact.azureedge.net/test-mono-mainline-webassembly/108/highsierra/sdks/wasm/mono-wasm-a14f41ca260.zip' -o "mono-wasm.zip" -#
 	unzip mono-wasm.zip -d $(TOP)/sdks
 	touch $@
 
