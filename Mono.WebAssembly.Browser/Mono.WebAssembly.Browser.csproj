@@ -43,7 +43,6 @@
     <Compile Include="DOM\BarProp.cs" />
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\Element.cs" />
-    <Compile Include="DOM\Enums.cs" />
     <Compile Include="DOM\ExportAttribute.cs" />
     <Compile Include="DOM\History.cs" />
     <Compile Include="DOM\HTMLPage.cs" />
@@ -97,9 +96,14 @@
     <Compile Include="DOM\HTMLLIElement.cs" />
     <Compile Include="DOM\HTMLUListElement.cs" />
     <Compile Include="DOM\HTMLFormElement.cs" />
+    <Compile Include="DOM\HTMLLabelElement.cs" />
+    <Compile Include="DOM\HTMLInputElement.cs" />
+    <Compile Include="DOM\Enums\ScrollRestoration.cs" />
+    <Compile Include="DOM\Enums\VisibilityState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />
+    <Folder Include="DOM\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mono-wasm-browser.js">

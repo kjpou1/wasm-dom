@@ -127,6 +127,20 @@ namespace Mono.WebAssembly
                     return c == null ? obj.ToString() : c.ToString();
                 }
             }
+            else if (type.IsEnum)
+            {
+                var enumValue = RuntimeUtilities.EnumToExportContract((Enum)obj);
+                if (enumValue == null)
+                {
+                    return "null";
+                }
+                else if (enumValue.GetType() == typeof(string))
+                {
+                    return $"\"{enumValue.ToString()}\"";
+                }
+                else
+                    return enumValue.ToString();
+            }
             else if (type == typeof(string))
             {
                 if (obj == null)
@@ -159,33 +173,30 @@ namespace Mono.WebAssembly
                 return (T)(object)null;
 
             var type = typeof(T);
-            if (typeof(T) == typeof(double))
+            if (type.IsPrimitive || typeof(Decimal) == type)
             {
-                var dblObject = obj;
-                if (dblObject == null)
-                    return (T)(object)0.0;
-                return (T)(object)double.Parse(dblObject.ToString());
+                return (T)Convert.ChangeType(obj, type);
             }
-            if (typeof(T) == typeof(double?))
+            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
-                var dblObject = obj;
-                if (dblObject == null)
-                    return (T)(object)null;
-                return (T)(object)double.Parse(dblObject.ToString());
+
+                var conv = System.ComponentModel.TypeDescriptor.GetConverter(type);
+
+                if (!conv.CanConvertFrom(obj.GetType()))
+                {
+                    throw new NotSupportedException();
+                }
+
+                if (conv.IsValid(obj))
+                {
+                    return (T)conv.ConvertFrom(obj);
+                }
+
+                throw new InvalidCastException();
             }
-            else if (typeof(T) == typeof(bool))
+            else if (type.IsEnum)
             {
-                var boolObject = obj;
-                if (boolObject == null)
-                    return (T)(object)false;
-                return (T)(object)bool.Parse(boolObject.ToString());
-            }
-            else if (typeof(T) == typeof(bool?))
-            {
-                var boolObject = obj;
-                if (boolObject == null)
-                    return (T)(object)null;
-                return (T)(object)bool.Parse(boolObject.ToString());
+                return (T)(object)RuntimeUtilities.EnumFromExportContract(type, obj);
             }
             else if (typeof(T) == typeof(string))
             {

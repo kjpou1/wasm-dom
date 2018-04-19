@@ -18,13 +18,15 @@ namespace Hello
 
             var document = HTMLPage.Document;
 
+            Console.WriteLine($"Visibility State: {document.VisibilityState}");
+
             var button = document.CreateElement<HTMLButtonElement>();
             button.TextContent = "Click Me";
 
             button.OnWheel += (JSObject sender, DOMEventArgs args1) => {
                 
                 var evt = (WheelEvent)args1.EventObject;
-                Console.WriteLine($"We gotsa wheel wwwhhheeeeee! {evt.DeltaMode}");
+                Console.WriteLine($"We got a wheel wwwhhheeeeee! {evt.DeltaMode}");
             };
 
 
@@ -34,15 +36,8 @@ namespace Hello
 
                 var evt = args1.EventObject;
 
-                ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes} times";
+                ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++} times";
 
-                //Console.WriteLine("Application thread ID click: {0}",
-                //        Thread.CurrentThread.ManagedThreadId);
-                //var t2 = Task.Run(() => {
-                //    ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++} times";
-                //    Console.WriteLine("Task thread ID click: {0}",
-                //    Thread.CurrentThread.ManagedThreadId);
-                //});
 
             };
 

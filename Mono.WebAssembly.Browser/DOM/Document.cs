@@ -538,8 +538,8 @@ namespace Mono.WebAssembly.Browser.DOM
          */
         [Export("URLUnencoded")]
         public string UrlUnencoded => GetProperty<string>("URLUnencoded");
-        // [Export("visibilityState")]
-        // public VisibilityState VisibilityState => GetProperty<VisibilityState>("visibilityState");
+        [Export("visibilityState")]
+        public VisibilityState VisibilityState => GetProperty<VisibilityState>("visibilityState");
         /**
          * Sets or gets the color of the links that the user has visited.
          */

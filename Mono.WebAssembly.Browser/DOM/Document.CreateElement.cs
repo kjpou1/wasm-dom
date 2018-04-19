@@ -10,6 +10,9 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             {typeof(HTMLDivElement), "div"},
             {typeof(HTMLButtonElement), "button"},
+            {typeof(HTMLInputElement), "input"},
+            {typeof(HTMLFormElement), "form"},
+            {typeof(HTMLLabelElement), "label"},
             {typeof(HTMLLIElement), "li"},
             {typeof(HTMLLinkElement), "link"},
             {typeof(HTMLParagraphElement), "p"},

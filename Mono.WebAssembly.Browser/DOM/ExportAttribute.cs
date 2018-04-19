@@ -5,7 +5,15 @@ using System;
 
 namespace Mono.WebAssembly
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Method, 
+    public enum ConvertEnum
+    {
+        Default,
+        ToLower,
+        ToUpper,
+        Numeric
+    }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Field, 
                     AllowMultiple = true, Inherited = false)]
     public class ExportAttribute : Attribute
     {
@@ -30,5 +38,6 @@ namespace Mono.WebAssembly
         public string ContractName { get; }
 
         public Type ContractType { get; }
+        public ConvertEnum EnumValue { get; set; }
     }
 }

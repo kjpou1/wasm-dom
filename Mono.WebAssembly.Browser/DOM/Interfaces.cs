@@ -52,7 +52,7 @@ namespace Mono.WebAssembly.Browser.DOM
         [Export("state")]
         Object State { get; }
         [Export("scrollRestoration")]
-        string ScrollRestoration { get; set; }
+        ScrollRestoration ScrollRestoration { get; set; }
         [Export("back")]
         void Back();
         [Export("forward")]
@@ -1116,5 +1116,141 @@ namespace Mono.WebAssembly.Browser.DOM
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
         //Object this[string name] { get; set; }
     }
+
+    public interface IHTMLLabelElement : IHTMLElement
+    {
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("htmlFor")]
+        string HtmlFor { get; set; }
+        //[Export("control")]
+        //HTMLInputElement Control { get; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+    public interface IHTMLInputElement : IHTMLElement
+    {
+        [Export("accept")]
+        string Accept { get; set; }
+        [Export("align")]
+        string Align { get; set; }
+        [Export("alt")]
+        string Alt { get; set; }
+        [Export("autocomplete")]
+        string Autocomplete { get; set; }
+        [Export("autofocus")]
+        bool Autofocus { get; set; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("checked")]
+        bool Checked { get; set; }
+        [Export("complete")]
+        bool Complete { get; }
+        [Export("defaultChecked")]
+        bool DefaultChecked { get; set; }
+        [Export("defaultValue")]
+        string DefaultValue { get; set; }
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        //[Export("files")]
+        //FileList Files { get; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("formAction")]
+        string FormAction { get; set; }
+        [Export("formEnctype")]
+        string FormEnctype { get; set; }
+        [Export("formMethod")]
+        string FormMethod { get; set; }
+        [Export("formNoValidate")]
+        string FormNoValidate { get; set; }
+        [Export("formTarget")]
+        string FormTarget { get; set; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("indeterminate")]
+        bool Indeterminate { get; set; }
+        [Export("list")]
+        HTMLElement List { get; }
+        [Export("max")]
+        string Max { get; set; }
+        [Export("maxLength")]
+        double MaxLength { get; set; }
+        [Export("min")]
+        string Min { get; set; }
+        [Export("multiple")]
+        bool Multiple { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("pattern")]
+        string Pattern { get; set; }
+        [Export("placeholder")]
+        string Placeholder { get; set; }
+        [Export("readOnly")]
+        bool ReadOnly { get; set; }
+        [Export("required")]
+        bool Required { get; set; }
+        [Export("selectionDirection")]
+        string SelectionDirection { get; set; }
+        [Export("selectionEnd")]
+        double SelectionEnd { get; set; }
+        [Export("selectionStart")]
+        double SelectionStart { get; set; }
+        [Export("size")]
+        double Size { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("status")]
+        bool Status { get; set; }
+        [Export("step")]
+        string Step { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("useMap")]
+        string UseMap { get; set; }
+        [Export("validationMessage")]
+        string ValidationMessage { get; }
+        //[Export("validity")]
+        //ValidityState Validity { get; }
+        [Export("value")]
+        string Value { get; set; }
+        //[Export("valueAsDate")]
+        //Date ValueAsDate { get; set; }
+        [Export("valueAsNumber")]
+        double ValueAsNumber { get; set; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("webkitdirectory")]
+        bool Webkitdirectory { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+        [Export("willValidate")]
+        bool WillValidate { get; }
+        [Export("minLength")]
+        double MinLength { get; set; }
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("select")]
+        void Select();
+        [Export("setCustomValidity")]
+        void SetCustomValidity(string error);
+        [Export("setSelectionRange")]
+        void SetSelectionRange(double start, double end, object direction);
+        [Export("stepDown")]
+        void StepDown(double n);
+        [Export("stepUp")]
+        void StepUp(double n);
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+
 
 }

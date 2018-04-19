@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("History", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class History : JSObject
+    public sealed class History : JSObject, IHistory
     {
         public History(int handle) : base(handle) { }
 
@@ -15,7 +15,7 @@ namespace Mono.WebAssembly.Browser.DOM
         [Export("state")]
         public Object State => GetProperty<Object>("state");
         [Export("scrollRestoration")]
-        public string ScrollRestoration { get => GetProperty<string>("scrollRestoration"); set => SetProperty<string>("scrollRestoration", value); }
+        public ScrollRestoration ScrollRestoration { get => GetProperty<ScrollRestoration>("scrollRestoration"); set => SetProperty<ScrollRestoration>("scrollRestoration", value); }
         [Export("back")]
         public void Back()
         {
