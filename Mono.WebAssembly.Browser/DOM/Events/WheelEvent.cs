@@ -40,10 +40,10 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         //{
         //    InvokeMethod<object>("initWheelEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, buttonArg, relatedTargetArg, modifiersListArg, deltaXArg, deltaYArg, deltaZArg, deltaMode);
         //}
-        internal override void InitEvent(Dictionary<string, object> eventInfoDic)
+        internal override void InitEvent(Dictionary<string, string> eventInfoDic)
         {
             base.InitEvent(eventInfoDic);
-            object value = null;
+            string value = null;
 
 
             if (eventInfoDic.TryGetValue("DOM_DELTA_LINE", out value))
@@ -69,18 +69,18 @@ namespace Mono.WebAssembly.Browser.DOM.Events
 
             if (eventInfoDic.TryGetValue("deltaX", out value))
             {
-                DeltaX = Convert.ToInt32(value);
+                DeltaX = Convert.ToDouble(value);
             }
 
             if (eventInfoDic.TryGetValue("deltaY", out value))
             {
-                DeltaY = Convert.ToInt32(value);
+                DeltaY = Convert.ToDouble(value);
             }
 
 
             if (eventInfoDic.TryGetValue("deltaZ", out value))
             {
-                DeltaZ = Convert.ToInt32(value);
+                DeltaZ = Convert.ToDouble(value);
             }
 
 
@@ -91,12 +91,12 @@ namespace Mono.WebAssembly.Browser.DOM.Events
 
             if (eventInfoDic.TryGetValue("wheelDeltaX", out value))
             {
-                WheelDeltaX = Convert.ToInt32(value);
+                WheelDeltaX = Convert.ToDouble(value);
             }
 
             if (eventInfoDic.TryGetValue("wheelDeltaY", out value))
             {
-                WheelDeltaY = Convert.ToInt32(value);
+                WheelDeltaY = Convert.ToDouble(value);
             }
         }
     }

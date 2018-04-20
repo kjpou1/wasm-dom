@@ -143,7 +143,8 @@ Module['postRun'].push(function() {
     runAssemblies.push(MonoWasmBrowserAPI.mono_wasm_browser_assembly())
     if (Module.applicationAssemblies) {
         runAssemblies = runAssemblies.concat(Module.applicationAssemblies);
-    }           
+    }
+
 
     runAssemblies.forEach (function(asm_name) {
         Module.print ("loading " + asm_name);

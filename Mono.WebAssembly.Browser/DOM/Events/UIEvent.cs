@@ -20,10 +20,10 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         //    InvokeMethod<object>("initUIEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg);
         //}
 
-        internal override void InitEvent(Dictionary<string, object> eventInfoDic)
+        internal override void InitEvent(Dictionary<string, string> eventInfoDic)
         {
             base.InitEvent(eventInfoDic);
-            object value = null;
+            string value = null;
 
             if (eventInfoDic.TryGetValue("detail", out value))
             {

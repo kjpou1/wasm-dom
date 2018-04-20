@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
     public sealed class DataTransfer : JSObject
     {
         internal DataTransfer(int handle) : base(handle) { }
-
+        bool disposed = false;
         public DataTransfer() { }
         [Export("dropEffect")]
         public string DropEffect { get => GetProperty<string>("dropEffect"); set => SetProperty<string>("dropEffect", value); }
@@ -37,5 +37,14 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             InvokeMethod<object>("setDragImage", image, x, y);
         }
-    }
+
+		protected override void Dispose(bool disposing)
+		{
+            if (disposed)
+                return;
+
+            base.Dispose(disposing);
+
+		}
+	}
 }

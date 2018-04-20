@@ -67,9 +67,10 @@ namespace Mono.WebAssembly.Browser.DOM.Events
             return InvokeMethod<EventTarget[]>("deepPath");
         }
 
-        internal virtual void InitEvent(Dictionary<string, object> eventInfoDic)
+
+        internal virtual void InitEvent(Dictionary<string, string> eventInfoDic)
         {
-            object value = null;
+            string value = null;
 
             if (eventInfoDic.TryGetValue("bubbles", out value))
             {

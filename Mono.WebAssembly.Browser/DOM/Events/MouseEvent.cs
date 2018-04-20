@@ -67,10 +67,10 @@ namespace Mono.WebAssembly.Browser.DOM.Events
         //{
         //    InvokeMethod<object>("initMouseEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
         //}
-        internal override void InitEvent(Dictionary<string,object> eventInfoDic)
+        internal override void InitEvent(Dictionary<string,string> eventInfoDic)
         {
             base.InitEvent(eventInfoDic);
-            object value = null;
+            string value = null;
 
             if (eventInfoDic.TryGetValue("button", out value))
             {

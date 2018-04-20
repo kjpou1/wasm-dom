@@ -21,16 +21,30 @@ namespace Mono.WebAssembly.Browser.DOM.Events
             }
             set => SetProperty<DataTransfer>("dataTransfer", value); 
         }
-        //[Export("initDragEvent")]
-        //public void InitDragEvent(string typeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, double detailArg, double screenXArg, double screenYArg, double clientXArg, double clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, double buttonArg, EventTarget relatedTargetArg, IDataTransfer dataTransferArg)
-        //{
-        //    InvokeMethod<object>("initDragEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg, dataTransferArg);
-        //}
-        //[Export("msConvertURL")]
-        //public void MsConvertUrl(File file, string targetType, string targetURL)
-        //{
-        //    InvokeMethod<object>("msConvertURL", file, targetType, targetURL);
-        //}
-    }
+		//[Export("initDragEvent")]
+		//public void InitDragEvent(string typeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, double detailArg, double screenXArg, double screenYArg, double clientXArg, double clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, double buttonArg, EventTarget relatedTargetArg, IDataTransfer dataTransferArg)
+		//{
+		//    InvokeMethod<object>("initDragEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg, dataTransferArg);
+		//}
+		//[Export("msConvertURL")]
+		//public void MsConvertUrl(File file, string targetType, string targetURL)
+		//{
+		//    InvokeMethod<object>("msConvertURL", file, targetType, targetURL);
+		//}
+
+		protected override void Dispose(bool disposing)
+		{
+			// the event object handle is already unregistered within the event handling function
+            // no need to do this again.
+            if (disposing)
+            {
+                if (dataTransfer != null)
+                {
+                    dataTransfer.Dispose();    
+                }
+            }
+
+		}
+	}
 
 }

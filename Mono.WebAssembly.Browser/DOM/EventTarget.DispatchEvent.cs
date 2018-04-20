@@ -22,6 +22,8 @@ namespace Mono.WebAssembly.Browser.DOM
                     eventHandler?.Invoke(this, eventArgs);
                 }
             }
+
+            eventArgs.EventObject.Dispose();
         }
     }
 }

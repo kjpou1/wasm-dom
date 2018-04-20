@@ -54,15 +54,31 @@ namespace Mono.WebAssembly.Browser.DOM
 
             if (eventInfo != null)
             {
-                
-                var eventInfoDic = Runtime.DeserializeJSON(eventInfo) as Dictionary<string, object>;
+                var ei = eventInfo.Substring(1, eventInfo.Length - 2).Split(',');
+                var eventInfoDic = new Dictionary<string, string>();
+                string value = null;
+                foreach (var eip in ei)
+                {
+                    //Console.WriteLine(eip);
+                    var kvp = eip.Split(':');
+                    var key = kvp[0].Substring(1, kvp[0].Length - 2);
+                    value = kvp[1];
+                    if (value.StartsWith('"'))
+                        eventInfoDic.Add(key, value.Substring(1, value.Length - 2));
+                    else
+                        eventInfoDic.Add(key, value);
+
+                }
+                //Console.WriteLine(eventInfo.Substring(1, eventInfo.Length - 2));
+
+                //var eventInfoDic = Runtime.DeserializeJSON(eventInfo) as Dictionary<string, object>;
 
                 //foreach(var key in eventInfoDic.Keys)
                 //{
                 //    Console.WriteLine($"Key: {key} - Value: {eventInfoDic[key]}");
                 //}
 
-                object value = null;
+                value = null;
 
                 if (eventInfoDic.TryGetValue("clientX", out value))
                 {

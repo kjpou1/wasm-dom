@@ -1251,6 +1251,31 @@ namespace Mono.WebAssembly.Browser.DOM
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
+    public interface IValidityState
+    {
+        [Export("badInput")]
+        bool BadInput { get; }
+        [Export("customError")]
+        bool CustomError { get; }
+        [Export("patternMismatch")]
+        bool PatternMismatch { get; }
+        [Export("rangeOverflow")]
+        bool RangeOverflow { get; }
+        [Export("rangeUnderflow")]
+        bool RangeUnderflow { get; }
+        [Export("stepMismatch")]
+        bool StepMismatch { get; }
+        [Export("tooLong")]
+        bool TooLong { get; }
+        [Export("typeMismatch")]
+        bool TypeMismatch { get; }
+        [Export("valid")]
+        bool Valid { get; }
+        [Export("valueMissing")]
+        bool ValueMissing { get; }
+        [Export("tooShort")]
+        bool TooShort { get; }
+    }
 
 
 }

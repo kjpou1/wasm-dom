@@ -92,8 +92,8 @@ namespace Mono.WebAssembly.Browser.DOM
         public string UseMap { get => GetProperty<string>("useMap"); set => SetProperty<string>("useMap", value); }
         [Export("validationMessage")]
         public string ValidationMessage => GetProperty<string>("validationMessage");
-        //[Export("validity")]
-        //public ValidityState Validity => GetProperty<ValidityState>("validity");
+        [Export("validity")]
+        public ValidityState Validity => GetProperty<ValidityState>("validity");
         [Export("value")]
         public string Value { get => GetProperty<string>("value"); set => SetProperty<string>("value", value); }
         //[Export("valueAsDate")]

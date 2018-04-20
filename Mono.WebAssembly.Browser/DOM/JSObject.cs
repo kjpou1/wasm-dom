@@ -251,6 +251,12 @@ namespace Mono.WebAssembly
             return UnWrapObject<T>(res);
         }
 
+        protected void FreeHandle ()
+        {
+            Runtime.ExecuteJavaScript("MonoWasmBrowserAPI.mono_wasm_free_handle(" + Handle + ");");
+        }
+
+
         public override bool Equals(System.Object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -326,9 +332,11 @@ namespace Mono.WebAssembly
 
             if (disposing)
             {
-                
+
                 // Free any other managed objects here.
                 //
+                FreeHandle();
+                handle = -1;
             }
 
             // Free any unmanaged objects here.

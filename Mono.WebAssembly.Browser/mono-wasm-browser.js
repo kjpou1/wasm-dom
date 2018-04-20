@@ -83,6 +83,9 @@ var MonoWasmBrowserAPI = {
             }
         }
     },
+    mono_wasm_free_handle: function(handle) {
+        this.mono_wasm_unregister_obj(this.mono_wasm_object_registry[handle]);
+    },
     mono_wasm_val_global: function (globalName) {
         function get_global() { return (function(){return Function;})()('return this')(); }
         var globalObj = get_global()[globalName];
@@ -185,13 +188,24 @@ var MonoWasmBrowserAPI = {
                 return ;
         }
         
-        if (typeof(value) === "undefined")
-        {
-            requireObject.style[attribute] = "";
+        try {
+            if (requireObject.style)
+            {
+                if (typeof(value) === "undefined")
+                {
+                    requireObject.style[attribute] = "";
+                }
+                else
+                {
+                    requireObject.style[attribute] = value;
+                }
+            }
+        
         }
-        else
+        catch (ex)
         {
-            requireObject.style[attribute] = value;
+            console.error(ex.message);
+            throw ex;
         }
         
         return true;
@@ -294,7 +308,9 @@ var MonoWasmBrowserAPI = {
                         Module.mono_string(eventStruct["typeOfEvent"]), 
                         Module.mono_string(eventHandler.uid.toString()),
                         Module.mono_string(eventHandle.toString()),
+
                         Module.mono_string(JSON.stringify(eventStruct)),
+                        //Module.mono_string("a"),
                     ]);
 
                 // We are now done with the event so we need to unregister the object from our object stack
