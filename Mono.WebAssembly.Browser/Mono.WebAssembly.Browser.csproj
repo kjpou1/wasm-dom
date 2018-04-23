@@ -101,6 +101,8 @@
     <Compile Include="DOM\Enums\ScrollRestoration.cs" />
     <Compile Include="DOM\Enums\VisibilityState.cs" />
     <Compile Include="DOM\ValidityState.cs" />
+    <Compile Include="DOM\Enums\DropEffect.cs" />
+    <Compile Include="DOM\Enums\EffectAllowed.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

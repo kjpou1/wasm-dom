@@ -39,9 +39,17 @@ namespace DragNDrop
             document.OnDragOver += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
                 args.PreventDefault();
                 args.StopPropagation();
+                var target = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
+                if (target.ClassName == "dropzone")
+                {
 
-                // A DropEffect must be set
-                ((DragEvent)args.EventObject).DataTransfer.DropEffect = "link";
+                    // A DropEffect must be set
+                    ((DragEvent)args.EventObject).DataTransfer.DropEffect = DropEffect.Link;
+                }
+                else
+                    // A DropEffect must be set
+                    ((DragEvent)args.EventObject).DataTransfer.DropEffect = DropEffect.None;
+
             };
 
             document.OnDragEnter += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {

@@ -60,15 +60,13 @@ namespace Mono.WebAssembly
         {
             var setPropOf = "MonoWasmBrowserAPI.mono_wasm_set_property(" + Handle + ",\"" + expr + "\",";
             var setPropOptions = ", " + (createIfNotExists ? "true" : "false") + ", " + (hasOwnProperty ? "true" : "false") + ")";
-            var objValue = WrapObject(value);
+            var objValue = WrapObject<T>(value);
             Runtime.ExecuteJavaScript(setPropOf + objValue + setPropOptions);
 
         }
 
         private string WrapObject(object obj)
         {
-            if (obj == null)
-                return "null";
 
             var type = obj.GetType();
             if (type.IsPrimitive || typeof(Decimal) == type)
@@ -83,17 +81,14 @@ namespace Mono.WebAssembly
                     return c == null ? obj.ToString() : c.ToString();
                 }
             }
+            else if (type.IsEnum)
+            {
+                var enumValue = RuntimeUtilities.EnumToExportContract((Enum)obj);
+                return enumValue == null ? "null" : $"\"{enumValue.ToString()}\"";
+            }
             else if (type == typeof(string))
             {
-                if (obj == null)
-                {
-                    return "null";
-                }
-                else
-                {
-                    return $"\"{obj.ToString()}\"";
-                }
-
+                return obj == null ? "null" : $"\"{obj.ToString()}\"";
             }
             else if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
@@ -111,8 +106,6 @@ namespace Mono.WebAssembly
 
         private string WrapObject<T>(object obj)
         {
-            if (obj == null)
-                return "null";
 
             var type = typeof(T);
             if (type.IsPrimitive || typeof(Decimal) == type)
@@ -130,28 +123,11 @@ namespace Mono.WebAssembly
             else if (type.IsEnum)
             {
                 var enumValue = RuntimeUtilities.EnumToExportContract((Enum)obj);
-                if (enumValue == null)
-                {
-                    return "null";
-                }
-                else if (enumValue.GetType() == typeof(string))
-                {
-                    return $"\"{enumValue.ToString()}\"";
-                }
-                else
-                    return enumValue.ToString();
+                return enumValue == null ? "null" : $"\"{enumValue.ToString()}\"";
             }
             else if (type == typeof(string))
             {
-                if (obj == null)
-                {
-                    return "null";
-                }
-                else
-                {
-                    return $"\"{obj.ToString()}\"";
-                }
-
+                return obj == null ? "null" : $"\"{obj.ToString()}\"";
             }
             else if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
@@ -169,8 +145,6 @@ namespace Mono.WebAssembly
 
         T UnWrapObject<T>(object obj)
         {
-            if (obj == null)
-                return (T)(object)null;
 
             var type = typeof(T);
             if (type.IsPrimitive || typeof(Decimal) == type)
@@ -211,6 +185,15 @@ namespace Mono.WebAssembly
 
                 return (T)jsobjectnew.Invoke(new object[] { (jsobject == null) ? -1 : Int32.Parse(jsobject) });
 
+            }
+            else if (type is object)
+            {
+                // called via invoke
+                if (obj == null)
+                    return (T)(object)null;
+                else
+                    throw new NotSupportedException($"Type {type} not supported yet.");
+    
             }
             else
             {

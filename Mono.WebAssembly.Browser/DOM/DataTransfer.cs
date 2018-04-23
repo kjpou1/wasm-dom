@@ -5,12 +5,11 @@ namespace Mono.WebAssembly.Browser.DOM
     public sealed class DataTransfer : JSObject
     {
         internal DataTransfer(int handle) : base(handle) { }
-        bool disposed = false;
         public DataTransfer() { }
         [Export("dropEffect")]
-        public string DropEffect { get => GetProperty<string>("dropEffect"); set => SetProperty<string>("dropEffect", value); }
+        public DropEffect DropEffect { get => GetProperty<DropEffect>("dropEffect"); set => SetProperty<DropEffect>("dropEffect", value); }
         [Export("effectAllowed")]
-        public string EffectAllowed { get => GetProperty<string>("effectAllowed"); set => SetProperty<string>("effectAllowed", value); }
+        public EffectAllowed EffectAllowed { get => GetProperty<EffectAllowed>("effectAllowed"); set => SetProperty<EffectAllowed>("effectAllowed", value); }
         //[Export("files")]
         //public FileList Files => GetProperty<FileList>("files");
         [Export("items")]
@@ -40,7 +39,7 @@ namespace Mono.WebAssembly.Browser.DOM
 
 		protected override void Dispose(bool disposing)
 		{
-            if (disposed)
+            if (Handle == -1)
                 return;
 
             base.Dispose(disposing);
