@@ -52,7 +52,7 @@ typedef struct _MonoAssemblyName MonoAssemblyName;
 #define TRUE  1
 typedef int BOOL;
 
-BOOL debugMode = TRUE;
+BOOL debugMode = false;
 
 #define DBG(...) if (debugMode) { printf(__VA_ARGS__); printf("\n"); }
 

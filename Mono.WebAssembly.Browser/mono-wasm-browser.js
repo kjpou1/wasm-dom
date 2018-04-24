@@ -376,6 +376,10 @@ var MonoWasmBrowserAPI = {
             {
                 MonoWasmBrowserAPI.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
             }
+            else if (e instanceof ClipboardEvent)
+            {
+                eventStruct["typeOfEvent"] = "ClipboardEvent";
+            }
     
             return eventStruct;
         },
@@ -438,6 +442,10 @@ var MonoWasmBrowserAPI = {
             {
                 MonoWasmBrowserAPI.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
             }
+            if (e instanceof KeyboardEvent)
+            {
+                MonoWasmBrowserAPI.mono_wasm_event_helper.fillKeyboardEventData(eventStruct, e, target);
+            }
 
         },        
         fillFocusEventData: function (eventStruct, e, target)
@@ -448,7 +456,7 @@ var MonoWasmBrowserAPI = {
                 eventStruct[prop] = e[prop];
             });
     
-            eventStruct["typeOfEvent"] = "focusEvent";
+            eventStruct["typeOfEvent"] = "FocusEvent";
         },     
         fillWheelEventData: function (eventStruct, e, target)
         {
@@ -468,7 +476,30 @@ var MonoWasmBrowserAPI = {
             });
     
             eventStruct["typeOfEvent"] = "WheelEvent";
+        }, 
+        fillFocusEventData: function (eventStruct, e, target)
+        {
+            var DOMKeyboardEventProps = ["locale",
+            "location",
+            "metakey",
+            "repeat",
+            "which",
+            "code",
+            "DOM_KEY_LOCATION_JOYSTICK",
+            "DOM_KEY_LOCATION_LEFT",
+            "DOM_KEY_LOCATION_MOBILE",
+            "DOM_KEY_LOCATION_NUMPAD",
+            "DOM_KEY_LOCATION_RIGHT",
+            "DOM_KEY_LOCATION_STANDARD"
+            ];
+    
+            DOMKeyboardEventProps.forEach(function (prop) {
+                eventStruct[prop] = e[prop];
+            });
+    
+            eventStruct["typeOfEvent"] = "KeyboardEvent";
         },     
+            
     },
     mono_wasm_eval_hook: function (dataPtr, is_exception)
     {

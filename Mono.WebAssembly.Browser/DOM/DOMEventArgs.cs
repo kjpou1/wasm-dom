@@ -46,6 +46,14 @@ namespace Mono.WebAssembly.Browser.DOM
             {
                 EventObject = new WheelEvent(Convert.ToInt32(eventHandle));
             }
+            else if (typeOfEvent == "KeyboardEvent")
+            {
+                EventObject = new KeyboardEvent(Convert.ToInt32(eventHandle));
+            }
+            else if (typeOfEvent == "ClipboardEvent")
+            {
+                EventObject = new ClipboardEvent(Convert.ToInt32(eventHandle));
+            }
             else 
             {
                 EventObject = new Event(Convert.ToInt32(eventHandle));

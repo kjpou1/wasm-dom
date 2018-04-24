@@ -1277,5 +1277,58 @@ namespace Mono.WebAssembly.Browser.DOM
         bool TooShort { get; }
     }
 
+    public interface IClipboardEvent : IEvent
+    {
+        [Export("clipboardData")]
+        DataTransfer ClipboardData { get; }
+    }
+
+    public interface IKeyboardEvent : IUIEvent
+    {
+        [Export("altKey")]
+        bool AltKey { get; }
+        [Export("char")]
+        string Char { get; }
+        [Export("charCode")]
+        double CharCode { get; }
+        [Export("ctrlKey")]
+        bool CtrlKey { get; }
+        [Export("key")]
+        string Key { get; }
+        [Export("keyCode")]
+        double KeyCode { get; }
+        [Export("locale")]
+        string Locale { get; }
+        [Export("location")]
+        double Location { get; }
+        [Export("metaKey")]
+        bool MetaKey { get; }
+        [Export("repeat")]
+        bool Repeat { get; }
+        [Export("shiftKey")]
+        bool ShiftKey { get; }
+        [Export("which")]
+        double Which { get; }
+        [Export("code")]
+        string Code { get; }
+        [Export("getModifierState")]
+        bool GetModifierState(string keyArg);
+        //[Export("initKeyboardEvent")]
+        //void InitKeyboardEvent(string typeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, string keyArg, double locationArg, string modifiersListArg, bool repeat, string locale);
+        [Export("DOM_KEY_LOCATION_JOYSTICK")]
+        double DomKeyLocationJoystick { get; }
+        [Export("DOM_KEY_LOCATION_LEFT")]
+        double DomKeyLocationLeft { get; }
+        [Export("DOM_KEY_LOCATION_MOBILE")]
+        double DomKeyLocationMobile { get; }
+        [Export("DOM_KEY_LOCATION_NUMPAD")]
+        double DomKeyLocationNumpad { get; }
+        [Export("DOM_KEY_LOCATION_RIGHT")]
+        double DomKeyLocationRight { get; }
+        [Export("DOM_KEY_LOCATION_STANDARD")]
+        double DomKeyLocationStandard { get; }
+    }
+
+
 
 }

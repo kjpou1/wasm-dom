@@ -103,6 +103,8 @@
     <Compile Include="DOM\ValidityState.cs" />
     <Compile Include="DOM\Enums\DropEffect.cs" />
     <Compile Include="DOM\Enums\EffectAllowed.cs" />
+    <Compile Include="DOM\Events\ClipboardEvent.cs" />
+    <Compile Include="DOM\Events\KeyboardEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mono.WebAssembly;
 
 namespace Mono.WebAssembly.Browser.DOM.Events
@@ -45,6 +46,11 @@ namespace Mono.WebAssembly.Browser.DOM.Events
             }
 
 		}
+
+        internal override void InitEvent(Dictionary<string, string> eventInfoDic)
+        {
+            base.InitEvent(eventInfoDic);
+        }
 	}
 
 }
