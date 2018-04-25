@@ -87,7 +87,7 @@ namespace Mono.WebAssembly.Browser.DOM
         [Export("step")]
         public string Step { get => GetProperty<string>("step"); set => SetProperty<string>("step", value); }
         [Export("type")]
-        public string Type { get => GetProperty<string>("type"); set => SetProperty<string>("type", value); }
+        public InputElementType Type { get => GetProperty<InputElementType>("type"); set => SetProperty<InputElementType>("type", value); }
         [Export("useMap")]
         public string UseMap { get => GetProperty<string>("useMap"); set => SetProperty<string>("useMap", value); }
         [Export("validationMessage")]

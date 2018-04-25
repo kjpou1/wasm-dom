@@ -40,7 +40,7 @@ namespace Mono.WebAssembly.Browser.DOM
             if (addNativeEventListener)
             {
 
-                string UID = Guid.NewGuid().ToString();
+                string UID = RuntimeUtilities.NextUID.ToString();
 
                 RuntimeEventManager.RegisterEventTarget(UID, this);
 

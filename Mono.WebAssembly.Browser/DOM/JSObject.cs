@@ -178,6 +178,9 @@ namespace Mono.WebAssembly
             }
             else if (typeof(T).IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
+                if (obj == null)
+                    return (T)(object)null;
+                
                 var jsobject = obj.ToString();
 
                 var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,

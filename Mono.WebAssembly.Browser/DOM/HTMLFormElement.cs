@@ -17,8 +17,8 @@ namespace Mono.WebAssembly.Browser.DOM
         public string Action { get => GetProperty<string>("action"); set => SetProperty<string>("action", value); }
         [Export("autocomplete")]
         public string Autocomplete { get => GetProperty<string>("autocomplete"); set => SetProperty<string>("autocomplete", value); }
-        //[Export("elements")]
-        //public HTMLFormControlsCollection Elements => GetProperty<HTMLFormControlsCollection>("elements");
+        [Export("elements")]
+        public HTMLFormControlsCollection Elements => GetProperty<HTMLFormControlsCollection>("elements");
         [Export("encoding")]
         public string Encoding { get => GetProperty<string>("encoding"); set => SetProperty<string>("encoding", value); }
         [Export("enctype")]
@@ -39,14 +39,19 @@ namespace Mono.WebAssembly.Browser.DOM
             return InvokeMethod<bool>("checkValidity");
         }
         [Export("item")]
-        public Object Item(Object name, Object index)
+        public Element Item(string name)
         {
-            return InvokeMethod<Object>("item", name, index);
+            return GetProperty<Element>(name);
+        }
+        [Export("item")]
+        public Element Item(int index)
+        {
+            return GetProperty<Element>(index.ToString());
         }
         [Export("namedItem")]
-        public Object NamedItem(string name)
+        public Element NamedItem(string name)
         {
-            return InvokeMethod<Object>("namedItem", name);
+            return Item(name);
         }
         [Export("reset")]
         public void Reset()
@@ -64,7 +69,7 @@ namespace Mono.WebAssembly.Browser.DOM
             return InvokeMethod<bool>("reportValidity");
         }
         [IndexerName("TheItem")]
-        public Object this[string name] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Object this[string name] { get => Item(name); set => throw new NotImplementedException(); }
     }
 
 }

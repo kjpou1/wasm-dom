@@ -26,8 +26,8 @@ namespace Mono.WebAssembly.Browser.DOM
          */
         // [Export("bgColor")]
         // public string BgColor { get => GetProperty<string>("bgColor"); set => SetProperty<string>("bgColor", value); }
-         [Export("body")]
-         public HTMLElement Body { get => GetProperty<HTMLElement>("body"); set => SetProperty<HTMLElement>("body", value); }
+        [Export("body")]
+        public HTMLElement Body { get => GetProperty<HTMLElement>("body"); set => SetProperty<HTMLElement>("body", value); }
         [Export("characterSet")]
         public string CharacterSet => GetProperty<string>("characterSet");
         [Export("charset")]
@@ -44,10 +44,10 @@ namespace Mono.WebAssembly.Browser.DOM
         public string DesignMode { get => GetProperty<string>("designMode"); set => SetProperty<string>("designMode", value); }
         [Export("dir")]
         public string Dir { get => GetProperty<string>("dir"); set => SetProperty<string>("dir", value); }
-        // [Export("doctype")]
-        // public DocumentType Doctype => GetProperty<DocumentType>("doctype");
-         [Export("documentElement")]
-         public HTMLElement DocumentElement { get => GetProperty<HTMLElement>("documentElement"); set => SetProperty<HTMLElement>("documentElement", value); }
+        [Export("doctype")]
+        public DocumentType Doctype => GetProperty<DocumentType>("doctype");
+        [Export("documentElement")]
+        public HTMLElement DocumentElement { get => GetProperty<HTMLElement>("documentElement"); set => SetProperty<HTMLElement>("documentElement", value); }
         [Export("domain")]
         public string Domain { get => GetProperty<string>("domain"); set => SetProperty<string>("domain", value); }
         // [Export("embeds")]
@@ -74,8 +74,8 @@ namespace Mono.WebAssembly.Browser.DOM
         public string LastModified => GetProperty<string>("lastModified");
         [Export("linkColor")]
         public string LinkColor { get => GetProperty<string>("linkColor"); set => SetProperty<string>("linkColor", value); }
-        // [Export("links")]
-        // public HTMLCollectionOf<HTMLAnchorElement | HTMLAreaElement> Links { get => GetProperty < HTMLCollectionOf < HTMLAnchorElement | HTMLAreaElement >> ("links"); set => SetProperty < HTMLCollectionOf < HTMLAnchorElement | HTMLAreaElement >> ("links", value); }
+        //[Export("links")]
+        //public HTMLCollectionOf<HTMLAnchorElement | HTMLAreaElement> Links { get => GetProperty < HTMLCollectionOf < HTMLAnchorElement | HTMLAreaElement >> ("links"); set => SetProperty < HTMLCollectionOf < HTMLAnchorElement | HTMLAreaElement >> ("links", value); }
         [Export("location")]
         public Location Location => GetProperty<Location>("location");
         [Export("msCapsLockWarningOff")]

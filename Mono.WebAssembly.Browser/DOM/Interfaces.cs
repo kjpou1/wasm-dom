@@ -1329,6 +1329,87 @@ namespace Mono.WebAssembly.Browser.DOM
         double DomKeyLocationStandard { get; }
     }
 
+    public interface IHTMLFormControlsCollection : IHTMLCollectionBase
+    {
+        [Export("namedItem")]
+        object NamedItem(string name);
+    }
+
+    public interface IDocumentType : INode, IChildNode
+    {
+        [Export("entities")]
+        NamedNodeMap Entities { get; }
+        [Export("internalSubset")]
+        string InternalSubset { get; }
+        [Export("name")]
+        string Name { get; }
+        [Export("notations")]
+        NamedNodeMap Notations { get; }
+        [Export("publicId")]
+        string PublicId { get; }
+        [Export("systemId")]
+        string SystemId { get; }
+    }
+
+    public interface IHTMLAnchorElement : IHTMLElement
+    {
+        [Export("charset")]
+        string Charset { get; set; }
+        [Export("coords")]
+        string Coords { get; set; }
+        [Export("download")]
+        string Download { get; set; }
+        [Export("hash")]
+        string Hash { get; set; }
+        [Export("host")]
+        string Host { get; set; }
+        [Export("hostname")]
+        string Hostname { get; set; }
+        [Export("href")]
+        string Href { get; set; }
+        [Export("hreflang")]
+        string Hreflang { get; set; }
+        [Export("Methods")]
+        string Methods { get; set; }
+        [Export("mimeType")]
+        string MimeType { get; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("nameProp")]
+        string NameProp { get; }
+        [Export("pathname")]
+        string Pathname { get; set; }
+        [Export("port")]
+        string Port { get; set; }
+        [Export("protocol")]
+        string Protocol { get; set; }
+        [Export("protocolLong")]
+        string ProtocolLong { get; }
+        [Export("rel")]
+        string Rel { get; set; }
+        [Export("rev")]
+        string Rev { get; set; }
+        [Export("search")]
+        string Search { get; set; }
+        [Export("shape")]
+        string Shape { get; set; }
+        [Export("target")]
+        string Target { get; set; }
+        [Export("text")]
+        string Text { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("urn")]
+        string Urn { get; set; }
+        [Export("toString")]
+        string ToString();
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+
 
 
 }
