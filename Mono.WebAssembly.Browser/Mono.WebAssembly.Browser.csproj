@@ -110,6 +110,7 @@
     <Compile Include="DOM\DocumentType.cs" />
     <Compile Include="DOM\HTMLAnchorElement.cs" />
     <Compile Include="DOM\HTMLFieldSetElement.cs" />
+    <Compile Include="DOM\Enums\InsertPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

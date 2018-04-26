@@ -409,21 +409,21 @@ namespace Mono.WebAssembly.Browser.DOM
         //{
         //    InvokeMethod<object>("scrollBy", options);
         //}
-        //[Export("insertAdjacentElement")]
-        //public Element InsertAdjacentElement(InsertPosition position, IElement insertedElement)
-        //{
-        //    return InvokeMethod<Element>("insertAdjacentElement", position, insertedElement);
-        //}
-        //[Export("insertAdjacentHTML")]
-        //public void InsertAdjacentHtml(InsertPosition where, string html)
-        //{
-        //    InvokeMethod<object>("insertAdjacentHTML", where, html);
-        //}
-        //[Export("insertAdjacentText")]
-        //public void InsertAdjacentText(InsertPosition where, string text)
-        //{
-        //    InvokeMethod<object>("insertAdjacentText", where, text);
-        //}
+        [Export("insertAdjacentElement")]
+        public Element InsertAdjacentElement(InsertPosition position, Element insertedElement)
+        {
+            return InvokeMethod<Element>("insertAdjacentElement", position, insertedElement);
+        }
+        [Export("insertAdjacentHTML")]
+        public void InsertAdjacentHtml(InsertPosition where, string html)
+        {
+            InvokeMethod<object>("insertAdjacentHTML", where, html);
+        }
+        [Export("insertAdjacentText")]
+        public void InsertAdjacentText(InsertPosition where, string text)
+        {
+            InvokeMethod<object>("insertAdjacentText", where, text);
+        }
         //[Export("attachShadow")]
         //public ShadowRoot AttachShadow(ShadowRootInit shadowRootInitDict)
         //{
