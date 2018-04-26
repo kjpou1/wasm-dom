@@ -37,6 +37,11 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             return InvokeMethod<bool>("toggle", token, force);
         }
+        [Export("toggle")]
+        public bool Toggle(string token)
+        {
+            return InvokeMethod<bool>("toggle", token);
+        }
         [Export("toString")]
         public override string ToString()
         {

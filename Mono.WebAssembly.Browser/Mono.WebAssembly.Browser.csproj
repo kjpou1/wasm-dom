@@ -109,6 +109,7 @@
     <Compile Include="DOM\HTMLFormControlsCollection.cs" />
     <Compile Include="DOM\DocumentType.cs" />
     <Compile Include="DOM\HTMLAnchorElement.cs" />
+    <Compile Include="DOM\HTMLFieldSetElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />
