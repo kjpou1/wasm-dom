@@ -3,7 +3,9 @@
 
 # Tinkering with HTML DOM Elements
 
-Example of tinkering with HTML DOM Elements.  Uses HTML 5 imports via the `HTMLLinkElement` Import method to dynamically modify the DOM content. 
+Example of tinkering with HTML DOM Elements.  Uses HTML 5 imports via the `HTMLLinkElement` Import method to dynamically modify the DOM content.
+
+This may not work with [FireFox](https://developer.mozilla.org/en-US/docs/Web/Web_Components/HTML_Imports).
 
 ## Features
 
