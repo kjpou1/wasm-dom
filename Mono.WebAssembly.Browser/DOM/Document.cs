@@ -671,12 +671,6 @@ namespace Mono.WebAssembly.Browser.DOM
             return InvokeMethod<HTMLElement>("createElementNS", namespaceURI, qualifiedName);
         }
 
-        [Export("createElement")]
-        public HTMLElement CreateElement(string tagName)
-        {
-            return InvokeMethod<HTMLElement>("createElement", tagName);
-        }
-
         // [Export("createExpression")]
         // public XPathExpression CreateExpression(string expression, XPathNSResolver resolver)
         // {

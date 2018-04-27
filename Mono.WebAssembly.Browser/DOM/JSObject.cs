@@ -143,13 +143,11 @@ namespace Mono.WebAssembly
             return "";
         }
 
-        T UnWrapObject<T>(object obj)
+        object UnWrapObject(Type type, object obj)
         {
-
-            var type = typeof(T);
             if (type.IsPrimitive || typeof(Decimal) == type)
             {
-                return (T)Convert.ChangeType(obj, type);
+                return Convert.ChangeType(obj, type);
             }
             else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
@@ -163,78 +161,88 @@ namespace Mono.WebAssembly
 
                 if (conv.IsValid(obj))
                 {
-                    return (T)conv.ConvertFrom(obj);
+                    return conv.ConvertFrom(obj);
                 }
 
                 throw new InvalidCastException();
             }
             else if (type.IsEnum)
             {
-                return (T)(object)RuntimeUtilities.EnumFromExportContract(type, obj);
+                return RuntimeUtilities.EnumFromExportContract(type, obj);
             }
-            else if (typeof(T) == typeof(string))
+            else if (type == typeof(string))
             {
-                return (T)(object)(obj);
+                return obj;
             }
-            else if (typeof(T).IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
+            else if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
                 if (obj == null)
-                    return (T)(object)null;
-                
+                    return (object)null;
+
                 var jsobject = obj.ToString();
 
-                var jsobjectnew = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                var jsobjectnew = type.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                                 null, new Type[] { typeof(Int32) }, null);
 
-                return (T)jsobjectnew.Invoke(new object[] { (jsobject == null) ? -1 : Int32.Parse(jsobject) });
+                return jsobjectnew.Invoke(new object[] { (jsobject == null) ? -1 : Int32.Parse(jsobject) });
 
             }
             else if (type is object)
             {
                 // called via invoke
                 if (obj == null)
-                    return (T)(object)null;
+                    return (object)null;
                 else
                     throw new NotSupportedException($"Type {type} not supported yet.");
-    
+
             }
             else
             {
                 throw new NotSupportedException($"Type {type} not supported yet.");
             }
 
-            
+
         }
 
-        protected T InvokeMethod<T>(string methodName, params object[] args)
+        T UnWrapObject<T>(object obj)
+        {
+
+            return (T)UnWrapObject(typeof(T), obj);
+        }
+
+        protected object InvokeMethod(Type type, string methodName, params object[] args)
         {
             var wrappedParms = new List<string>();
 
             var invokeWith = "MonoWasmBrowserAPI.mono_wasm_invoke(" + Handle + ",\"" + methodName + "\", [ ";
             var invokeWithEnd = "])";
 
-            for (int x =0; x < args.Length; x++)
+            for (int x = 0; x < args.Length; x++)
             {
                 if (x > 0)
                     invokeWith += ", ";
-                invokeWith += WrapObject(args[x]);                
+                invokeWith += WrapObject(args[x]);
             }
 
             invokeWith += invokeWithEnd;
-            var type = typeof(T);
 
             if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
-                invokeWith = "MonoWasmBrowserAPI.mono_wasm_register_obj(" 
+                invokeWith = "MonoWasmBrowserAPI.mono_wasm_register_obj("
                     + invokeWith
                     + ");";
-                
+
             }
-            
+
             var res = Runtime.ExecuteJavaScript(invokeWith);
 
 
-            return UnWrapObject<T>(res);
+            return UnWrapObject(type, res);
+        }
+
+        protected T InvokeMethod<T>(string methodName, params object[] args)
+        {
+            return (T)InvokeMethod(typeof(T), methodName, args);
         }
 
         protected void FreeHandle ()

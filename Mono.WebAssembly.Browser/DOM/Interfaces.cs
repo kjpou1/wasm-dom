@@ -1509,6 +1509,17 @@ namespace Mono.WebAssembly.Browser.DOM
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
+    public interface IHTMLHtmlElement : IHTMLElement
+    {
+        [Export("version")]
+        string Version { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+
 
 
 }
