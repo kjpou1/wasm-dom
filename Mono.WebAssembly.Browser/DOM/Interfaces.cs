@@ -1435,6 +1435,69 @@ namespace Mono.WebAssembly.Browser.DOM
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
+    public interface IHTMLBRElement : IHTMLElement
+    {
+        [Export("clear")]
+        string Clear { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+    public interface IHTMLAreaElement : IHTMLElement
+    {
+        [Export("alt")]
+        string Alt { get; set; }
+        [Export("coords")]
+        string Coords { get; set; }
+        [Export("download")]
+        string Download { get; set; }
+        [Export("hash")]
+        string Hash { get; set; }
+        [Export("host")]
+        string Host { get; set; }
+        [Export("hostname")]
+        string Hostname { get; set; }
+        [Export("href")]
+        string Href { get; set; }
+        [Export("noHref")]
+        bool NoHref { get; set; }
+        [Export("pathname")]
+        string Pathname { get; set; }
+        [Export("port")]
+        string Port { get; set; }
+        [Export("protocol")]
+        string Protocol { get; set; }
+        [Export("rel")]
+        string Rel { get; set; }
+        [Export("search")]
+        string Search { get; set; }
+        [Export("shape")]
+        string Shape { get; set; }
+        [Export("target")]
+        string Target { get; set; }
+        [Export("toString")]
+        string ToString();
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
+
+    public interface IHTMLBaseElement : IHTMLElement
+    {
+        [Export("href")]
+        string Href { get; set; }
+        [Export("target")]
+        string Target { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
+
 
 
 
