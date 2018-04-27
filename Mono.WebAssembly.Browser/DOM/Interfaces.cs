@@ -1499,6 +1499,15 @@ namespace Mono.WebAssembly.Browser.DOM
     }
 
 
+    public interface IHTMLQuoteElement : IHTMLElement
+    {
+        [Export("cite")]
+        string Cite { get; set; }
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+    }
 
 
 

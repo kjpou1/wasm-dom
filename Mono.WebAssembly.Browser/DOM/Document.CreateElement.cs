@@ -21,6 +21,7 @@ namespace Mono.WebAssembly.Browser.DOM
             {typeof(HTMLLIElement), "li"},
             {typeof(HTMLLinkElement), "link"},
             {typeof(HTMLParagraphElement), "p"},
+            {typeof(HTMLQuoteElement), "q"},
             {typeof(HTMLTemplateElement), "template"},
             {typeof(HTMLUListElement), "ul"},
         };

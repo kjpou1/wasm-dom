@@ -114,6 +114,7 @@
     <Compile Include="DOM\HTMLBRElement.cs" />
     <Compile Include="DOM\HTMLAreaElement.cs" />
     <Compile Include="DOM\HTMLBaseElement.cs" />
+    <Compile Include="DOM\HTMLQuoteElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />
