@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLParagraphElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLParagraphElement : HTMLElement
+    public sealed class HTMLParagraphElement : HTMLElement, IHTMLParagraphElement
     {
         public HTMLParagraphElement(int handle) : base(handle) { }
 

@@ -116,6 +116,10 @@
     <Compile Include="DOM\HTMLBaseElement.cs" />
     <Compile Include="DOM\HTMLQuoteElement.cs" />
     <Compile Include="DOM\HTMLHtmlElement.cs" />
+    <Compile Include="DOM\HTMLHeadingElement.cs" />
+    <Compile Include="DOM\HTMLBodyElement.cs" />
+    <Compile Include="DOM\Comment.cs" />
+    <Compile Include="DOM\CDATASection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

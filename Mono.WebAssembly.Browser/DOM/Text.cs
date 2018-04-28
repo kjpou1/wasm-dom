@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("Text", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class Text : CharacterData
+    public class Text : CharacterData, IText
     {
         internal Text(int handle) : base(handle) { }
 

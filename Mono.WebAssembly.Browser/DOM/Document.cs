@@ -528,21 +528,12 @@ namespace Mono.WebAssembly.Browser.DOM
         // public StyleSheetList StyleSheets => GetProperty<StyleSheetList>("styleSheets");
         [Export("title")]
         public string Title { get => GetProperty<string>("title"); set => SetProperty<string>("title", value); }
-        /**
-         * Sets or gets the URL for the current document.
-         */
         [Export("URL")]
         public string Url => GetProperty<string>("URL");
-        /**
-         * Gets the URL for the document, stripped of any character encoding.
-         */
         [Export("URLUnencoded")]
         public string UrlUnencoded => GetProperty<string>("URLUnencoded");
         [Export("visibilityState")]
         public VisibilityState VisibilityState => GetProperty<VisibilityState>("visibilityState");
-        /**
-         * Sets or gets the color of the links that the user has visited.
-         */
         [Export("vlinkColor")]
         public string VlinkColor { get => GetProperty<string>("vlinkColor"); set => SetProperty<string>("vlinkColor", value); }
         [Export("webkitCurrentFullScreenElement")]
@@ -650,16 +641,16 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             return InvokeMethod<Attr>("createAttributeNS", namespaceURI, qualifiedName);
         }
-        // [Export("createCDATASection")]
-        // public CDATASection CreateCdataSection(string data)
-        // {
-        //     return InvokeMethod<CDATASection>("createCDATASection", data);
-        // }
-        // [Export("createComment")]
-        // public Comment CreateComment(string data)
-        // {
-        //     return InvokeMethod<Comment>("createComment", data);
-        // }
+        [Export("createCDATASection")]
+        public CDATASection CreateCdataSection(string data)
+        {
+            return InvokeMethod<CDATASection>("createCDATASection", data);
+        }
+        [Export("createComment")]
+        public Comment CreateComment(string data)
+        {
+            return InvokeMethod<Comment>("createComment", data);
+        }
         [Export("createDocumentFragment")]
         public DocumentFragment CreateDocumentFragment()
         {

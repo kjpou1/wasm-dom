@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLBaseElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLBaseElement : HTMLElement
+    public sealed class HTMLBaseElement : HTMLElement, IHTMLBaseElement
     {
         internal HTMLBaseElement(int handle) : base(handle) { }
 

@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLAnchorElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLAnchorElement : HTMLElement
+    public sealed class HTMLAnchorElement : HTMLElement, IHTMLAnchorElement
     {
         internal HTMLAnchorElement(int handle) : base(handle) { }
 

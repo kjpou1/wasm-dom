@@ -7,7 +7,7 @@ namespace Mono.WebAssembly.Browser.DOM
 
 
     [Export("HTMLLinkElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLLinkElement : HTMLElement
+    public sealed class HTMLLinkElement : HTMLElement, IHTMLLinkElement
     {
         internal HTMLLinkElement(int handle) : base(handle) { }
 

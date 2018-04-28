@@ -6,7 +6,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLFormElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLFormElement : HTMLElement
+    public sealed class HTMLFormElement : HTMLElement, IHTMLFormElement
     {
         internal HTMLFormElement(int handle) : base(handle) { }
 
@@ -69,7 +69,7 @@ namespace Mono.WebAssembly.Browser.DOM
             return InvokeMethod<bool>("reportValidity");
         }
         [IndexerName("TheItem")]
-        public Object this[string name] { get => Item(name); set => throw new NotImplementedException(); }
+        public Element this[string name] { get => Item(name); set => throw new NotImplementedException(); }
     }
 
 }

@@ -5,7 +5,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLQuoteElement", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLQuoteElement : HTMLElement
+    public sealed class HTMLQuoteElement : HTMLElement, IHTMLQuoteElement
     {
         internal HTMLQuoteElement(int handle) : base(handle) { }
 

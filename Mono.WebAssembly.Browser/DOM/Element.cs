@@ -389,11 +389,16 @@ namespace Mono.WebAssembly.Browser.DOM
         {
             return InvokeMethod<bool>("matches", selector);
         }
-        [Export("scrollIntoView")]
-        public void ScrollIntoView(object arg)
+        [Export("closest")]
+        public Element Closest(string selector)
         {
-            InvokeMethod<object>("scrollIntoView", arg);
+            return InvokeMethod<Element>("closest", selector);
         }
+        //[Export("scrollIntoView")]
+        //public void ScrollIntoView(object arg)
+        //{
+        //    InvokeMethod<object>("scrollIntoView", arg);
+        //}
         //[Export("scroll")]
         //public void Scroll(ScrollToOptions options)
         //{
@@ -409,6 +414,21 @@ namespace Mono.WebAssembly.Browser.DOM
         //{
         //    InvokeMethod<object>("scrollBy", options);
         //}
+        [Export("scroll")]
+        public void Scroll(double x, double y)
+        {
+            InvokeMethod<object>("scroll", x, y);
+        }
+        [Export("scrollBy")]
+        public void ScrollBy(double x, double y)
+        {
+            InvokeMethod<object>("scrollBy", x, y);
+        }
+        [Export("scrollTo")]
+        public void ScrollTo(double x, double y)
+        {
+            InvokeMethod<object>("scrollTo", x, y);
+        }
         [Export("insertAdjacentElement")]
         public Element InsertAdjacentElement(InsertPosition position, Element insertedElement)
         {

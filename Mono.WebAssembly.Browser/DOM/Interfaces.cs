@@ -159,302 +159,298 @@ namespace Mono.WebAssembly.Browser.DOM
     }
 
 
-    public interface IElement //: INode, IGlobalEventHandlers, IElementTraversal, INodeSelector, IChildNode, IParentNode
+    public interface IElement : INode, IElementTraversal, INodeSelector, IChildNode, IParentNode //IGlobalEventHandlers, 
     {
-    //    //[Export("classList")]
-    //    //DOMTokenList ClassList { get; }
-    //    [Export("className")]
-    //    string ClassName { get; set; }
-    //    [Export("clientHeight")]
-    //    double ClientHeight { get; }
-    //    [Export("clientLeft")]
-    //    double ClientLeft { get; }
-    //    [Export("clientTop")]
-    //    double ClientTop { get; }
-    //    [Export("clientWidth")]
-    //    double ClientWidth { get; }
-    //    [Export("id")]
-    //    string Id { get; set; }
-    //    [Export("innerHTML")]
-    //    string InnerHtml { get; set; }
-    //    [Export("msContentZoomFactor")]
-    //    double MsContentZoomFactor { get; set; }
-    //    [Export("msRegionOverflow")]
-    //    string MsRegionOverflow { get; }
-    //    event DOMEventHandler OnAriarequest;
-    //    event DOMEventHandler OnCommand;
-    //    event DOMEventHandler OnGotpointercapture;
-    //    event DOMEventHandler OnLostpointercapture;
-    //    event DOMEventHandler OnMsgesturechange;
-    //    event DOMEventHandler OnMsgesturedoubletap;
-    //    event DOMEventHandler OnMsgestureend;
-    //    event DOMEventHandler OnMsgesturehold;
-    //    event DOMEventHandler OnMsgesturestart;
-    //    event DOMEventHandler OnMsgesturetap;
-    //    event DOMEventHandler OnMsgotpointercapture;
-    //    event DOMEventHandler OnMsinertiastart;
-    //    event DOMEventHandler OnMslostpointercapture;
-    //    event DOMEventHandler OnMspointercancel;
-    //    event DOMEventHandler OnMspointerdown;
-    //    event DOMEventHandler OnMspointerenter;
-    //    event DOMEventHandler OnMspointerleave;
-    //    event DOMEventHandler OnMspointermove;
-    //    event DOMEventHandler OnMspointerout;
-    //    event DOMEventHandler OnMspointerover;
-    //    event DOMEventHandler OnMspointerup;
-    //    [Export("ontouchcancel")]
-    //    Action Ontouchcancel { get; set; }
-    //    [Export("ontouchend")]
-    //    Action Ontouchend { get; set; }
-    //    [Export("ontouchmove")]
-    //    Action Ontouchmove { get; set; }
-    //    [Export("ontouchstart")]
-    //    Action Ontouchstart { get; set; }
-    //    event DOMEventHandler OnWebkitfullscreenchange;
-    //    event DOMEventHandler OnWebkitfullscreenerror;
-    //    [Export("outerHTML")]
-    //    string OuterHtml { get; set; }
-    //    [Export("prefix")]
-    //    string Prefix { get; }
-    //    [Export("scrollHeight")]
-    //    double ScrollHeight { get; }
-    //    [Export("scrollLeft")]
-    //    double ScrollLeft { get; set; }
-    //    [Export("scrollTop")]
-    //    double ScrollTop { get; set; }
-    //    [Export("scrollWidth")]
-    //    double ScrollWidth { get; }
-    //    [Export("tagName")]
-    //    string TagName { get; }
-    //    //[Export("assignedSlot")]
-    //    //HTMLSlotElement AssignedSlot { get; }
-    //    [Export("slot")]
-    //    string Slot { get; set; }
-    //    //[Export("shadowRoot")]
-    //    //ShadowRoot ShadowRoot { get; }
-    //    [Export("getAttribute")]
-    //    string GetAttribute(string name);
-    //    [Export("getAttributeNode")]
-    //    Attr GetAttributeNode(string name);
-    //    [Export("getAttributeNodeNS")]
-    //    Attr GetAttributeNodeNs(string namespaceURI, string localName);
-    //    [Export("getAttributeNS")]
-    //    string GetAttributeNs(string namespaceURI, string localName);
-    //    [Export("getBoundingClientRect")]
-    //    object GetBoundingClientRect();
-    //    [Export("getClientRects")]
-    //    object GetClientRects();
-    //    //[Export("getElementsByTagName")]
-    //    //NodeListOf<Element> GetElementsByTagName(string name);
-    //    //[Export("getElementsByTagNameNS")]
-    //    //HTMLCollectionOf<HTMLElement> GetElementsByTagNameNs(string namespaceURI, string localName);
-    //    //[Export("getElementsByTagNameNS")]
-    //    //HTMLCollectionOf<SVGElement> GetElementsByTagNameNs(string namespaceURI, string localName);
-    //    //[Export("getElementsByTagNameNS")]
-    //    //HTMLCollectionOf<Element> GetElementsByTagNameNs(string namespaceURI, string localName);
-    //    [Export("hasAttribute")]
-    //    bool HasAttribute(string name);
-    //    [Export("hasAttributeNS")]
-    //    bool HasAttributeNs(string namespaceURI, string localName);
-    //    [Export("msGetRegionContent")]
-    //    MSRangeCollection MsGetRegionContent();
-    //    [Export("msGetUntransformedBounds")]
-    //    ClientRect MsGetUntransformedBounds();
-    //    [Export("msMatchesSelector")]
-    //    bool MsMatchesSelector(string selectors);
-    //    [Export("msReleasePointerCapture")]
-    //    void MsReleasePointerCapture(double pointerId);
-    //    [Export("msSetPointerCapture")]
-    //    void MsSetPointerCapture(double pointerId);
-    //    [Export("msZoomTo")]
-    //    void MsZoomTo(MsZoomToOptions args);
-    //    [Export("releasePointerCapture")]
-    //    void ReleasePointerCapture(double pointerId);
-    //    [Export("removeAttribute")]
-    //    void RemoveAttribute(string qualifiedName);
-    //    [Export("removeAttributeNode")]
-    //    Attr RemoveAttributeNode(Attr oldAttr);
-    //    [Export("removeAttributeNS")]
-    //    void RemoveAttributeNs(string namespaceURI, string localName);
-    //    [Export("requestFullscreen")]
-    //    void RequestFullscreen();
-    //    [Export("requestPointerLock")]
-    //    void RequestPointerLock();
-    //    [Export("setAttribute")]
-    //    void SetAttribute(string name, string value);
-    //    [Export("setAttributeNode")]
-    //    Attr SetAttributeNode(Attr newAttr);
-    //    [Export("setAttributeNodeNS")]
-    //    Attr SetAttributeNodeNs(Attr newAttr);
-    //    [Export("setAttributeNS")]
-    //    void SetAttributeNs(string namespaceURI, string qualifiedName, string value);
-    //    [Export("setPointerCapture")]
-    //    void SetPointerCapture(double pointerId);
-    //    [Export("webkitMatchesSelector")]
-    //    bool WebkitMatchesSelector(string selectors);
-    //    [Export("webkitRequestFullscreen")]
-    //    void WebkitRequestFullscreen();
-    //    [Export("webkitRequestFullScreen")]
-    //    void WebkitRequestFullScreen();
-    //    [Export("getElementsByClassName")]
-    //    NodeListOf<Element> GetElementsByClassName(string classNames);
-    //    [Export("matches")]
-    //    bool Matches(string selector);
-    //    [Export("closest")]
-    //    IElement Closest(string selector);
-    //    [Export("scrollIntoView")]
-    //    void ScrollIntoView(object arg);
-    //    [Export("scroll")]
-    //    void Scroll(ScrollToOptions options);
-    //    [Export("scroll")]
-    //    void Scroll(double x, double y);
-    //    [Export("scrollTo")]
-    //    void ScrollTo(ScrollToOptions options);
-    //    [Export("scrollTo")]
-    //    void ScrollTo(double x, double y);
-    //    [Export("scrollBy")]
-    //    void ScrollBy(ScrollToOptions options);
-    //    [Export("scrollBy")]
-    //    void ScrollBy(double x, double y);
-    //    [Export("insertAdjacentElement")]
-    //    IElement InsertAdjacentElement(InsertPosition position, IElement insertedElement);
-    //    [Export("insertAdjacentHTML")]
-    //    void InsertAdjacentHtml(InsertPosition where, string html);
-    //    [Export("insertAdjacentText")]
-    //    void InsertAdjacentText(InsertPosition where, string text);
-    //    [Export("attachShadow")]
-    //    ShadowRoot AttachShadow(ShadowRootInit shadowRootInitDict);
-    //    [Export("addEventListener")]
-    //    void AddEventListener(string type, DOMEventHandler listener, object options);
-    //    [Export("removeEventListener")]
-    //    void RemoveEventListener(string type, DOMEventHandler listener, object options);
+        [Export("classList")]
+        DOMTokenList ClassList { get; }
+        [Export("className")]
+        string ClassName { get; set; }
+        [Export("clientHeight")]
+        double ClientHeight { get; }
+        [Export("clientLeft")]
+        double ClientLeft { get; }
+        [Export("clientTop")]
+        double ClientTop { get; }
+        [Export("clientWidth")]
+        double ClientWidth { get; }
+        [Export("id")]
+        string Id { get; set; }
+        [Export("innerHTML")]
+        string InnerHtml { get; set; }
+        [Export("msContentZoomFactor")]
+        double MsContentZoomFactor { get; set; }
+        [Export("msRegionOverflow")]
+        string MsRegionOverflow { get; }
+        event DOMEventHandler OnAriarequest;
+        event DOMEventHandler OnCommand;
+        event DOMEventHandler OnGotpointercapture;
+        event DOMEventHandler OnLostpointercapture;
+        event DOMEventHandler OnMsgesturechange;
+        event DOMEventHandler OnMsgesturedoubletap;
+        event DOMEventHandler OnMsgestureend;
+        event DOMEventHandler OnMsgesturehold;
+        event DOMEventHandler OnMsgesturestart;
+        event DOMEventHandler OnMsgesturetap;
+        event DOMEventHandler OnMsgotpointercapture;
+        event DOMEventHandler OnMsinertiastart;
+        event DOMEventHandler OnMslostpointercapture;
+        event DOMEventHandler OnMspointercancel;
+        event DOMEventHandler OnMspointerdown;
+        event DOMEventHandler OnMspointerenter;
+        event DOMEventHandler OnMspointerleave;
+        event DOMEventHandler OnMspointermove;
+        event DOMEventHandler OnMspointerout;
+        event DOMEventHandler OnMspointerover;
+        event DOMEventHandler OnMspointerup;
+        [Export("ontouchcancel")]
+        Action Ontouchcancel { get; set; }
+        [Export("ontouchend")]
+        Action Ontouchend { get; set; }
+        [Export("ontouchmove")]
+        Action Ontouchmove { get; set; }
+        [Export("ontouchstart")]
+        Action Ontouchstart { get; set; }
+        event DOMEventHandler OnWebkitfullscreenchange;
+        event DOMEventHandler OnWebkitfullscreenerror;
+        [Export("outerHTML")]
+        string OuterHtml { get; set; }
+        [Export("prefix")]
+        string Prefix { get; }
+        [Export("scrollHeight")]
+        double ScrollHeight { get; }
+        [Export("scrollLeft")]
+        double ScrollLeft { get; set; }
+        [Export("scrollTop")]
+        double ScrollTop { get; set; }
+        [Export("scrollWidth")]
+        double ScrollWidth { get; }
+        [Export("tagName")]
+        string TagName { get; }
+        //[Export("assignedSlot")]
+        //HTMLSlotElement AssignedSlot { get; }
+        [Export("slot")]
+        string Slot { get; set; }
+        //[Export("shadowRoot")]
+        //ShadowRoot ShadowRoot { get; }
+        [Export("getAttribute")]
+        string GetAttribute(string name);
+        [Export("getAttributeNode")]
+        Attr GetAttributeNode(string name);
+        [Export("getAttributeNodeNS")]
+        Attr GetAttributeNodeNs(string namespaceURI, string localName);
+        [Export("getAttributeNS")]
+        string GetAttributeNs(string namespaceURI, string localName);
+        [Export("getBoundingClientRect")]
+        object GetBoundingClientRect();
+        [Export("getClientRects")]
+        object GetClientRects();
+        [Export("getElementsByTagName")]
+        NodeListOf<Element> GetElementsByTagName(string name);
+        [Export("getElementsByTagNameNS")]
+        HTMLCollectionOf<HTMLElement> GetElementsByTagNameNs(string namespaceURI, string localName);
+        //[Export("getElementsByTagNameNS")]
+        //HTMLCollectionOf<SVGElement> GetElementsByTagNameNs(string namespaceURI, string localName);
+        //[Export("getElementsByTagNameNS")]
+        //HTMLCollectionOf<Element> GetElementsByTagNameNs(string namespaceURI, string localName);
+        [Export("hasAttribute")]
+        bool HasAttribute(string name);
+        [Export("hasAttributeNS")]
+        bool HasAttributeNs(string namespaceURI, string localName);
+        //[Export("msGetRegionContent")]
+        //MSRangeCollection MsGetRegionContent();
+        //[Export("msGetUntransformedBounds")]
+        //ClientRect MsGetUntransformedBounds();
+        [Export("msMatchesSelector")]
+        bool MsMatchesSelector(string selectors);
+        [Export("msReleasePointerCapture")]
+        void MsReleasePointerCapture(double pointerId);
+        [Export("msSetPointerCapture")]
+        void MsSetPointerCapture(double pointerId);
+        //[Export("msZoomTo")]
+        //void MsZoomTo(MsZoomToOptions args);
+        [Export("releasePointerCapture")]
+        void ReleasePointerCapture(double pointerId);
+        [Export("removeAttribute")]
+        void RemoveAttribute(string qualifiedName);
+        [Export("removeAttributeNode")]
+        Attr RemoveAttributeNode(Attr oldAttr);
+        [Export("removeAttributeNS")]
+        void RemoveAttributeNs(string namespaceURI, string localName);
+        [Export("requestFullscreen")]
+        void RequestFullscreen();
+        [Export("requestPointerLock")]
+        void RequestPointerLock();
+        [Export("setAttribute")]
+        void SetAttribute(string name, string value);
+        [Export("setAttributeNode")]
+        Attr SetAttributeNode(Attr newAttr);
+        [Export("setAttributeNodeNS")]
+        Attr SetAttributeNodeNs(Attr newAttr);
+        [Export("setAttributeNS")]
+        void SetAttributeNs(string namespaceURI, string qualifiedName, string value);
+        [Export("setPointerCapture")]
+        void SetPointerCapture(double pointerId);
+        [Export("webkitMatchesSelector")]
+        bool WebkitMatchesSelector(string selectors);
+        [Export("webkitRequestFullscreen")]
+        void WebkitRequestFullscreen();
+        [Export("webkitRequestFullScreen")]
+        void WebkitRequestFullScreen();
+        [Export("getElementsByClassName")]
+        NodeListOf<Element> GetElementsByClassName(string classNames);
+        [Export("matches")]
+        bool Matches(string selector);
+        [Export("closest")]
+        Element Closest(string selector);
+        //[Export("scrollIntoView")]
+        //void ScrollIntoView(object arg);
+        //[Export("scroll")]
+        //void Scroll(ScrollToOptions options);
+        [Export("scroll")]
+        void Scroll(double x, double y);
+        //[Export("scrollTo")]
+        //void ScrollTo(ScrollToOptions options);
+        [Export("scrollTo")]
+        void ScrollTo(double x, double y);
+        //[Export("scrollBy")]
+        //void ScrollBy(ScrollToOptions options);
+        [Export("scrollBy")]
+        void ScrollBy(double x, double y);
+        [Export("insertAdjacentElement")]
+        Element InsertAdjacentElement(InsertPosition position, Element insertedElement);
+        [Export("insertAdjacentHTML")]
+        void InsertAdjacentHtml(InsertPosition where, string html);
+        [Export("insertAdjacentText")]
+        void InsertAdjacentText(InsertPosition where, string text);
+        //[Export("attachShadow")]
+        //ShadowRoot AttachShadow(ShadowRootInit shadowRootInitDict);
+        [Export("addEventListener")]
+        void AddEventListener(string type, DOMEventHandler listener, object options);
+        [Export("removeEventListener")]
+        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLElement : IElement
     {
-    //    [Export("accessKey")]
-    //    string AccessKey { get; set; }
-    //    [Export("children")]
-    //    HTMLCollection Children { get; }
-    //    [Export("contentEditable")]
-    //    string ContentEditable { get; set; }
-    //    [Export("dataset")]
-    //    DOMStringMap Dataset { get; }
-    //    [Export("dir")]
-    //    string Dir { get; set; }
-    //    [Export("draggable")]
-    //    bool Draggable { get; set; }
-    //    [Export("hidden")]
-    //    bool Hidden { get; set; }
-    //    [Export("hideFocus")]
-    //    bool HideFocus { get; set; }
-    //    [Export("innerText")]
-    //    string InnerText { get; set; }
-    //    [Export("isContentEditable")]
-    //    bool IsContentEditable { get; }
-    //    [Export("lang")]
-    //    string Lang { get; set; }
-    //    [Export("offsetHeight")]
-    //    double OffsetHeight { get; }
-    //    [Export("offsetLeft")]
-    //    double OffsetLeft { get; }
-    //    [Export("offsetParent")]
-    //    Element OffsetParent { get; }
-    //    [Export("offsetTop")]
-    //    double OffsetTop { get; }
-    //    [Export("offsetWidth")]
-    //    double OffsetWidth { get; }
-    //    event DOMEventHandler OnAbort;
-    //    event DOMEventHandler OnActivate;
-    //    event DOMEventHandler OnBeforeactivate;
-    //    event DOMEventHandler OnBeforecopy;
-    //    event DOMEventHandler OnBeforecut;
-    //    event DOMEventHandler OnBeforedeactivate;
-    //    event DOMEventHandler OnBeforepaste;
-    //    event DOMEventHandler OnBlur;
-    //    event DOMEventHandler OnCanplay;
-    //    event DOMEventHandler OnCanplaythrough;
-    //    event DOMEventHandler OnChange;
-    //    event DOMEventHandler OnClick;
-    //    event DOMEventHandler OnContextmenu;
-    //    event DOMEventHandler OnCopy;
-    //    event DOMEventHandler OnCuechange;
-    //    event DOMEventHandler OnCut;
-    //    event DOMEventHandler OnDblclick;
-    //    event DOMEventHandler OnDeactivate;
-    //    event DOMEventHandler OnDrag;
-    //    event DOMEventHandler OnDragend;
-    //    event DOMEventHandler OnDragenter;
-    //    event DOMEventHandler OnDragleave;
-    //    event DOMEventHandler OnDragover;
-    //    event DOMEventHandler OnDragstart;
-    //    event DOMEventHandler OnDrop;
-    //    event DOMEventHandler OnDurationchange;
-    //    event DOMEventHandler OnEmptied;
-    //    event DOMEventHandler OnEnded;
-    //    event DOMEventHandler OnError;
-    //    event DOMEventHandler OnFocus;
-    //    event DOMEventHandler OnInput;
-    //    event DOMEventHandler OnInvalid;
-    //    event DOMEventHandler OnKeydown;
-    //    event DOMEventHandler OnKeypress;
-    //    event DOMEventHandler OnKeyup;
-    //    event DOMEventHandler OnLoad;
-    //    event DOMEventHandler OnLoadeddata;
-    //    event DOMEventHandler OnLoadedmetadata;
-    //    event DOMEventHandler OnLoadstart;
-    //    event DOMEventHandler OnMousedown;
-    //    event DOMEventHandler OnMouseenter;
-    //    event DOMEventHandler OnMouseleave;
-    //    event DOMEventHandler OnMousemove;
-    //    event DOMEventHandler OnMouseout;
-    //    event DOMEventHandler OnMouseover;
-    //    event DOMEventHandler OnMouseup;
-    //    event DOMEventHandler OnMousewheel;
-    //    event DOMEventHandler OnMscontentzoom;
-    //    event DOMEventHandler OnMsmanipulationstatechanged;
-    //    event DOMEventHandler OnPaste;
-    //    event DOMEventHandler OnPause;
-    //    event DOMEventHandler OnPlay;
-    //    event DOMEventHandler OnPlaying;
-    //    event DOMEventHandler OnProgress;
-    //    event DOMEventHandler OnRatechange;
-    //    event DOMEventHandler OnReset;
-    //    event DOMEventHandler OnScroll;
-    //    event DOMEventHandler OnSeeked;
-    //    event DOMEventHandler OnSeeking;
-    //    event DOMEventHandler OnSelect;
-    //    event DOMEventHandler OnSelectstart;
-    //    event DOMEventHandler OnStalled;
-    //    event DOMEventHandler OnSubmit;
-    //    event DOMEventHandler OnSuspend;
-    //    event DOMEventHandler OnTimeupdate;
-    //    event DOMEventHandler OnVolumechange;
-    //    event DOMEventHandler OnWaiting;
-    //    [Export("outerText")]
-    //    string OuterText { get; set; }
-    //    [Export("spellcheck")]
-    //    bool Spellcheck { get; set; }
-    //    [Export("style")]
-    //    CSSStyleDeclaration Style { get; }
-    //    [Export("tabIndex")]
-    //    double TabIndex { get; set; }
-    //    [Export("title")]
-    //    string Title { get; set; }
-    //    [Export("blur")]
-    //    void Blur();
-    //    [Export("click")]
-    //    void Click();
-    //    [Export("dragDrop")]
-    //    bool DragDrop();
-    //    [Export("focus")]
-    //    void Focus();
-    //    [Export("msGetInputContext")]
-    //    MSInputMethodContext MsGetInputContext();
-    //    [Export("addEventListener")]
-    //    void AddEventListener(string type, DOMEventHandler listener, object options);
-    //    [Export("removeEventListener")]
-    //    void RemoveEventListener(string type, DOMEventHandler listener, object options);
+        [Export("accessKey")]
+        string AccessKey { get; set; }
+        [Export("children")]
+        HTMLCollection Children { get; }
+        [Export("contentEditable")]
+        string ContentEditable { get; set; }
+        //[Export("dataset")]
+        //DOMStringMap Dataset { get; }
+        [Export("dir")]
+        string Dir { get; set; }
+        [Export("draggable")]
+        bool Draggable { get; set; }
+        [Export("hidden")]
+        bool Hidden { get; set; }
+        [Export("hideFocus")]
+        bool HideFocus { get; set; }
+        [Export("innerText")]
+        string InnerText { get; set; }
+        [Export("isContentEditable")]
+        bool IsContentEditable { get; }
+        [Export("lang")]
+        string Lang { get; set; }
+        [Export("offsetHeight")]
+        double OffsetHeight { get; }
+        [Export("offsetLeft")]
+        double OffsetLeft { get; }
+        [Export("offsetParent")]
+        Element OffsetParent { get; }
+        [Export("offsetTop")]
+        double OffsetTop { get; }
+        [Export("offsetWidth")]
+        double OffsetWidth { get; }
+        event DOMEventHandler OnAbort;
+        event DOMEventHandler OnActivate;
+        event DOMEventHandler OnBeforeactivate;
+        event DOMEventHandler OnBeforecopy;
+        event DOMEventHandler OnBeforecut;
+        event DOMEventHandler OnBeforedeactivate;
+        event DOMEventHandler OnBeforepaste;
+        event DOMEventHandler OnBlur;
+        event DOMEventHandler OnCanplay;
+        event DOMEventHandler OnCanplaythrough;
+        event DOMEventHandler OnChange;
+        event DOMEventHandler OnClick;
+        event DOMEventHandler OnContextmenu;
+        event DOMEventHandler OnCopy;
+        event DOMEventHandler OnCuechange;
+        event DOMEventHandler OnCut;
+        event DOMEventHandler OnDblclick;
+        event DOMEventHandler OnDeactivate;
+        event DOMEventHandler OnDrag;
+        event DOMEventHandler OnDragend;
+        event DOMEventHandler OnDragenter;
+        event DOMEventHandler OnDragleave;
+        event DOMEventHandler OnDragover;
+        event DOMEventHandler OnDragstart;
+        event DOMEventHandler OnDrop;
+        event DOMEventHandler OnDurationchange;
+        event DOMEventHandler OnEmptied;
+        event DOMEventHandler OnEnded;
+        event DOMEventHandler OnError;
+        event DOMEventHandler OnFocus;
+        event DOMEventHandler OnInput;
+        event DOMEventHandler OnInvalid;
+        event DOMEventHandler OnKeydown;
+        event DOMEventHandler OnKeypress;
+        event DOMEventHandler OnKeyup;
+        event DOMEventHandler OnLoad;
+        event DOMEventHandler OnLoadeddata;
+        event DOMEventHandler OnLoadedmetadata;
+        event DOMEventHandler OnLoadstart;
+        event DOMEventHandler OnMousedown;
+        event DOMEventHandler OnMouseenter;
+        event DOMEventHandler OnMouseleave;
+        event DOMEventHandler OnMousemove;
+        event DOMEventHandler OnMouseout;
+        event DOMEventHandler OnMouseover;
+        event DOMEventHandler OnMouseup;
+        event DOMEventHandler OnMousewheel;
+        event DOMEventHandler OnMscontentzoom;
+        event DOMEventHandler OnMsmanipulationstatechanged;
+        event DOMEventHandler OnPaste;
+        event DOMEventHandler OnPause;
+        event DOMEventHandler OnPlay;
+        event DOMEventHandler OnPlaying;
+        event DOMEventHandler OnProgress;
+        event DOMEventHandler OnRatechange;
+        event DOMEventHandler OnReset;
+        event DOMEventHandler OnScroll;
+        event DOMEventHandler OnSeeked;
+        event DOMEventHandler OnSeeking;
+        event DOMEventHandler OnSelect;
+        event DOMEventHandler OnSelectstart;
+        event DOMEventHandler OnStalled;
+        event DOMEventHandler OnSubmit;
+        event DOMEventHandler OnSuspend;
+        event DOMEventHandler OnTimeupdate;
+        event DOMEventHandler OnVolumechange;
+        event DOMEventHandler OnWaiting;
+        [Export("outerText")]
+        string OuterText { get; set; }
+        [Export("spellcheck")]
+        bool Spellcheck { get; set; }
+        //[Export("style")]
+        //CSSStyleDeclaration Style { get; }
+        [Export("tabIndex")]
+        double TabIndex { get; set; }
+        [Export("title")]
+        string Title { get; set; }
+        [Export("blur")]
+        void Blur();
+        [Export("click")]
+        void Click();
+        [Export("dragDrop")]
+        bool DragDrop();
+        [Export("focus")]
+        void Focus();
+        //[Export("msGetInputContext")]
+        //MSInputMethodContext MsGetInputContext();
     }
 
     public interface ILinkStyle
@@ -1055,10 +1051,6 @@ namespace Mono.WebAssembly.Browser.DOM
         bool Compact { get; set; }
         [Export("type")]
         string Type { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
 
@@ -1068,10 +1060,6 @@ namespace Mono.WebAssembly.Browser.DOM
         string Type { get; set; }
         [Export("value")]
         double Value { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLFormElement : IHTMLElement
@@ -1082,8 +1070,8 @@ namespace Mono.WebAssembly.Browser.DOM
         string Action { get; set; }
         [Export("autocomplete")]
         string Autocomplete { get; set; }
-        //[Export("elements")]
-        //HTMLFormControlsCollection Elements { get; }
+        [Export("elements")]
+        HTMLFormControlsCollection Elements { get; }
         [Export("encoding")]
         string Encoding { get; set; }
         [Export("enctype")]
@@ -1100,21 +1088,17 @@ namespace Mono.WebAssembly.Browser.DOM
         string Target { get; set; }
         [Export("checkValidity")]
         bool CheckValidity();
-        [Export("item")]
-        Object Item(Object name, Object index);
+        //[Export("item")]
+        //Element Item(Object name, Object index);
         [Export("namedItem")]
-        Object NamedItem(string name);
+        Element NamedItem(string name);
         [Export("reset")]
         void Reset();
         [Export("submit")]
         void Submit();
         [Export("reportValidity")]
         bool ReportValidity();
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
-        //Object this[string name] { get; set; }
+        Element this[string name] { get; set; }
     }
 
     public interface IHTMLLabelElement : IHTMLElement
@@ -1123,12 +1107,8 @@ namespace Mono.WebAssembly.Browser.DOM
         HTMLFormElement Form { get; }
         [Export("htmlFor")]
         string HtmlFor { get; set; }
-        //[Export("control")]
-        //HTMLInputElement Control { get; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
+        [Export("control")]
+        HTMLInputElement Control { get; }
     }
 
     public interface IHTMLInputElement : IHTMLElement
@@ -1210,13 +1190,13 @@ namespace Mono.WebAssembly.Browser.DOM
         [Export("step")]
         string Step { get; set; }
         [Export("type")]
-        string Type { get; set; }
+        InputElementType Type { get; set; }
         [Export("useMap")]
         string UseMap { get; set; }
         [Export("validationMessage")]
         string ValidationMessage { get; }
-        //[Export("validity")]
-        //ValidityState Validity { get; }
+        [Export("validity")]
+        ValidityState Validity { get; }
         [Export("value")]
         string Value { get; set; }
         //[Export("valueAsDate")]
@@ -1245,10 +1225,6 @@ namespace Mono.WebAssembly.Browser.DOM
         void StepDown(double n);
         [Export("stepUp")]
         void StepUp(double n);
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IValidityState
@@ -1403,10 +1379,6 @@ namespace Mono.WebAssembly.Browser.DOM
         string Urn { get; set; }
         [Export("toString")]
         string ToString();
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLFieldSetElement : IHTMLElement
@@ -1429,20 +1401,12 @@ namespace Mono.WebAssembly.Browser.DOM
         bool CheckValidity();
         [Export("setCustomValidity")]
         void SetCustomValidity(string error);
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLBRElement : IHTMLElement
     {
         [Export("clear")]
         string Clear { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLAreaElement : IHTMLElement
@@ -1479,10 +1443,6 @@ namespace Mono.WebAssembly.Browser.DOM
         string Target { get; set; }
         [Export("toString")]
         string ToString();
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
 
@@ -1492,10 +1452,6 @@ namespace Mono.WebAssembly.Browser.DOM
         string Href { get; set; }
         [Export("target")]
         string Target { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
 
@@ -1503,22 +1459,63 @@ namespace Mono.WebAssembly.Browser.DOM
     {
         [Export("cite")]
         string Cite { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
     public interface IHTMLHtmlElement : IHTMLElement
     {
         [Export("version")]
         string Version { get; set; }
-        [Export("addEventListener")]
-        void AddEventListener(string type, DOMEventHandler listener, object options);
-        [Export("removeEventListener")]
-        void RemoveEventListener(string type, DOMEventHandler listener, object options);
     }
 
+    public interface IHTMLHeadingElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+    }
+
+    public interface IHTMLBodyElement : IHTMLElement
+    {
+        [Export("aLink")]
+        Object ALink { get; set; }
+        [Export("background")]
+        string Background { get; set; }
+        [Export("bgColor")]
+        Object BgColor { get; set; }
+        [Export("bgProperties")]
+        string BgProperties { get; set; }
+        [Export("link")]
+        Object Link { get; set; }
+        [Export("noWrap")]
+        bool NoWrap { get; set; }
+        event DOMEventHandler OnAfterprint;
+        event DOMEventHandler OnBeforeprint;
+        event DOMEventHandler OnBeforeunload;
+        event DOMEventHandler OnHashchange;
+        event DOMEventHandler OnMessage;
+        event DOMEventHandler OnOffline;
+        event DOMEventHandler OnOnline;
+        event DOMEventHandler OnOrientationchange;
+        event DOMEventHandler OnPagehide;
+        event DOMEventHandler OnPageshow;
+        event DOMEventHandler OnPopstate;
+        event DOMEventHandler OnResize;
+        event DOMEventHandler OnStorage;
+        event DOMEventHandler OnUnload;
+        [Export("text")]
+        Object Text { get; set; }
+        [Export("vLink")]
+        Object VLink { get; set; }
+    }
+
+    public interface IComment : ICharacterData
+    {
+        [Export("text")]
+        string Text { get; set; }
+    }
+
+    public interface ICDATASection : IText
+    {
+    }
 
 
 
