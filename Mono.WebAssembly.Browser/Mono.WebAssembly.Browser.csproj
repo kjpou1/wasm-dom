@@ -120,6 +120,15 @@
     <Compile Include="DOM\HTMLBodyElement.cs" />
     <Compile Include="DOM\Comment.cs" />
     <Compile Include="DOM\CDATASection.cs" />
+    <Compile Include="DOM\HTMLHeadElement.cs" />
+    <Compile Include="DOM\HTMLTableColElement.cs" />
+    <Compile Include="DOM\HTMLTableCaptionElement.cs" />
+    <Compile Include="DOM\HTMLTableCellElement.cs" />
+    <Compile Include="DOM\HTMLTableDataCellElement.cs" />
+    <Compile Include="DOM\HTMLTableSectionElement.cs" />
+    <Compile Include="DOM\HTMLTableRowElement.cs" />
+    <Compile Include="DOM\HTMLTableHeaderCellElement.cs" />
+    <Compile Include="DOM\HTMLTableElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

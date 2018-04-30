@@ -1517,6 +1517,166 @@ namespace Mono.WebAssembly.Browser.DOM
     {
     }
 
+    public interface IHTMLHeadElement : IHTMLElement
+    {
+        [Export("profile")]
+        string Profile { get; set; }
+    }
+
+    public interface IHTMLTableAlignment
+    {
+        [Export("ch")]
+        string Ch { get; set; }
+        [Export("chOff")]
+        string ChOff { get; set; }
+        [Export("vAlign")]
+        string VAlign { get; set; }
+    }
+
+    public interface IHTMLTableColElement : IHTMLElement, IHTMLTableAlignment
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("span")]
+        double Span { get; set; }
+        [Export("width")]
+        Object Width { get; set; }
+    }
+
+    public interface IHTMLTableCaptionElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("vAlign")]
+        string VAlign { get; set; }
+    }
+
+    public interface IHTMLTableCellElement : IHTMLElement, IHTMLTableAlignment
+    {
+        [Export("abbr")]
+        string Abbr { get; set; }
+        [Export("align")]
+        string Align { get; set; }
+        [Export("axis")]
+        string Axis { get; set; }
+        [Export("bgColor")]
+        Object BgColor { get; set; }
+        [Export("cellIndex")]
+        double CellIndex { get; }
+        [Export("colSpan")]
+        double ColSpan { get; set; }
+        [Export("headers")]
+        string Headers { get; set; }
+        [Export("height")]
+        Object Height { get; set; }
+        [Export("noWrap")]
+        bool NoWrap { get; set; }
+        [Export("rowSpan")]
+        double RowSpan { get; set; }
+        [Export("scope")]
+        string Scope { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+    }
+
+    public interface IHTMLTableDataCellElement : IHTMLTableCellElement
+    {
+    }
+
+
+    public interface IHTMLTableSectionElement : IHTMLElement, IHTMLTableAlignment
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("rows")]
+        HTMLCollectionOf<HTMLTableRowElement> Rows { get; set; }
+        [Export("deleteRow")]
+        void DeleteRow(double index);
+        [Export("insertRow")]
+        HTMLTableRowElement InsertRow(double index);
+    }
+
+    public interface IHTMLTableRowElement : IHTMLElement, IHTMLTableAlignment
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("bgColor")]
+        Object BgColor { get; set; }
+        [Export("cells")]
+        HTMLCollectionOf<HTMLTableCellElement> Cells { get; set; }
+        [Export("height")]
+        Object Height { get; set; }
+        [Export("rowIndex")]
+        double RowIndex { get; }
+        [Export("sectionRowIndex")]
+        double SectionRowIndex { get; }
+        [Export("deleteCell")]
+        void DeleteCell(double index);
+        [Export("insertCell")]
+        HTMLTableDataCellElement InsertCell(double index);
+    }
+
+    public interface IHTMLTableHeaderCellElement : IHTMLTableCellElement 
+    {
+        //[Export("scope")]
+        //string Scope { get; set; }
+    }
+
+    public interface IHTMLTableElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("bgColor")]
+        Object BgColor { get; set; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("borderColor")]
+        Object BorderColor { get; set; }
+        [Export("caption")]
+        HTMLTableCaptionElement Caption { get; set; }
+        [Export("cellPadding")]
+        string CellPadding { get; set; }
+        [Export("cellSpacing")]
+        string CellSpacing { get; set; }
+        [Export("cols")]
+        double Cols { get; set; }
+        [Export("frame")]
+        string Frame { get; set; }
+        [Export("height")]
+        Object Height { get; set; }
+        [Export("rows")]
+        HTMLCollectionOf<HTMLTableRowElement> Rows { get; set; }
+        [Export("rules")]
+        string Rules { get; set; }
+        [Export("summary")]
+        string Summary { get; set; }
+        [Export("tBodies")]
+        HTMLCollectionOf<HTMLTableSectionElement> TBodies { get; set; }
+        [Export("tFoot")]
+        HTMLTableSectionElement TFoot { get; set; }
+        [Export("tHead")]
+        HTMLTableSectionElement THead { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+        [Export("createCaption")]
+        HTMLTableCaptionElement CreateCaption();
+        [Export("createTBody")]
+        HTMLTableSectionElement CreateTBody();
+        [Export("createTFoot")]
+        HTMLTableSectionElement CreateTFoot();
+        [Export("createTHead")]
+        HTMLTableSectionElement CreateTHead();
+        [Export("deleteCaption")]
+        void DeleteCaption();
+        [Export("deleteRow")]
+        void DeleteRow(double index);
+        [Export("deleteTFoot")]
+        void DeleteTFoot();
+        [Export("deleteTHead")]
+        void DeleteTHead();
+        [Export("insertRow")]
+        HTMLTableRowElement InsertRow(double index);
+    }
 
 
 }

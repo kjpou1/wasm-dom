@@ -17,8 +17,8 @@ namespace Mono.WebAssembly.Browser.DOM
         public string AlinkColor { get => GetProperty<string>("alinkColor"); set => SetProperty<string>("alinkColor", value); }
         // [Export("all")]
         // public HTMLAllCollection All => GetProperty<HTMLAllCollection>("all");
-        // [Export("anchors")]
-        // public HTMLCollectionOf<HTMLAnchorElement> Anchors { get => GetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors"); set => SetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors", value); }
+        [Export("anchors")]
+        public HTMLCollectionOf<HTMLAnchorElement> Anchors { get => GetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors"); set => SetProperty<HTMLCollectionOf<HTMLAnchorElement>>("anchors", value); }
         // [Export("applets")]
         // public HTMLCollectionOf<HTMLAppletElement> Applets { get => GetProperty<HTMLCollectionOf<HTMLAppletElement>>("applets"); set => SetProperty<HTMLCollectionOf<HTMLAppletElement>>("applets", value); }
         /**
@@ -60,8 +60,8 @@ namespace Mono.WebAssembly.Browser.DOM
         public Element FullscreenElement => GetProperty<Element>("fullscreenElement");
         [Export("fullscreenEnabled")]
         public bool FullscreenEnabled => GetProperty<bool>("fullscreenEnabled");
-        // [Export("head")]
-        // public HTMLHeadElement Head => GetProperty<HTMLHeadElement>("head");
+        [Export("head")]
+        public HTMLHeadElement Head => GetProperty<HTMLHeadElement>("head");
         [Export("hidden")]
         public bool Hidden => GetProperty<bool>("hidden");
         // [Export("images")]
