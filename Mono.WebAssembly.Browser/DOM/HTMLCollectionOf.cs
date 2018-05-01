@@ -9,7 +9,7 @@ namespace Mono.WebAssembly.Browser.DOM
 {
 
     [Export("HTMLCollection", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class HTMLCollectionOf<T> : JSObject, IEnumerable<T>, IEnumerable 
+    public class HTMLCollectionOf<T> : JSObject, IEnumerable<T>, IEnumerable 
     {
 
         public HTMLCollectionOf(int handle) : base(handle) { }

@@ -138,6 +138,10 @@
     <Compile Include="DOM\HTMLStyleElement.cs" />
     <Compile Include="DOM\HTMLMetaElement.cs" />
     <Compile Include="DOM\HTMLOListElement.cs" />
+    <Compile Include="DOM\HTMLOptGroupElement.cs" />
+    <Compile Include="DOM\HTMLOptionElement.cs" />
+    <Compile Include="DOM\HTMLOptionsCollection.cs" />
+    <Compile Include="DOM\HTMLSelectElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

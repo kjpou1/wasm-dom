@@ -1764,5 +1764,94 @@ namespace Mono.WebAssembly.Browser.DOM
         string Type { get; set; }
     }
 
+    public interface IHTMLOptGroupElement : IHTMLElement
+    {
+        [Export("defaultSelected")]
+        bool DefaultSelected { get; set; }
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("index")]
+        double Index { get; }
+        [Export("label")]
+        string Label { get; set; }
+        [Export("selected")]
+        bool Selected { get; set; }
+        [Export("text")]
+        string Text { get; }
+        [Export("value")]
+        string Value { get; set; }
+    }
+
+    public interface IHTMLOptionElement : IHTMLElement
+    {
+        [Export("defaultSelected")]
+        bool DefaultSelected { get; set; }
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("index")]
+        double Index { get; }
+        [Export("label")]
+        string Label { get; set; }
+        [Export("selected")]
+        bool Selected { get; set; }
+        [Export("text")]
+        string Text { get; set; }
+        [Export("value")]
+        string Value { get; set; }
+    }
+
+    public interface IHTMLSelectElement : IHTMLElement
+    {
+        [Export("autofocus")]
+        bool Autofocus { get; set; }
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("length")]
+        double Length { get; set; }
+        [Export("multiple")]
+        bool Multiple { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("options")]
+        HTMLOptionsCollection Options { get; }
+        [Export("required")]
+        bool Required { get; set; }
+        [Export("selectedIndex")]
+        double SelectedIndex { get; set; }
+        [Export("selectedOptions")]
+        HTMLCollectionOf<HTMLOptionElement> SelectedOptions { get; set; }
+        [Export("size")]
+        double Size { get; set; }
+        [Export("type")]
+        string Type { get; }
+        [Export("validationMessage")]
+        string ValidationMessage { get; }
+        [Export("validity")]
+        ValidityState Validity { get; }
+        [Export("value")]
+        string Value { get; set; }
+        [Export("willValidate")]
+        bool WillValidate { get; }
+        [Export("add")]
+        void Add(HTMLElement element, object before);
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("item")]
+        Object Item(Object name, Object index);
+        [Export("namedItem")]
+        Object NamedItem(string name);
+        [Export("remove")]
+        void Remove(double index);
+        [Export("setCustomValidity")]
+        void SetCustomValidity(string error);
+        [IndexerName("TheItem")]
+        Object this[string name] { get; set; }
+    }
 
 }
