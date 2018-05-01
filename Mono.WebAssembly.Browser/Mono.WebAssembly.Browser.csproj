@@ -129,6 +129,15 @@
     <Compile Include="DOM\HTMLTableRowElement.cs" />
     <Compile Include="DOM\HTMLTableHeaderCellElement.cs" />
     <Compile Include="DOM\HTMLTableElement.cs" />
+    <Compile Include="DOM\HTMLUnknownElement.cs" />
+    <Compile Include="DOM\HTMLHRElement.cs" />
+    <Compile Include="DOM\HTMLBaseFontElement.cs" />
+    <Compile Include="DOM\HTMLFontElement.cs" />
+    <Compile Include="DOM\HTMLSpanElement.cs" />
+    <Compile Include="DOM\HTMLTitleElement.cs" />
+    <Compile Include="DOM\HTMLStyleElement.cs" />
+    <Compile Include="DOM\HTMLMetaElement.cs" />
+    <Compile Include="DOM\HTMLOListElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

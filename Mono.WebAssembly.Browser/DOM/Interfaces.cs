@@ -1678,5 +1678,91 @@ namespace Mono.WebAssembly.Browser.DOM
         HTMLTableRowElement InsertRow(double index);
     }
 
+    public interface IHTMLUnknownElement : IHTMLElement
+    {
+    }
+
+    public interface IDOML2DeprecatedColorProperty
+    {
+        [Export("color")]
+        string Color { get; set; }
+    }
+    public interface IDOML2DeprecatedSizeProperty
+    {
+        [Export("size")]
+        double Size { get; set; }
+    }
+
+
+    public interface IHTMLHRElement : IHTMLElement, IDOML2DeprecatedColorProperty, IDOML2DeprecatedSizeProperty
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("noShade")]
+        bool NoShade { get; set; }
+        [Export("width")]
+        double Width { get; set; }
+    }
+
+    public interface IHTMLBaseFontElement : IHTMLElement, IDOML2DeprecatedColorProperty
+    {
+        [Export("face")]
+        string Face { get; set; }
+        [Export("size")]
+        double Size { get; set; }
+    }
+
+    public interface IHTMLFontElement : IHTMLElement, IDOML2DeprecatedColorProperty, IDOML2DeprecatedSizeProperty
+    {
+        [Export("face")]
+        string Face { get; set; }
+    }
+
+    public interface IHTMLSpanElement : IHTMLElement
+    {
+    }
+
+    public interface IHTMLTitleElement : IHTMLElement
+    {
+        [Export("text")]
+        string Text { get; set; }
+    }
+
+    public interface IHTMLStyleElement : IHTMLElement, ILinkStyle
+    {
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        [Export("media")]
+        string Media { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+    }
+
+    public interface IHTMLMetaElement : IHTMLElement
+    {
+        [Export("charset")]
+        string Charset { get; set; }
+        [Export("content")]
+        string Content { get; set; }
+        [Export("httpEquiv")]
+        string HttpEquiv { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("scheme")]
+        string Scheme { get; set; }
+        [Export("url")]
+        string Url { get; set; }
+    }
+
+    public interface IHTMLOListElement : IHTMLElement
+    {
+        [Export("compact")]
+        bool Compact { get; set; }
+        [Export("start")]
+        double Start { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+    }
+
 
 }
