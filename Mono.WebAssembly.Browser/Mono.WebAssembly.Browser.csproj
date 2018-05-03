@@ -142,6 +142,27 @@
     <Compile Include="DOM\HTMLOptionElement.cs" />
     <Compile Include="DOM\HTMLOptionsCollection.cs" />
     <Compile Include="DOM\HTMLSelectElement.cs" />
+    <Compile Include="DOM\HTMLTextAreaElement.cs" />
+    <Compile Include="DOM\HTMLDataElement.cs" />
+    <Compile Include="DOM\HTMLDataListElement.cs" />
+    <Compile Include="DOM\HTMLImageElement.cs" />
+    <Compile Include="DOM\HTMLModElement.cs" />
+    <Compile Include="DOM\HTMLPreElement.cs" />
+    <Compile Include="DOM\HTMLMarqueeElement.cs" />
+    <Compile Include="DOM\HTMLTrackElement.cs" />
+    <Compile Include="DOM\HTMLTimeElement.cs" />
+    <Compile Include="DOM\HTMLLegendElement.cs" />
+    <Compile Include="DOM\HTMLMeterElement.cs" />
+    <Compile Include="DOM\HTMLProgressElement.cs" />
+    <Compile Include="DOM\HTMLSourceElement.cs" />
+    <Compile Include="DOM\HTMLDirectoryElement.cs" />
+    <Compile Include="DOM\HTMLDListElement.cs" />
+    <Compile Include="DOM\HTMLParamElement.cs" />
+    <Compile Include="DOM\HTMLAreasCollection.cs" />
+    <Compile Include="DOM\HTMLMapElement.cs" />
+    <Compile Include="DOM\HTMLPictureElement.cs" />
+    <Compile Include="DOM\HTMLMenuElement.cs" />
+    <Compile Include="DOM\HTMLScriptElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

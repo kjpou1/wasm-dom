@@ -1854,4 +1854,332 @@ namespace Mono.WebAssembly.Browser.DOM
         Object this[string name] { get; set; }
     }
 
+    public interface IHTMLTextAreaElement : IHTMLElement
+    {
+        [Export("autofocus")]
+        bool Autofocus { get; set; }
+        [Export("cols")]
+        double Cols { get; set; }
+        [Export("defaultValue")]
+        string DefaultValue { get; set; }
+        [Export("disabled")]
+        bool Disabled { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("maxLength")]
+        double MaxLength { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("placeholder")]
+        string Placeholder { get; set; }
+        [Export("readOnly")]
+        bool ReadOnly { get; set; }
+        [Export("required")]
+        bool Required { get; set; }
+        [Export("rows")]
+        double Rows { get; set; }
+        [Export("selectionEnd")]
+        double SelectionEnd { get; set; }
+        [Export("selectionStart")]
+        double SelectionStart { get; set; }
+        [Export("status")]
+        Object Status { get; set; }
+        [Export("type")]
+        string Type { get; }
+        [Export("validationMessage")]
+        string ValidationMessage { get; }
+        [Export("validity")]
+        ValidityState Validity { get; }
+        [Export("value")]
+        string Value { get; set; }
+        [Export("willValidate")]
+        bool WillValidate { get; }
+        [Export("wrap")]
+        string Wrap { get; set; }
+        [Export("minLength")]
+        double MinLength { get; set; }
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("select")]
+        void Select();
+        [Export("setCustomValidity")]
+        void SetCustomValidity(string error);
+        [Export("setSelectionRange")]
+        void SetSelectionRange(double start, double end, object direction);
+    }
+
+    public interface IHTMLDataElement : IHTMLElement
+    {
+        [Export("value")]
+        string Value { get; set; }
+    }
+
+    public interface IHTMLDataListElement : IHTMLElement
+    {
+        [Export("options")]
+        HTMLCollectionOf<HTMLOptionElement> Options { get; set; }
+    }
+
+    public interface IHTMLImageElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("alt")]
+        string Alt { get; set; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("complete")]
+        bool Complete { get; }
+        [Export("crossOrigin")]
+        string CrossOrigin { get; set; }
+        [Export("currentSrc")]
+        string CurrentSrc { get; }
+        [Export("height")]
+        double Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("isMap")]
+        bool IsMap { get; set; }
+        [Export("longDesc")]
+        string LongDesc { get; set; }
+        [Export("lowsrc")]
+        string Lowsrc { get; set; }
+        [Export("msPlayToDisabled")]
+        bool MsPlayToDisabled { get; set; }
+        [Export("msPlayToPreferredSourceUri")]
+        string MsPlayToPreferredSourceUri { get; set; }
+        [Export("msPlayToPrimary")]
+        bool MsPlayToPrimary { get; set; }
+        [Export("msPlayToSource")]
+        Object MsPlayToSource { get; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("naturalHeight")]
+        double NaturalHeight { get; }
+        [Export("naturalWidth")]
+        double NaturalWidth { get; }
+        [Export("sizes")]
+        string Sizes { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("srcset")]
+        string Srcset { get; set; }
+        [Export("useMap")]
+        string UseMap { get; set; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("width")]
+        double Width { get; set; }
+        [Export("x")]
+        double X { get; }
+        [Export("y")]
+        double Y { get; }
+        [Export("msGetAsCastingSource")]
+        Object MsGetAsCastingSource();
+    }
+
+    public interface IHTMLModElement : IHTMLElement
+    {
+        [Export("cite")]
+        string Cite { get; set; }
+        [Export("dateTime")]
+        string DateTime { get; set; }
+    }
+
+
+    public interface IHTMLPreElement : IHTMLElement
+    {
+        [Export("width")]
+        double Width { get; set; }
+    }
+
+    public interface IHTMLMarqueeElement : IHTMLElement
+    {
+        [Export("behavior")]
+        string Behavior { get; set; }
+        [Export("bgColor")]
+        Object BgColor { get; set; }
+        [Export("direction")]
+        string Direction { get; set; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("loop")]
+        double Loop { get; set; }
+        event DOMEventHandler OnBounce;
+        event DOMEventHandler OnFinish;
+        event DOMEventHandler OnStart;
+        [Export("scrollAmount")]
+        double ScrollAmount { get; set; }
+        [Export("scrollDelay")]
+        double ScrollDelay { get; set; }
+        [Export("trueSpeed")]
+        bool TrueSpeed { get; set; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+        [Export("start")]
+        void Start();
+        [Export("stop")]
+        void Stop();
+    }
+
+    public interface IHTMLTrackElement : IHTMLElement
+    {
+        [Export("default")]
+        bool Default { get; set; }
+        [Export("kind")]
+        string Kind { get; set; }
+        [Export("label")]
+        string Label { get; set; }
+        [Export("readyState")]
+        double ReadyState { get; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("srclang")]
+        string Srclang { get; set; }
+        //[Export("track")]
+        //TextTrack Track { get; }
+        [Export("ERROR")]
+        double Error { get; }
+        [Export("LOADED")]
+        double Loaded { get; }
+        [Export("LOADING")]
+        double Loading { get; }
+        [Export("NONE")]
+        double None { get; }
+    }
+
+    public interface IHTMLTimeElement : IHTMLElement
+    {
+        [Export("dateTime")]
+        string DateTime { get; set; }
+    }
+
+    public interface IHTMLLegendElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+    }
+
+    public interface IHTMLMeterElement : IHTMLElement
+    {
+        [Export("high")]
+        double High { get; set; }
+        [Export("low")]
+        double Low { get; set; }
+        [Export("max")]
+        double Max { get; set; }
+        [Export("min")]
+        double Min { get; set; }
+        [Export("optimum")]
+        double Optimum { get; set; }
+        [Export("value")]
+        double Value { get; set; }
+    }
+
+    public interface IHTMLProgressElement : IHTMLElement
+    {
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("max")]
+        double Max { get; set; }
+        [Export("position")]
+        double Position { get; }
+        [Export("value")]
+        double Value { get; set; }
+    }
+
+    public interface IHTMLSourceElement : IHTMLElement
+    {
+        [Export("media")]
+        string Media { get; set; }
+        [Export("msKeySystem")]
+        string MsKeySystem { get; set; }
+        [Export("sizes")]
+        string Sizes { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("srcset")]
+        string Srcset { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+    }
+
+    public interface IHTMLDirectoryElement : IHTMLElement
+    {
+        [Export("compact")]
+        bool Compact { get; set; }
+    }
+
+    public interface IHTMLDListElement : IHTMLElement
+    {
+        [Export("compact")]
+        bool Compact { get; set; }
+    }
+
+    public interface IHTMLParamElement : IHTMLElement
+    {
+        [Export("name")]
+        string Name { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("value")]
+        string Value { get; set; }
+        [Export("valueType")]
+        string ValueType { get; set; }
+    }
+
+    public interface IHTMLAreasCollection : IHTMLCollectionBase
+    {
+    }
+
+    public interface IHTMLMapElement : IHTMLElement
+    {
+        [Export("areas")]
+        HTMLAreasCollection Areas { get; }
+        [Export("name")]
+        string Name { get; set; }
+    }
+
+    public interface IHTMLPictureElement : IHTMLElement
+    {
+    }
+
+    public interface IHTMLMenuElement : IHTMLElement
+    {
+        [Export("compact")]
+        bool Compact { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+    }
+
+    public interface IHTMLScriptElement : IHTMLElement
+    {
+        [Export("async")]
+        bool Async { get; set; }
+        [Export("charset")]
+        string Charset { get; set; }
+        [Export("crossOrigin")]
+        string CrossOrigin { get; set; }
+        [Export("defer")]
+        bool Defer { get; set; }
+        [Export("event")]
+        string Event { get; set; }
+        [Export("htmlFor")]
+        string HtmlFor { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("text")]
+        string Text { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("integrity")]
+        string Integrity { get; set; }
+    }
+
 }
