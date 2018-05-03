@@ -163,6 +163,11 @@
     <Compile Include="DOM\HTMLPictureElement.cs" />
     <Compile Include="DOM\HTMLMenuElement.cs" />
     <Compile Include="DOM\HTMLScriptElement.cs" />
+    <Compile Include="DOM\HTMLEmbedElement.cs" />
+    <Compile Include="DOM\HTMLFrameElement.cs" />
+    <Compile Include="DOM\HTMLFrameSetElement.cs" />
+    <Compile Include="DOM\HTMLAppletElement.cs" />
+    <Compile Include="DOM\HTMLObjectElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />

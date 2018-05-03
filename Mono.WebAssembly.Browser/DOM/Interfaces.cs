@@ -2182,4 +2182,222 @@ namespace Mono.WebAssembly.Browser.DOM
         string Integrity { get; set; }
     }
 
+    public interface IGetSVGDocument
+    {
+        [Export("getSVGDocument")]
+        Document GetSvgDocument();
+    }
+
+    public interface IHTMLEmbedElement : IHTMLElement, IGetSVGDocument
+    {
+        [Export("height")]
+        string Height { get; set; }
+        //[Export("hidden")]
+        //Object Hidden { get; set; }
+        [Export("msPlayToDisabled")]
+        bool MsPlayToDisabled { get; set; }
+        [Export("msPlayToPreferredSourceUri")]
+        string MsPlayToPreferredSourceUri { get; set; }
+        [Export("msPlayToPrimary")]
+        bool MsPlayToPrimary { get; set; }
+        //[Export("msPlayToSource")]
+        //Object MsPlayToSource { get; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("palette")]
+        string Palette { get; }
+        [Export("pluginspage")]
+        string Pluginspage { get; }
+        [Export("readyState")]
+        string ReadyState { get; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("units")]
+        string Units { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+    }
+
+    public interface IHTMLFrameElement : IHTMLElement, IGetSVGDocument
+    {
+        [Export("border")]
+        string Border { get; set; }
+        [Export("borderColor")]
+        Object BorderColor { get; set; }
+        [Export("contentDocument")]
+        Document ContentDocument { get; }
+        [Export("contentWindow")]
+        Window ContentWindow { get; }
+        [Export("frameBorder")]
+        string FrameBorder { get; set; }
+        [Export("frameSpacing")]
+        Object FrameSpacing { get; set; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("longDesc")]
+        string LongDesc { get; set; }
+        [Export("marginHeight")]
+        string MarginHeight { get; set; }
+        [Export("marginWidth")]
+        string MarginWidth { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("noResize")]
+        bool NoResize { get; set; }
+        [Export("scrolling")]
+        string Scrolling { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+    }
+
+    public interface IHTMLFrameSetElement : IHTMLElement
+    {
+        [Export("border")]
+        string Border { get; set; }
+        [Export("borderColor")]
+        string BorderColor { get; set; }
+        [Export("cols")]
+        string Cols { get; set; }
+        [Export("frameBorder")]
+        string FrameBorder { get; set; }
+        [Export("frameSpacing")]
+        string FrameSpacing { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        event DOMEventHandler OnAfterprint;
+        event DOMEventHandler OnBeforeprint;
+        event DOMEventHandler OnBeforeunload;
+        event DOMEventHandler OnHashchange;
+        event DOMEventHandler OnMessage;
+        event DOMEventHandler OnOffline;
+        event DOMEventHandler OnOnline;
+        event DOMEventHandler OnOrientationchange;
+        event DOMEventHandler OnPagehide;
+        event DOMEventHandler OnPageshow;
+        event DOMEventHandler OnPopstate;
+        event DOMEventHandler OnResize;
+        event DOMEventHandler OnStorage;
+        event DOMEventHandler OnUnload;
+        [Export("rows")]
+        string Rows { get; set; }
+    }
+
+    public interface IHTMLAppletElement : IHTMLElement
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("alt")]
+        string Alt { get; set; }
+        [Export("altHtml")]
+        string AltHtml { get; set; }
+        [Export("archive")]
+        string Archive { get; set; }
+        [Export("BaseHref")]
+        string BaseHref { get; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("code")]
+        string Code { get; set; }
+        [Export("codeBase")]
+        string CodeBase { get; set; }
+        [Export("codeType")]
+        string CodeType { get; set; }
+        [Export("contentDocument")]
+        Document ContentDocument { get; }
+        [Export("data")]
+        string Data { get; set; }
+        [Export("declare")]
+        bool Declare { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("object")]
+        string Object { get; set; }
+        [Export("standby")]
+        string Standby { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("useMap")]
+        string UseMap { get; set; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("width")]
+        double Width { get; set; }
+    }
+
+    public interface IHTMLObjectElement : IHTMLElement, IGetSVGDocument
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("alt")]
+        string Alt { get; set; }
+        [Export("altHtml")]
+        string AltHtml { get; set; }
+        [Export("archive")]
+        string Archive { get; set; }
+        [Export("BaseHref")]
+        string BaseHref { get; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("code")]
+        string Code { get; set; }
+        [Export("codeBase")]
+        string CodeBase { get; set; }
+        [Export("codeType")]
+        string CodeType { get; set; }
+        [Export("contentDocument")]
+        Document ContentDocument { get; }
+        [Export("data")]
+        string Data { get; set; }
+        [Export("declare")]
+        bool Declare { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("msPlayToDisabled")]
+        bool MsPlayToDisabled { get; set; }
+        [Export("msPlayToPreferredSourceUri")]
+        string MsPlayToPreferredSourceUri { get; set; }
+        [Export("msPlayToPrimary")]
+        bool MsPlayToPrimary { get; set; }
+        [Export("msPlayToSource")]
+        Object MsPlayToSource { get; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("readyState")]
+        double ReadyState { get; }
+        [Export("standby")]
+        string Standby { get; set; }
+        [Export("type")]
+        string Type { get; set; }
+        [Export("useMap")]
+        string UseMap { get; set; }
+        [Export("validationMessage")]
+        string ValidationMessage { get; }
+        [Export("validity")]
+        ValidityState Validity { get; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+        [Export("willValidate")]
+        bool WillValidate { get; }
+        [Export("typemustmatch")]
+        bool Typemustmatch { get; set; }
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("setCustomValidity")]
+        void SetCustomValidity(string error);
+    }
+
 }
