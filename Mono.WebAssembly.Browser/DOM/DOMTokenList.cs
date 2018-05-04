@@ -5,7 +5,7 @@ using Mono.WebAssembly;
 namespace Mono.WebAssembly.Browser.DOM
 {
     [Export("DOMTokenList", typeof(Mono.WebAssembly.JSObject))]
-    public sealed class DOMTokenList : JSObject
+    public class DOMTokenList : JSObject
     {
         public DOMTokenList(int handle) : base(handle) { }
 

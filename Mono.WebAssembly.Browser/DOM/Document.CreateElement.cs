@@ -31,6 +31,7 @@ namespace Mono.WebAssembly.Browser.DOM
             {typeof(HTMLHeadingElement), "h1"},
             {typeof(HTMLHRElement), "hr"},
             {typeof(HTMLHtmlElement), "html"},
+            {typeof(HTMLIFrameElement), "iframe"},
             {typeof(HTMLImageElement), "img"},
             {typeof(HTMLInputElement), "input"},
             {typeof(HTMLLabelElement), "label"},
@@ -47,6 +48,7 @@ namespace Mono.WebAssembly.Browser.DOM
             {typeof(HTMLOListElement), "ol"},
             {typeof(HTMLOptGroupElement), "optgroup"},
             {typeof(HTMLOptionElement), "option"},
+            {typeof(HTMLOutputElement), "output"},
             {typeof(HTMLParagraphElement), "p"},
             {typeof(HTMLParamElement), "param"},
             {typeof(HTMLPictureElement), "picture"},
@@ -152,7 +154,7 @@ namespace Mono.WebAssembly.Browser.DOM
             {"hr", typeof(HTMLHRElement)},
             {"html", typeof(HTMLHtmlElement)},
             {"i", typeof(HTMLElement)},
-            //{"iframe", typeof(HTMLIFrameElement)},
+            {"iframe", typeof(HTMLIFrameElement)},
             {"img", typeof(HTMLImageElement)},
             {"input", typeof(HTMLInputElement)},
             {"ins", typeof(HTMLModElement)},
@@ -179,7 +181,7 @@ namespace Mono.WebAssembly.Browser.DOM
             {"ol", typeof(HTMLOListElement)},
             {"optgroup", typeof(HTMLOptGroupElement)},
             {"option", typeof(HTMLOptionElement)},
-            //{"output", typeof(HTMLOutputElement)},
+            {"output", typeof(HTMLOutputElement)},
             {"p", typeof(HTMLParagraphElement)},
             {"param", typeof(HTMLParamElement)},
             {"picture", typeof(HTMLPictureElement)},
@@ -221,7 +223,7 @@ namespace Mono.WebAssembly.Browser.DOM
             //{"video", typeof(HTMLVideoElement)},
             {"wbr", typeof(HTMLElement)},
             //{"x-ms-webview", typeof(MSHTMLWebViewElement)},
-            //{"xmp", typeof(HTMLPreElement)},
+            {"xmp", typeof(HTMLPreElement)},
         };
     }
 }

@@ -2400,4 +2400,86 @@ namespace Mono.WebAssembly.Browser.DOM
         void SetCustomValidity(string error);
     }
 
+    public interface IHTMLIFrameElement : IHTMLElement, IGetSVGDocument
+    {
+        [Export("align")]
+        string Align { get; set; }
+        [Export("allowFullscreen")]
+        bool AllowFullscreen { get; set; }
+        [Export("allowPaymentRequest")]
+        bool AllowPaymentRequest { get; set; }
+        [Export("border")]
+        string Border { get; set; }
+        [Export("contentDocument")]
+        Document ContentDocument { get; }
+        [Export("contentWindow")]
+        Window ContentWindow { get; }
+        [Export("frameBorder")]
+        string FrameBorder { get; set; }
+        [Export("frameSpacing")]
+        Object FrameSpacing { get; set; }
+        [Export("height")]
+        string Height { get; set; }
+        [Export("hspace")]
+        double Hspace { get; set; }
+        [Export("longDesc")]
+        string LongDesc { get; set; }
+        [Export("marginHeight")]
+        string MarginHeight { get; set; }
+        [Export("marginWidth")]
+        string MarginWidth { get; set; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("noResize")]
+        bool NoResize { get; set; }
+        [Export("sandbox")]
+        DOMSettableTokenList Sandbox { get; }
+        [Export("scrolling")]
+        string Scrolling { get; set; }
+        [Export("src")]
+        string Src { get; set; }
+        [Export("vspace")]
+        double Vspace { get; set; }
+        [Export("width")]
+        string Width { get; set; }
+        [Export("srcdoc")]
+        string Srcdoc { get; set; }
+    }
+
+    public interface IDOMSettableTokenList : IDOMTokenList
+    {
+        [Export("value")]
+        string Value { get; set; }
+    }
+
+    public interface IHTMLOutputElement : IHTMLElement
+    {
+        [Export("defaultValue")]
+        string DefaultValue { get; set; }
+        [Export("form")]
+        HTMLFormElement Form { get; }
+        [Export("htmlFor")]
+        DOMSettableTokenList HtmlFor { get; }
+        [Export("name")]
+        string Name { get; set; }
+        [Export("type")]
+        string Type { get; }
+        [Export("validationMessage")]
+        string ValidationMessage { get; }
+        [Export("validity")]
+        ValidityState Validity { get; }
+        [Export("value")]
+        string Value { get; set; }
+        [Export("willValidate")]
+        bool WillValidate { get; }
+        [Export("checkValidity")]
+        bool CheckValidity();
+        [Export("reportValidity")]
+        bool ReportValidity();
+        [Export("setCustomValidity")]
+        void SetCustomValidity(string error);
+    }
+
+
+
 }

@@ -168,6 +168,9 @@
     <Compile Include="DOM\HTMLFrameSetElement.cs" />
     <Compile Include="DOM\HTMLAppletElement.cs" />
     <Compile Include="DOM\HTMLObjectElement.cs" />
+    <Compile Include="DOM\HTMLIFrameElement.cs" />
+    <Compile Include="DOM\DOMSettableTokenList.cs" />
+    <Compile Include="DOM\HTMLOutputElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DOM\Events\" />
