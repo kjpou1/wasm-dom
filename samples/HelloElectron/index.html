@@ -18,32 +18,19 @@
       require('./renderer.js')
     </script>
 
-    <script src="./publish/mono-wasm-browser.js"></script>
-    <script src="./publish/sample_module_node.js"></script>
-    <script type='text/javascript'>
-        //Module.mono_wasm_debug = true;
-        Module.onWasmDOMInitialized.push(
-            function() {
-                console.log("Initialized");
-                Module.applicationAssemblies.push("HelloElectron.exe");
-            }
-        )
-        Module.onWasmDOMStarted.push(
-            function() {
-                try {
-                    var res = Module.runMainClass("HelloElectron", "HelloElectron", "MainClass", "Main", "Hello from C#.");
-                    console.log("Started");
-                    if (res)
-                        console.log(Module.conv_string (res));
-                } catch (e) {
-                    console.log(e);
-                }
+    <script src="./publish/config.js"></script>
+    <script src="./publish/runtime.js"></script>
+    <!--script type="text/javascript">
 
-            }
+        var App = {
+            init: function () {
+                var res = BINDING.call_static_method("[HelloElectron]HelloElectron.MainClass:Main", []);
+            },
+        };
 
-        )
-      </script>
+    </script-->
 
-      <script async src="./publish/mono.js"></script>    
+
+      <script src="./publish/mono.js"></script>    
   </body>
 </html>

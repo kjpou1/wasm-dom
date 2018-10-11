@@ -5,33 +5,18 @@
   </head>
   <body>
         <div id="div1">The text above has been created dynamically.</div>
-        <script src="mono-wasm-browser.js"></script>
-        <script src="sample_module.js"></script>
-        <script type='text/javascript'>
-                //Module.mono_wasm_debug = true;
-                Module.onWasmDOMInitialized.push(
-                    function() {
+        <script type="text/javascript" src="runtime.js"></script>
 
-                        Module.applicationAssemblies.push("CreateElement.exe");
-                        console.log("Initialized");
-                    }
-                )
-                Module.onWasmDOMStarted.push(
-                    function() {
+        <script type="text/javascript">
     
-                        try {
-                            var res = Module.runMainClass("CreateElement", "CreateElement", "MainClass", "Main", "Hello from C#.");
-                            if (res)
-                                console.log(Module.conv_string (res));
-                        } catch (e) {
-                            console.log(e);
-                        }
+            var App = {
+                init: function () {
+                    var res = BINDING.call_static_method("[CreateElement]CreateElement.MainClass:Main", []);
+                },
+            };
     
-                        console.log("Started");
-                    }
+        </script>
     
-                )
-        </script>          
     <script defer src="mono.js"></script>
   </body>
 </html>

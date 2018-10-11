@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Mono.WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM;
 
 namespace DOMElement
 {
@@ -15,7 +15,7 @@ namespace DOMElement
         public void Invoke(string input)
         {
             // Get a reference to the HTML DOM document.
-            var document = HTMLPage.Document;
+            var document = Web.Document;
 
             // Get a reference to the body element.
             var loading = document.GetElementById("loading");
@@ -42,11 +42,11 @@ namespace DOMElement
                 // import property of the corresponding <link> element
                 // For all imported contents obtain a reference to the <template>
                 var template = link.As<HTMLLinkElement>().Import.QuerySelector<HTMLTemplateElement>(".task-template");
-                // Create a clone of the template’s content using the importNode property and
-                // passing in the content of the template
+                //// Create a clone of the template’s content using the importNode property and
+                //// passing in the content of the template
                 var clone = document.ImportNode(template.Content, true);
 
-                // Append the newly created cloned template to the content element.
+                //// Append the newly created cloned template to the content element.
                 content.AppendChild(clone);
             }            
         }  

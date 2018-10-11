@@ -1,7 +1,6 @@
-using System;
-using Mono.WebAssembly.Browser.DOM;
-using Mono.WebAssembly.Browser.DOM.Events;
-using Mono.WebAssembly;
+﻿using System;
+using WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM.Events;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -16,28 +15,30 @@ namespace Hello
 
             System.Console.WriteLine("hello world from Main!");
 
-            var document = HTMLPage.Document;
-
+            var document = Web.Document;
+            Console.WriteLine($"Visibility State: {document}");
             Console.WriteLine($"Visibility State: {document.VisibilityState}");
 
             var button = document.CreateElement<HTMLButtonElement>();
             button.TextContent = "Click Me";
 
-            button.OnWheel += (JSObject sender, DOMEventArgs args1) => {
-                
+            button.OnWheel += (DOMObject sender, DOMEventArgs args1) => {
+
                 var evt = (WheelEvent)args1.EventObject;
-                Console.WriteLine($"We got a wheel wwwhhheeeeee! {evt.DeltaMode}");
+                Console.WriteLine($"We got a wheel wwwhhheeeeee! {evt.CurrentTarget}");
             };
+
 
 
             document.Body.AppendChild(button);
             button.OnClick += Button_OnClick;
-            button.OnClick += (JSObject sender, DOMEventArgs args1) => {
+            button.OnClick += async (DOMObject sender, DOMEventArgs args1) => {
 
                 var evt = args1.EventObject;
 
-                ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++} times";
-
+                Console.WriteLine("before await");
+                await Task.Run(() => UpdateButton(((HTMLButtonElement)sender) )).ConfigureAwait(false); 
+                Console.WriteLine("after await");
 
             };
 
@@ -50,7 +51,7 @@ namespace Hello
             ul.AppendChild(li1);
             ul.AppendChild(li2);
 
-            ul.OnClick += (JSObject sender, DOMEventArgs args2) => {
+            ul.OnClick += (DOMObject sender, DOMEventArgs args2) => {
                 args2.EventObject.Target.ConvertTo<HTMLElement>().SetStyleAttribute("visibility", "hidden");
             };
 
@@ -60,11 +61,24 @@ namespace Hello
             System.Console.WriteLine($"elapsedMs: {elapsedMs}");
         }
 
+        static Task<object> UpdateButton(HTMLButtonElement button)
+        {
+            Console.WriteLine("enter await");
+            var tcs = new TaskCompletionSource<object>();
 
-        static void Button_OnClick(JSObject sender, DOMEventArgs args)
+            button.TextContent = $"We be clicked {numTimes++} times";
+            tcs.SetResult(null);
+
+
+
+            Console.WriteLine("exit await");
+            return tcs.Task;
+        }
+
+        static void Button_OnClick(DOMObject sender, DOMEventArgs args)
         {
             var button = (HTMLButtonElement)sender;
-            //button.TextContent = "Clicked";
+            button.TextContent = "Clicked";
 
         }
 

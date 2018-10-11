@@ -1,5 +1,5 @@
 ﻿using System;
-using Mono.WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM;
 
 namespace DOMTree
 {
@@ -15,7 +15,7 @@ namespace DOMTree
         /// <returns></returns>
         public void Invoke(string input)
         {
-            var document = HTMLPage.Document;
+            var document = Web.Document;
             // Get a reference to the top-level <html> element.
             var element = document.DocumentElement;
             // Process the starting element reference

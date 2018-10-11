@@ -1,5 +1,5 @@
 ﻿using System;
-using Mono.WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM;
 
 namespace Forms
 {
@@ -9,7 +9,7 @@ namespace Forms
         {
 
             // Get a reference to the body element.
-            var document = HTMLPage.Document;
+            var document = Web.Document;
 
             // Hide the loading label
             document.GetElementById("loading").Remove();

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using Mono.WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM;
 
 namespace Forms
 {
@@ -23,12 +22,6 @@ namespace Forms
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string result = reader.ReadToEnd();
-
-                        // JavaScript strings can not have embedded linefeeds.  Instead each string has to be terminated
-                        result = Regex.Replace(result, @"\n|\r|\r\n", "\\\n");
-                        // We also need to make sure all our quotes can pass or parsing will not work when
-                        // setting the content.
-                        result = Regex.Replace(result, @"""", "\'");
 
                         if (res.EndsWith("about.html"))
                             content.InsertAdjacentHtml(InsertPosition.AfterEnd, result);
@@ -62,7 +55,7 @@ namespace Forms
                     {
                         //Console.WriteLine(linkElement.Href);
                         // Append the newly created cloned template to the content element.
-                        if (linkElement.Href.EndsWith("about.html"))
+                        if (linkElement.Href.EndsWith("about.html", StringComparison.CurrentCulture))
                             document.QuerySelector("body").AppendChild(clone);
                         else
                             document.QuerySelector(".content").AppendChild(clone);

@@ -1,42 +1,58 @@
 ﻿using System;
-using Mono.WebAssembly.Browser.DOM;
-using Mono.WebAssembly.Browser.DOM.Events;
+using WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM.Events;
 
 namespace DragNDrop
 {
+    //https://developer.mozilla.org/en-US/docs/Web/Events/dragstart
     public class Dragger
     {
         public Dragger()
         {
 
-            var document = HTMLPage.Document;
+            var document = Web.Document;
 
             HTMLElement dragged = null;
 
             // events fired on the draggable target */
-            document.OnDrag += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) =>
+            document.OnDrag += (DOMObject sender, DOMEventArgs args) =>
             {
                 //Console.WriteLine("dragged");
+
             };
 
-            document.OnDragStart += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
-                Console.WriteLine("Drag Start");
+            document.OnDragStart += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("Drag Start");
+
+                // This is needed for FireFox to work
+                try
+                {
+                    // Internet Explorer throws an Invalide Argument error
+                    ((DragEvent)args.EventObject).DataTransfer.SetData("text/plain", null);
+                }
+                catch {}
+
+
                 dragged = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
                 dragged.SetStyleAttribute("opacity", ".5");
+
             };
 
 
-            document.OnDragEnd += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
+            document.OnDragEnd += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("DragEnd");
                 ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("opacity", null);
             };
 
-            document.OnDragLeave += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
+            document.OnDragLeave += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("DragLeave");
                 ((DragEvent)args.EventObject).Target.As<HTMLElement>().RemoveStyleAttribute("opacity");
             };
 
 
             //Events fired on the drop targets
-            document.OnDragOver += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
+            document.OnDragOver += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("DragOver");
                 args.PreventDefault();
                 args.StopPropagation();
                 var target = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
@@ -52,7 +68,8 @@ namespace DragNDrop
 
             };
 
-            document.OnDragEnter += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
+            document.OnDragEnter += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("DragEnter");
                 var target = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
                 if (target.ClassName == "dropzone")
                 {
@@ -60,7 +77,8 @@ namespace DragNDrop
                 }
             };
 
-            document.OnDragLeave += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
+            document.OnDragLeave += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("DragLeave");
                 var target = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
                 if (target.ClassName == "dropzone")
                 {
@@ -69,8 +87,8 @@ namespace DragNDrop
 
             };
 
-            document.OnDrop += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => {
-
+            document.OnDrop += (DOMObject sender, DOMEventArgs args) => {
+                //Console.WriteLine("Drop");
                 args.PreventDefault();
                 args.StopPropagation();
 

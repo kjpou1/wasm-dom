@@ -1,7 +1,6 @@
 ﻿using System;
 
-using Mono.WebAssembly.Browser.DOM;
-
+using WebAssembly.Browser.DOM;
 
 namespace Hello
 {
@@ -10,10 +9,10 @@ namespace Hello
         static void Main(string[] args)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-
-            System.Console.WriteLine("hello world from Invoke!");
-
-            var window = HTMLPage.Window;
+             
+            //System.Console.WriteLine("hello world from Invoke!");
+               
+            var window = Web.Window;
             System.Console.WriteLine($"window = {window}");
 
             if (args != null)

@@ -5,32 +5,17 @@
   </head>
   <body>
 
-        <script src="mono-wasm-browser.js" defer></script>
-        <script src="sample_module.js"></script>
-        <script type='text/javascript'>
-                //Module.mono_wasm_debug = true;
-                Module.onWasmDOMInitialized.push(
-                    function() {
+    <script type="text/javascript" src="runtime.js"></script>
 
-                        Module.applicationAssemblies.push("hello.dll");
-                        console.log("Initialized");
-                    }
-                )
-                Module.onWasmDOMStarted.push(
-                    function() {
+    <script type="text/javascript">
 
-                        try {
-                            var res = Module.runMainClass("hello", "Hello", "Program", "Main", "Hello from C#.");
-                            if (res)
-                                console.log(Module.conv_string (res));
-                        } catch (e) {
-                            console.log(e);
-                        }
+        var App = {
+            init: function () {
+                var res = BINDING.call_static_method("[Hello]Hello.Program:Main", ["Hello World from Window"]);
+            },
+        };
 
-                        console.log("Started");
-                    }
-                )
-        </script>  
+    </script>
         <script defer src="mono.js"></script>        
     
   </body>

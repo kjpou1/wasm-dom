@@ -34,9 +34,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mono.WebAssembly.Browser\Mono.WebAssembly.Browser.csproj">
-      <Project>{CBB6864C-7D13-493F-815B-9DFFDC461253}</Project>
-      <Name>Mono.WebAssembly.Browser</Name>
+    <ProjectReference Include="..\..\..\WebAssembly.Browser\WebAssembly.Browser.csproj">
+      <Project>{8C54652C-6036-41B7-AEB9-A1FF7748331B}</Project>
+      <Name>WebAssembly.Browser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -39,33 +39,19 @@
     </ul>
     <p id="loading"><i class="fa fa-refresh fa-spin" style="font-size:14px;margin-right:0.5em;"></i> Loading...</p>
 
+    <script type="text/javascript" src="runtime.js"></script>
 
-    <script src="mono-wasm-browser.js" defer></script>
-    <script src="sample_module.js"></script>
-    <script type='text/javascript'>
-            //Module.mono_wasm_debug = true;
-            Module.onWasmDOMInitialized.push(
-                function() {
+    <script type="text/javascript">
 
-                    Module.applicationAssemblies.push("DOMElement.dll");
-                    console.log("Initialized");
-                }
-            )
-            Module.onWasmDOMStarted.push(
-                function() {
+        var App = {
+            init: function () {
+                var res = BINDING.call_static_method("[DOMElement]DOMElement.Program:Main", []);
+            },
+        };
 
-                    try {
-                        var res = Module.runMainClass("DOMElement", "DOMElement", "Program", "Main", "Hello from C#.");
-                        if (res)
-                            console.log(Module.conv_string (res));
-                    } catch (e) {
-                        console.log(e);
-                    }
+    </script>
 
-                    console.log("Started");
-                }
-            )
-    </script>  
+
     <script defer src="mono.js"></script>        
 
   </body>

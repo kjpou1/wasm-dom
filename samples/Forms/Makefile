@@ -1,65 +1,40 @@
 TOP=$(realpath $(CURDIR)/../..)
 
 #Use either 'release' or 'debug' dependending on what you need
-DRIVER_CONF=release
+DRIVER_CONF=debug
 
 #Use either 'release' or 'debug' dependending on what you need
-DOM_CONF=debug
+DOM_CONF=release
 
-WASM_BCL_DIR=$(TOP)/mono/sdks/bcl
-DEPLOY_DIR=$(TOP)/mono
-MANAGED_DEPLOY_DIR=$(TOP)/mono/sdks/bcl
-MANAGED_WASM_DOM_DIR=$(TOP)/Mono.WebAssembly.Browser/bin/$(DOM_CONF)
-
-BCL_ASSEMBLIES= \
-        mscorlib.dll    \
-        System.dll      \
-        System.Core.dll \
-
+#WASM_SDK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/bcl
+#WASM_SDK_FRAMEWORK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/framework
+#WASM_SDK_PACKAGER=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks
+  WASM_SDK=$(TOP)/../mono/sdks/out/wasm-bcl/wasm
+  WASM_SDK_FRAMEWORK=$(TOP)/../mono/sdks/wasm
+  WASM_SDK_PACKAGER=$(TOP)/../mono/sdks/wasm
 
 APP_SOURCES = \
-	./Program.cs
+    ./Program.cs   \
+    ./DemoButtons.cs   \
+    ./LinkImports.cs   \
+    ./Nav   \
 
-MANAGED_ASSEMBLIES= \
-        Mono.WebAssembly.Browser.dll
+ASSETS = \
+    --asset=index.html   \
+	
+Forms.dll: 
+	msbuild Forms.csproj /p:configuration=$(DOM_CONF)
 
-TEST_DEPS = $(patsubst %,managed/%,$(BCL_ASSEMBLIES))
-TEST_CSC_DEPS = $(patsubst %,-r:%, $(TEST_DEPS))
+gen-runtime:
+	mono $(WASM_SDK_PACKAGER)/packager.exe --debugrt --copy=ifnewer --template=../runtime.js --out=publish --prefix=./bin/$(DOM_CONF) $(ASSETS) Forms.exe
 
-MANAGED_DEPS = $(patsubst %,$(MANAGED_WASM_DOM_DIR)/%,$(MANAGED_ASSEMBLIES))
-MANAGED_CSC_DEPS = $(patsubst %,-r:%, $(MANAGED_DEPS))
-
-publish/:
-	mkdir -p $@
-
-managed/:
-	mkdir -p $@
-
-$(patsubst %,managed/%,$(BCL_ASSEMBLIES)): managed/%: $(WASM_BCL_DIR)/% | managed/
-	cp $< $@
-
-$(patsubst %,managed/%,$(MANAGED_ASSEMBLIES)): managed/%: $(MANAGED_DEPLOY_DIR)/% | managed/
-	cp $< $@
-
-managed/Forms.dll: $(TEST_DEPS) $(MANAGED_DEPS) $(APP_SOURCES) | managed/
-	msbuild -p:outputpath=./managed
-
-build-managed: managed/Forms.dll
+build-managed: Forms.dll gen-runtime
 
 build: build-managed
-	rm -rf publish
-	mkdir publish
-	mkdir publish/bcl
-	cp -r $(WASM_BCL_DIR)/* publish/bcl/
-	cp $(DEPLOY_DIR)/$(DRIVER_CONF)/* publish/
-	cp $(MANAGED_DEPS) managed
-	cp -r managed publish/
-	cp $(MANAGED_WASM_DOM_DIR)/mono-wasm-browser.js publish/
-	cp index.html publish/
-	cp -r assets publish/
-	cp -r sections publish/
-	cp $(TOP)/samples/sample_module.js publish/
-	cp $(DEPLOY_DIR)/sdks/server.py publish/
+	cp -R ./assets ./publish
+	cp -R ./sections ./publish
 
 clean:
 	rm -rf managed publish
+
+

@@ -1,14 +1,14 @@
 TOP=$(realpath $(CURDIR)/../..)
 
 #Use either 'release' or 'debug' dependending on what you need
-DRIVER_CONF=release
+DRIVER_CONF=debug
 
 #Use either 'release' or 'debug' dependending on what you need
 DOM_CONF=debug
 
-WASM_BCL_DIR=$(TOP)/mono/sdks/bcl
-DEPLOY_DIR=$(TOP)/mono
-MANAGED_DEPLOY_DIR=$(TOP)/mono/sdks/bcl
+WASM_BCL_DIR=$(TOP)/../WebAssembly.JSInterop/mono/sdks/bcl
+DEPLOY_DIR=$(TOP)/../WebAssembly.JSInterop/mono
+MANAGED_DEPLOY_DIR=$(TOP)/../WebAssembly.JSInterop/mono/sdks/bcl
 MANAGED_WASM_DOM_DIR=$(TOP)/Mono.WebAssembly.Browser/bin/$(DOM_CONF)
 
 BCL_ASSEMBLIES= \
@@ -21,6 +21,7 @@ APP_SOURCES = \
 	./Program.cs
 
 MANAGED_ASSEMBLIES= \
+        WebAssembly.JSInterop.dll    \
         Mono.WebAssembly.Browser.dll
 
 TEST_DEPS = $(patsubst %,managed/%,$(BCL_ASSEMBLIES))
@@ -54,7 +55,6 @@ build: build-managed
 	cp $(DEPLOY_DIR)/$(DRIVER_CONF)/* publish/
 	cp $(MANAGED_DEPS) managed
 	cp -r managed publish/
-	cp $(MANAGED_WASM_DOM_DIR)/mono-wasm-browser.js publish/
 	cp index.html publish/
 	cp $(TOP)/samples/sample_module.js publish/
 	cp $(DEPLOY_DIR)/sdks/server.py publish/

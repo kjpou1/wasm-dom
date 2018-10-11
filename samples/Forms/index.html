@@ -40,36 +40,21 @@
 
 
         </main>
+    </div>
 
-        <script src="mono-wasm-browser.js"></script>
-        <script src="sample_module.js"></script>
-        <script type='text/javascript'>
-                Module.mono_wasm_debug = true;
-                Module.onWasmDOMInitialized.push(
-                    function() {
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="runtime.js"></script>
 
-                        Module.applicationAssemblies.push("Forms.exe");
-                        console.log("Initialized");
-                    }
-                )
-                Module.onWasmDOMStarted.push(
-                    function() {
-    
-                        try {
-                            var res = Module.runMainClass("Forms", "Forms", "MainClass", "Main", "Hello from C#.");
-                            if (res)
-                                console.log(Module.conv_string (res));
-                        } catch (e) {
-                            console.log(e);
-                        }
-    
-                        console.log("Started");
-                    }
-    
-                )
-        </script>          
+    <script type="text/javascript">
+
+        var App = {
+            init: function () {
+                var res = BINDING.call_static_method("[Forms]Forms.MainClass:Main", []);
+            },
+        };
+
+    </script>
     <script defer src="mono.js"></script>
 
-    </div>
   </body>
 </html>

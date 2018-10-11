@@ -1,7 +1,6 @@
 ﻿using System;
-using Mono.WebAssembly.Browser.DOM;
-using Mono.WebAssembly.Browser.DOM.Events;
-using Mono.WebAssembly;
+using WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM.Events;
 
 namespace HelloElectron
 {
@@ -14,7 +13,7 @@ namespace HelloElectron
 
             System.Console.WriteLine("hello world from Main!");
 
-            var document = HTMLPage.Document;
+            var document = Web.Document;
 
             var div = document.CreateElement<HTMLDivElement>();
             div.AppendChild(document.CreateElement<HTMLParagraphElement>());
@@ -26,7 +25,7 @@ namespace HelloElectron
 
             div.AppendChild(button);
 
-            button.OnClick += (JSObject sender, DOMEventArgs args1) =>
+            button.OnClick += (DOMObject sender, DOMEventArgs args1) =>
             {
                 ((HTMLButtonElement)sender).TextContent = $"We be clicked {numTimes++} time(s)";
 
@@ -41,7 +40,7 @@ namespace HelloElectron
             ul.AppendChild(li1);
             ul.AppendChild(li2);
 
-            ul.OnClick += (JSObject sender, DOMEventArgs args2) =>
+            ul.OnClick += (DOMObject sender, DOMEventArgs args2) =>
             {
                 args2.EventObject.Target.ConvertTo<HTMLElement>().SetStyleAttribute("visibility", "hidden");
             };

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Mono.WebAssembly.Browser.DOM;
+using WebAssembly.Browser.DOM;
 
 namespace Forms
 {
@@ -18,7 +18,7 @@ namespace Forms
                 {
                     using (var btn = btnElement.ConvertTo<HTMLElement>())
                     {
-                        btn.OnClick += (Mono.WebAssembly.JSObject sender, DOMEventArgs args) => 
+                        btn.OnClick += (DOMObject sender, DOMEventArgs args) => 
                         {
                             using (var target = args.EventObject.Target.ConvertTo<HTMLElement>())
                             {

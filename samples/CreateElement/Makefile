@@ -1,63 +1,35 @@
 TOP=$(realpath $(CURDIR)/../..)
 
 #Use either 'release' or 'debug' dependending on what you need
-DRIVER_CONF=release
+DRIVER_CONF=debug
 
 #Use either 'release' or 'debug' dependending on what you need
 DOM_CONF=debug
 
-WASM_BCL_DIR=$(TOP)/mono/sdks/bcl
-DEPLOY_DIR=$(TOP)/mono
-MANAGED_DEPLOY_DIR=$(TOP)/mono/sdks/bcl
-MANAGED_WASM_DOM_DIR=$(TOP)/Mono.WebAssembly.Browser/bin/$(DOM_CONF)
+#WASM_SDK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/bcl
+#WASM_SDK_FRAMEWORK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/framework
+#WASM_SDK_PACKAGER=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks
+  WASM_SDK=$(TOP)/../mono/sdks/out/wasm-bcl/wasm
+  WASM_SDK_FRAMEWORK=$(TOP)/../mono/sdks/wasm
+  WASM_SDK_PACKAGER=$(TOP)/../mono/sdks/wasm
 
-BCL_ASSEMBLIES= \
-        mscorlib.dll    \
-        System.dll      \
-        System.Core.dll \
-
+WASM_DOM=../../WebAssembly.Browser/bin/Debug/netstandard2.0/WebAssembly.Browser.dll
 
 APP_SOURCES = \
-	./Program.cs
+	./Hello.cs
 
-MANAGED_ASSEMBLIES= \
-        Mono.WebAssembly.Browser.dll
+ASSETS = \
+    --asset=index.html   \
+	
+CreateElement.dll: 
+	msbuild CreateElement.csproj /p:configuration=Debug
 
-TEST_DEPS = $(patsubst %,managed/%,$(BCL_ASSEMBLIES))
-TEST_CSC_DEPS = $(patsubst %,-r:%, $(TEST_DEPS))
+gen-runtime:
+	mono $(WASM_SDK_PACKAGER)/packager.exe --debugrt --copy=ifnewer --out=publish --prefix=./bin/Debug $(ASSETS) CreateElement.exe
 
-MANAGED_DEPS = $(patsubst %,$(MANAGED_WASM_DOM_DIR)/%,$(MANAGED_ASSEMBLIES))
-MANAGED_CSC_DEPS = $(patsubst %,-r:%, $(MANAGED_DEPS))
-
-publish/:
-	mkdir -p $@
-
-managed/:
-	mkdir -p $@
-
-$(patsubst %,managed/%,$(BCL_ASSEMBLIES)): managed/%: $(WASM_BCL_DIR)/% | managed/
-	cp $< $@
-
-$(patsubst %,managed/%,$(MANAGED_ASSEMBLIES)): managed/%: $(MANAGED_DEPLOY_DIR)/% | managed/
-	cp $< $@
-
-managed/CreateElement.dll: $(TEST_DEPS) $(MANAGED_DEPS) $(APP_SOURCES) | managed/
-	msbuild CreateElement.csproj -p:outputpath=./managed
-
-build-managed: managed/CreateElement.dll
+build-managed: CreateElement.dll gen-runtime
 
 build: build-managed
-	rm -rf publish
-	mkdir publish
-	mkdir publish/bcl
-	cp -r $(WASM_BCL_DIR)/* publish/bcl/
-	cp $(DEPLOY_DIR)/$(DRIVER_CONF)/* publish/
-	cp $(MANAGED_DEPS) managed
-	cp -r managed publish/
-	cp $(MANAGED_WASM_DOM_DIR)/mono-wasm-browser.js publish/
-	cp index.html publish/
-	cp $(TOP)/samples/sample_module.js publish/
-	cp $(DEPLOY_DIR)/sdks/server.py publish/
 
 clean:
 	rm -rf managed publish
