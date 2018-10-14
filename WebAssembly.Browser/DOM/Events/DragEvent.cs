@@ -35,8 +35,9 @@ namespace WebAssembly.Browser.DOM.Events
 
 		protected override void Dispose(bool disposing)
 		{
-			// the event object handle is already unregistered within the event handling function
-            // no need to do this again.
+            base.Dispose(disposing);
+
+            // Drag Events have a DataTransfer associated.  This needs to be disposed as well.
             if (disposing)
             {
                 if (dataTransfer != null)

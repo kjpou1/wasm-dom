@@ -23,7 +23,10 @@ namespace WebAssembly.Browser.DOM
                 }
             }
 
-            eventArgs.EventObject.Dispose();
+            eventArgs.EventObject?.Dispose();
+            eventArgs.EventObject = null;
+            eventArgs.Source = null;
+            eventArgs = null;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace WebAssembly.Browser.DOM
 
     public class DOMObject : IDisposable
     {
-        static readonly JSObject domBrowserInterface = (JSObject)Runtime.GetGlobalObject("__WASM_DOM_BROWSER_INTERFACE__");
+        static readonly JSObject domBrowserInterface = (JSObject)Runtime.GetGlobalObject("__WebAssembly_Browser_DOM__");
 
         public JSObject ManagedJSObject { get; private set; }
 
@@ -205,7 +205,9 @@ namespace WebAssembly.Browser.DOM
                 // Free any other managed objects here.
                 //
             }
-
+//#if DEBUG
+//            Console.WriteLine($"CS::DOMObject::Dispose {ManagedJSObject}");
+//#endif
             // Free any unmanaged objects here.
             //
             ManagedJSObject?.Dispose();

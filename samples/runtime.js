@@ -10,14 +10,14 @@ var Module = {
 			config.file_list,
 			function () {
 				config.add_bindings ();
-				BINDING.mono_wasm_get_global()["__WASM_DOM_BROWSER_INTERFACE__"] = __WASM_DOM_INTERFACE_INTERFACE__;
+				BINDING.mono_wasm_get_global()["__WebAssembly_Browser_DOM__"] = __WebAssembly_Browser_DOM__;
 				App.init ();
 			}
 		)
 	},
 };
 
-var __WASM_DOM_INTERFACE_INTERFACE__ = {
+var __WebAssembly_Browser_DOM__ = {
 	
 	mono_wasm_get_js_style_attribute: function(js_handle, js_name) {
 		BINDING.bindings_lazy_init ();
@@ -120,10 +120,7 @@ var __WASM_DOM_INTERFACE_INTERFACE__ = {
 				// this may need to be used on windows and needs testing ??????
 				var e = event || window.event;
 
-				var eventStruct = __WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillEventData(e, this);
-				// We will register the object on our object stack so PreventDefault, StopPropogation and other info
-				// methods will be available
-				BINDING.mono_wasm_register_obj(e);
+				var eventStruct = __WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillEventData(e, this);
 				
 				eventHandler.delegate(eventStruct["type"],
 				 	eventStruct["typeOfEvent"],
@@ -131,9 +128,6 @@ var __WASM_DOM_INTERFACE_INTERFACE__ = {
 					e,
 					JSON.stringify(eventStruct)
 				);
-				// We are now done with the event so we need to unregister the object from our object stack
-				// and free the handle for re-use. 
-				BINDING.mono_wasm_unregister_obj(e);
 			}
 			eventHandler.target.addEventListener(eventHandler.eventTypeString, handler, false);
 			wasm_events[eventHandler.uid] = handler;
@@ -187,11 +181,11 @@ var __WASM_DOM_INTERFACE_INTERFACE__ = {
 
 			if (e instanceof MouseEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillMouseEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillMouseEventData(eventStruct, e, target);
 			}
 			else if (e instanceof UIEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillUIEventData(eventStruct, e, target);
 			}
 			else if (e instanceof ClipboardEvent)
 			{
@@ -227,11 +221,11 @@ var __WASM_DOM_INTERFACE_INTERFACE__ = {
 
 			if (e instanceof DragEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillDragEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillDragEventData(eventStruct, e, target);
 			}
 			else if (e instanceof WheelEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillWheelEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillWheelEventData(eventStruct, e, target);
 			}
 
 		},        
@@ -257,11 +251,11 @@ var __WASM_DOM_INTERFACE_INTERFACE__ = {
 
 			if (e instanceof FocusEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillFocusEventData(eventStruct, e, target);
 			}
 			if (e instanceof KeyboardEvent)
 			{
-				__WASM_DOM_INTERFACE_INTERFACE__.mono_wasm_event_helper.fillKeyboardEventData(eventStruct, e, target);
+				__WebAssembly_Browser_DOM__.mono_wasm_event_helper.fillKeyboardEventData(eventStruct, e, target);
 			}
 
 		},        

@@ -3,14 +3,11 @@
 
 var Module = { 
 
-    // Make sure we set our environment so that the NODE filesystem is used.
-    // This overrides the default mechanism that tries to determine the environment and will
-    // error out because it tries to use Browser API to read the files.
-	ENVIRONMENTNode: 'NODE',
     // Needed to locate the wasm modules correctly
-    locateFile: function (module)
+    locateFile: function (path, prefix)
     {
-        var pathtomodule = require("path").resolve(__dirname, './publish/',module);
+		//var pathtomodule = require("path").resolve(__dirname, './publish/',path);
+		pathtomodule = prefix + "/publish/" + path;
         return pathtomodule;
     },    
 	onRuntimeInitialized: function () {
