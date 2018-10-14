@@ -8,7 +8,7 @@ namespace WebAssembly.Browser.DOM
 
     public class DOMObject : IDisposable
     {
-        static readonly JSObject domBrowserInterface = (JSObject)Runtime.GetGlobalObject("__WebAssembly_Browser_DOM__");
+        static readonly JSObject domBrowserInterface = (JSObject)((JSObject)Runtime.GetGlobalObject("WebAssembly_Browser_DOM")).GetObjectProperty("prototype");
 
         public JSObject ManagedJSObject { get; private set; }
 
