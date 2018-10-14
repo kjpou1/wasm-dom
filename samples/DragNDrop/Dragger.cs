@@ -30,14 +30,13 @@ namespace DragNDrop
                     // Internet Explorer throws an Invalide Argument error
                     ((DragEvent)args.EventObject).DataTransfer.SetData("text/plain", null);
                 }
-                catch {}
+                catch { }
 
 
                 dragged = ((DragEvent)args.EventObject).Target.As<HTMLElement>();
                 dragged.SetStyleAttribute("opacity", ".5");
 
             };
-
 
             document.OnDragEnd += (DOMObject sender, DOMEventArgs args) => {
                 //Console.WriteLine("DragEnd");
@@ -46,7 +45,7 @@ namespace DragNDrop
 
             document.OnDragLeave += (DOMObject sender, DOMEventArgs args) => {
                 //Console.WriteLine("DragLeave");
-                ((DragEvent)args.EventObject).Target.As<HTMLElement>().RemoveStyleAttribute("opacity");
+                ((DragEvent)args.EventObject).Target.As<HTMLElement>().SetStyleAttribute("background", "");
             };
 
 
@@ -60,7 +59,7 @@ namespace DragNDrop
                 {
 
                     // A DropEffect must be set
-                    ((DragEvent)args.EventObject).DataTransfer.DropEffect = DropEffect.Link;
+                    ((DragEvent)args.EventObject).DataTransfer.DropEffect = DropEffect.Copy;
                 }
                 else
                     // A DropEffect must be set
