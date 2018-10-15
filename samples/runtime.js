@@ -25,10 +25,8 @@ var Module = {
 	}
 
 	__WebAssembly_Browser_DOM__.prototype = {
-
 		mono_wasm_get_js_style_attribute: function(js_handle, js_name) {
 			BINDING.bindings_lazy_init ();
-	
 	
 			// var res;
 			var m = obj.style[js_name];
@@ -193,8 +191,9 @@ var Module = {
 				});
 	
 				eventStruct["typeOfEvent"] = "MouseEvent";
-	
-				if (e instanceof DragEvent)
+
+				// Safari does not have a DragEvent instance as it uses MouseEvent
+				if (e.type.startsWith("drag") || e.type === "drop")
 				{
 					this.fillDragEventData(eventStruct, e, target);
 				}
