@@ -14,8 +14,6 @@ DOM_CONF=debug
   WASM_SDK_FRAMEWORK=$(TOP)/../mono/sdks/wasm
   WASM_SDK_PACKAGER=$(TOP)/../mono/sdks/wasm
 
-WASM_DOM=../../WebAssembly.Browser/bin/Debug/netstandard2.0/WebAssembly.Browser.dll
-
 APP_SOURCES = \
     ./Program.cs   \
     ./Dragger.cs   \
@@ -24,7 +22,7 @@ ASSETS = \
     --asset=index.html   \
 	
 DragNDrop.dll: ${APP_SOURCES}
-	msbuild DragNDrop.csproj /p:configuration=${DOM_CONF}
+	msbuild DragNDrop.csproj /t:Rebuild /p:configuration=${DOM_CONF}
 
 gen-runtime:
 	mono $(WASM_SDK_PACKAGER)/packager.exe ${DRIVER_CONF} --copy=ifnewer --template=../runtime.js --out=publish --prefix=./bin/${DOM_CONF} $(ASSETS) DragNDrop.exe

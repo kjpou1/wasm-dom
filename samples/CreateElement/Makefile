@@ -1,7 +1,8 @@
 TOP=$(realpath $(CURDIR)/../..)
 
-#Use either 'release' or 'debug' dependending on what you need
-DRIVER_CONF=debug
+#Use either ' ' or '--debugrt' dependending on what you need
+DRIVER_CONF=--debugrt
+#DRIVER_CONF=
 
 #Use either 'release' or 'debug' dependending on what you need
 DOM_CONF=debug
@@ -22,10 +23,10 @@ ASSETS = \
     --asset=index.html   \
 	
 CreateElement.dll: 
-	msbuild CreateElement.csproj /p:configuration=Debug
+	msbuild CreateElement.csproj /p:configuration=$(DOM_CONF)
 
 gen-runtime:
-	mono $(WASM_SDK_PACKAGER)/packager.exe --debugrt --copy=ifnewer --out=publish --prefix=./bin/Debug $(ASSETS) CreateElement.exe
+	mono $(WASM_SDK_PACKAGER)/packager.exe ${DRIVER_CONF} --copy=ifnewer --out=publish --prefix=./bin/Debug $(ASSETS) CreateElement.exe
 
 build-managed: CreateElement.dll gen-runtime
 

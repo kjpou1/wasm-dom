@@ -1,7 +1,8 @@
 TOP=$(realpath $(CURDIR)/../..)
 
-#Use either 'release' or 'debug' dependending on what you need
-DRIVER_CONF=debug
+#Use either ' ' or '--debugrt' dependending on what you need
+DRIVER_CONF=--debugrt
+#DRIVER_CONF=
 
 #Use either 'release' or 'debug' dependending on what you need
 DOM_CONF=release
@@ -26,7 +27,7 @@ HelloElectron.dll:
 	msbuild src/HelloElectron.csproj /p:configuration=$(DOM_CONF)
 
 gen-runtime:
-	mono $(WASM_SDK_PACKAGER)/packager.exe --debugrt --copy=ifnewer --template=electron-runtime.js --out=./publish --prefix=./src/bin/$(DOM_CONF) $(ASSETS) HelloElectron.exe
+	mono $(WASM_SDK_PACKAGER)/packager.exe ${DRIVER_CONF} --copy=ifnewer --template=electron-runtime.js --out=./publish --prefix=./src/bin/$(DOM_CONF) $(ASSETS) HelloElectron.exe
 
 build-managed: HelloElectron.dll gen-runtime
 

@@ -5,7 +5,7 @@ DRIVER_CONF=--debugrt
 #DRIVER_CONF=
 
 #Use either 'release' or 'debug' dependending on what you need
-DOM_CONF=release
+DOM_CONF=debug
 
 #WASM_SDK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/bcl
 #WASM_SDK_FRAMEWORK=$(TOP)/../JSInterop2/WebAssembly.JSInterop/tools/mono/sdks/framework
@@ -15,25 +15,20 @@ DOM_CONF=release
   WASM_SDK_PACKAGER=$(TOP)/../mono/sdks/wasm
 
 APP_SOURCES = \
-    ./Program.cs   \
-    ./DemoButtons.cs   \
-    ./LinkImports.cs   \
-    ./Nav   \
+	./Hello.cs
 
 ASSETS = \
     --asset=index.html   \
 	
-Forms.dll: 
-	msbuild Forms.csproj /p:configuration=$(DOM_CONF)
+HelloDotNetStandard.dll: Hello.cs
+	msbuild HelloDotNetStandard.csproj /p:configuration=$(DOM_CONF)
 
 gen-runtime:
-	mono $(WASM_SDK_PACKAGER)/packager.exe ${DRIVER_CONF} --copy=ifnewer --template=../runtime.js --out=publish --prefix=./bin/$(DOM_CONF) $(ASSETS) Forms.exe
+	mono $(WASM_SDK_PACKAGER)/packager.exe ${DRIVER_CONF} --copy=ifnewer --template=../runtime.js --out=publish --prefix=./bin/Debug/netstandard2.0 $(ASSETS) HelloDotNetStandard.dll
 
-build-managed: Forms.dll gen-runtime
+build-managed: HelloDotNetStandard.dll gen-runtime
 
 build: build-managed
-	cp -R ./assets ./publish
-	cp -R ./sections ./publish
 
 clean:
 	rm -rf managed publish
