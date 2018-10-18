@@ -14,7 +14,28 @@ namespace WebAssembly.Browser.DOM
         bool DispatchEvent(Event evt);
         [Export("removeEventListener")]
         void RemoveEventListener(string type, DOMEventHandler listener, object options);
-        void DispatchDOMEvent(string type, string eventType, string UID, JSObject eventHandle, string eventInfo = null);
+        int DispatchDOMEvent(string eventType, string typeOfEvent, JSObject eventTarget, JSObject eventHandle,
+                                      bool evAltKey,
+                                      bool evBubbles,
+                                      bool evCancelable,
+                                      bool evCtrlKey,
+                                      int evDetail,
+                                      int evEventPhase,
+                                      bool evMetaKey,
+                                      bool evShiftKey,
+                                      int evKeyCode,
+                                      int evPointerId,
+                                      string evPointerType,
+                                      double evScreenX,
+                                      double evScreenY,
+                                      double timeStamp,
+                                      bool evIsTrusted,
+                                      bool evScoped,
+                                      double evClientX,
+                                      double evClientY,
+                                      int evButton,
+                             string eventInfo);
+
     }
 
     public interface INode : IEventTarget

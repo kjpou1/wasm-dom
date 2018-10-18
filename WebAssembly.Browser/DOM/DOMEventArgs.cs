@@ -8,28 +8,47 @@ namespace WebAssembly.Browser.DOM
     public class DOMEventArgs : EventArgs
     {
 
-        public int ClientX { get; internal set; }
-        public int ClientY { get; internal set;  }
-        public int OffsetX { get; internal set;  }
-        public int OffsetY { get; internal set; }
-        public int ScreenX { get; internal set; }
-        public int ScreenY { get; internal set; }
+        public double ClientX { get; internal set; }
+        public double ClientY { get; internal set;  }
+        public double OffsetX { get; internal set;  }
+        public double OffsetY { get; internal set; }
+        public double ScreenX { get; internal set; }
+        public double ScreenY { get; internal set; }
         public bool AltKey { get; internal set; }
         public bool CtrlKey { get; internal set; }
         public bool ShiftKey { get; internal set; }
         public int KeyCode { get; internal set; }
-        public int CharCode { get; internal set; }
         public string EventType { get; internal set; }
         public DOMObject Source { get; internal set; }
         public Event EventObject { get; internal set; }
 
 
-        internal DOMEventArgs(DOMObject source, string type, string typeOfEvent, JSObject eventObject, string eventInfo)
+        public DOMEventArgs(DOMObject source, string eventType, string typeOfEvent, JSObject eventTarget, JSObject eventObject,
+                                      bool evAltKey,
+                                      bool evBubbles,
+                                      bool evCancelable,
+                                      bool evCtrlKey,
+                                      int evDetail,
+                                      int evEventPhase,
+                                      bool evMetaKey,
+                                      bool evShiftKey,
+                                      int evKeyCode,
+                                      int evPointerId,
+                                      string evPointerType,
+                                      double evScreenX,
+                                      double evScreenY,
+                                      double timeStamp,
+                                      bool evIsTrusted,
+                                      bool evScoped,
+                                      double evClientX,
+                                      double evClientY,
+                                      int evButton,
+                              string eventInfo)
         {
-            Source = source;
-            EventType = type;
 
-            //Console.WriteLine($"EventHandle: {eventHandle}");
+
+            Source = source;
+            EventType = typeOfEvent;
 
             if (typeOfEvent == "MouseEvent")
             {
@@ -60,11 +79,20 @@ namespace WebAssembly.Browser.DOM
                 EventObject = new Event(eventObject);
             }
 
+            ScreenX = evScreenX;
+            ScreenY = evScreenY;
+            AltKey = evAltKey;
+            CtrlKey = evCtrlKey;
+            ShiftKey = evShiftKey;
+            KeyCode = evKeyCode;
+            ClientX = evClientX;
+            ClientY = evClientY;
 
-            if (eventInfo != null)
+            var eventInfoDic = new Dictionary<string, string>();
+
+            if (!string.IsNullOrEmpty(eventInfo))
             {
                 var ei = eventInfo.Substring(1, eventInfo.Length - 2).Split(',');
-                var eventInfoDic = new Dictionary<string, string>();
                 string value = null;
                 foreach (var eip in ei)
                 {
@@ -87,17 +115,6 @@ namespace WebAssembly.Browser.DOM
                 //    Console.WriteLine($"Key: {key} - Value: {eventInfoDic[key]}");
                 //}
 
-                value = null;
-
-                if (eventInfoDic.TryGetValue("clientX", out value))
-                {
-                    ClientX = Convert.ToInt32(value);
-                }
-
-                if (eventInfoDic.TryGetValue("clientY", out value))
-                {
-                    ClientY = Convert.ToInt32(value);
-                }
 
                 if (eventInfoDic.TryGetValue("offsetX", out value))
                 {
@@ -108,45 +125,11 @@ namespace WebAssembly.Browser.DOM
                     OffsetY = Convert.ToInt32(value);
                 }
 
-                if (eventInfoDic.TryGetValue("screenX", out value))
-                {
-                    ScreenX = Convert.ToInt32(value);
-                }
-                if (eventInfoDic.TryGetValue("screenY", out value))
-                {
-                    ScreenY = Convert.ToInt32(value);
-                }
-
-                if (eventInfoDic.TryGetValue("altKey", out value))
-                {
-                    AltKey = Convert.ToBoolean(value);
-                }
-
-                if (eventInfoDic.TryGetValue("ctrlKey", out value))
-                {
-                    CtrlKey = Convert.ToBoolean(value);
-                }
-                if (eventInfoDic.TryGetValue("shiftKey", out value))
-                {
-                    ShiftKey = Convert.ToBoolean(value);
-                }
-
-                if (eventInfoDic.TryGetValue("keyCode", out value))
-                {
-                    KeyCode = Convert.ToInt32(value);
-                }
-
-                if (eventInfoDic.TryGetValue("charCode", out value))
-                {
-                    CharCode = Convert.ToInt32(value);
-                }
-
-                if (eventInfoDic != null)
-                {
-                    EventObject.InitEvent(eventInfoDic);
-                }
-
             }
+
+            EventObject.InitEvent(eventType, evBubbles, evCancelable, null, evDetail, evScreenX, evScreenY, evClientX, evClientY,
+            evCtrlKey, evAltKey, evShiftKey, evMetaKey, evButton, evEventPhase, evScoped, timeStamp,
+                  eventInfoDic);
 
         }
 

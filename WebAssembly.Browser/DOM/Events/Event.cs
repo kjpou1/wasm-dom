@@ -69,40 +69,19 @@ namespace WebAssembly.Browser.DOM.Events
         }
 
 
-        internal virtual void InitEvent(Dictionary<string, string> eventInfoDic)
+        internal virtual void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, int detailArg,
+                                         double screenXArg, double screenYArg, double clientXArg, double clientYArg,
+                                         bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, int buttonArg,
+                                        int eventPhaseArg, bool scopedArg, double timeStampArg, 
+            Dictionary<string, string> eventInfoDic)
         {
-            string value = null;
 
-            if (eventInfoDic.TryGetValue("bubbles", out value))
-            {
-                Bubbles = Convert.ToBoolean(value);
-            }
-
-            if (eventInfoDic.TryGetValue("cancelable", out value))
-            {
-                Cancelable = Convert.ToBoolean(value);
-            }
-
-            if (eventInfoDic.TryGetValue("timeStamp", out value))
-            {
-                TimeStamp = Convert.ToDouble(value);
-            }
-
-            if (eventInfoDic.TryGetValue("scoped", out value))
-            {
-                Scoped = Convert.ToBoolean(value);
-            }
-
-            if (eventInfoDic.TryGetValue("type", out value))
-            {
-                Type = Convert.ToString(value);
-            }
-
-
-            if (eventInfoDic.TryGetValue("eventPhase", out value))
-            {
-                EventPhase = Convert.ToDouble(value);
-            }
+            Bubbles = canBubbleArg;
+            Cancelable = cancelableArg;
+            TimeStamp = timeStampArg;
+            Scoped = scopedArg;
+            Type = eventTypeArg;
+            EventPhase = eventPhaseArg;
 
         }
 

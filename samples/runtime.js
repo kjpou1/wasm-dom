@@ -94,13 +94,29 @@ var Module = {
 					var e = event || window.event;
 	
 					var eventStruct = __WebAssembly_Browser_DOM__.prototype.mono_wasm_event_helper.fillEventData(e, this);
-					
-					eventHandler.delegate(eventStruct["type"],
-						 eventStruct["typeOfEvent"],
-						eventHandler.target,
-						e,
-						JSON.stringify(eventStruct)
-					);
+
+					eventHandler.delegate(e["type"], eventStruct["typeOfEvent"], e.target, e,
+							eventStruct._event_params[0],
+							eventStruct._event_params[1],
+							eventStruct._event_params[2],
+							eventStruct._event_params[3],
+							eventStruct._event_params[4],
+							eventStruct._event_params[5],
+							eventStruct._event_params[6],
+							eventStruct._event_params[7],
+							eventStruct._event_params[8],
+							eventStruct._event_params[9],
+							eventStruct._event_params[10],
+							eventStruct._event_params[11],
+							eventStruct._event_params[12],
+							eventStruct._event_params[13],
+							eventStruct._event_params[14],
+							eventStruct._event_params[15],
+							eventStruct._event_params[16],
+							eventStruct._event_params[17],
+							eventStruct._event_params[18],
+							JSON.stringify(eventStruct._event_props)
+							);
 				}
 				eventHandler.target.addEventListener(eventHandler.eventTypeString, handler, false);
 				wasm_events[eventHandler.uid] = handler;
@@ -123,46 +139,84 @@ var Module = {
 			},
 			fillEventData: function (e, target)
 			{
-				var DOMEventProps = ["type",
-				"altKey",
-				"bubbles",
-				"cancelable",
-				"changedTouches",
-				"ctrlKey",
-				"detail",
-				"eventPhase",
-				"metaKey",
-				"shiftKey",
-				"char",
-				"charCode",
-				"key",
-				"keyCode",
-				"pointerId",
-				"pointerType",
-				"screenX",
-				"screenY",
-				"timeStamp",
-				"isTrusted",
-				"scoped"]
+				var DOMEventProps = [
+				"altKey", // bool
+				"bubbles", // bool
+				"cancelable", // bool
+				"ctrlKey", // bool
+				"detail", // int
+				"eventPhase", // int
+				"metaKey", // bool
+				"shiftKey", // bool
+				"keyCode", // int
+				"pointerId", // int
+				"pointerType", // string
+				"screenX", // double
+				"screenY", // double
+				"timeStamp", // double
+				"isTrusted", // bool
+				"scoped", // bool
+				"clientX", // double
+				"clientY", // double
+				"button", // int
+				]
 	
 				var eventStruct = {};
+				eventStruct._event_params = [];
+				eventStruct._event_props = {};
 				eventStruct["typeOfEvent"] = "Event";
 	
+				// Load common event properties
 				DOMEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_params.push(e[prop]);
 				});
-	
-				if (e instanceof MouseEvent)
-				{
-					this.fillMouseEventData(eventStruct, e, target);
-				}
-				else if (e instanceof UIEvent)
-				{
-					this.fillUIEventData(eventStruct, e, target);
-				}
-				else if (e instanceof ClipboardEvent)
-				{
-					eventStruct["typeOfEvent"] = "ClipboardEvent";
+
+				switch (e.type) {
+
+					// Mouse events
+					case 'contextmenu':
+					case 'click':
+					case 'mouseover':
+					case 'mouseout':
+					case 'mousemove':
+					case 'mousedown':
+					case 'mouseup':
+					case 'dblclick':					
+					case 'drag':
+					case 'dragend':
+					case 'dragenter':
+					case 'dragleave':
+					case 'dragover':
+					case 'dragstart':
+					case 'drop':
+					case 'wheel':
+					case 'mousewheel':					
+						this.fillMouseEventData(eventStruct, e, target);
+						break;
+					case 'keydown':
+					case 'keyup':
+					case 'keypress':						
+						this.fillKeyboardEventData(eventStruct, e, target);
+						break;
+					case 'copy':
+					case 'cut':
+					case 'paste':
+						this.fillClipboardEventData(eventStruct, e, target);
+						break;
+					case 'keydown':
+					case 'keyup':
+					case 'keypress':
+						this.fillKeyboardEventData(eventStruct, e, target);					
+						break;
+					case 'focus':
+					case 'blur':
+					case 'focusin':
+					case 'focusout':
+						this.fillFocusEventData(eventStruct, e, target);					
+						break;
+					default:
+						this.fillUIEventData(eventStruct, e, target);
+						break;
 				}
 	
 				return eventStruct;
@@ -187,19 +241,27 @@ var Module = {
 				"y"]
 	
 				DOMMouseEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "MouseEvent";
 
-				// Safari does not have a DragEvent instance as it uses MouseEvent
-				if (e.type.startsWith("drag") || e.type === "drop")
+				switch(e.type)
 				{
-					this.fillDragEventData(eventStruct, e, target);
-				}
-				else if (e instanceof WheelEvent)
-				{
-					this.fillWheelEventData(eventStruct, e, target);
+					case 'drag':
+					case 'dragend':
+					case 'dragenter':
+					case 'dragleave':
+					case 'dragover':
+					case 'dragstart':
+					case 'drop':
+						this.fillDragEventData(eventStruct, e, target);
+						break;
+					case 'wheel':
+					case 'mousewheel':
+						this.fillWheelEventData(eventStruct, e, target);					
+						break;
+
 				}
 	
 			},        
@@ -208,7 +270,7 @@ var Module = {
 				var DOMDragEventProps = [];
 	
 				DOMDragEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "DragEvent";
@@ -218,7 +280,7 @@ var Module = {
 				var DOMUIEventProps = []
 	
 				DOMUIEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "UIEvent";
@@ -238,7 +300,7 @@ var Module = {
 				var DOMFocusEventProps = [];
 	
 				DOMFocusEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "FocusEvent";
@@ -257,16 +319,15 @@ var Module = {
 				"DOM_DELTA_PIXEL"];
 	
 				DOMWheelEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "WheelEvent";
 			}, 
-			fillFocusEventData: function (eventStruct, e, target)
+			fillKeyboardData: function (eventStruct, e, target)
 			{
 				var DOMKeyboardEventProps = ["locale",
 				"location",
-				"metakey",
 				"repeat",
 				"which",
 				"code",
@@ -279,11 +340,25 @@ var Module = {
 				];
 	
 				DOMKeyboardEventProps.forEach(function (prop) {
-					eventStruct[prop] = e[prop];
+					eventStruct._event_props[prop] = e[prop];
 				});
 	
 				eventStruct["typeOfEvent"] = "KeyboardEvent";
+			},  
+			fillClipboardEventData: function (eventStruct, e, target)
+			{
+				var DOMClipboardEventProps = [];
+	
+				DOMClipboardEventProps.forEach(function (prop) {
+					eventStruct._event_props[prop] = e[prop];
+				});
+	
+				// what else do we need here.
+				eventStruct["typeOfEvent"] = "ClipboardEvent";
+			
 			},     
+
+
 		
 		},			
 	

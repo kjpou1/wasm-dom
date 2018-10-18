@@ -21,15 +21,17 @@ namespace WebAssembly.Browser.DOM.Events
         //    InvokeMethod<object>("initUIEvent", typeArg, canBubbleArg, cancelableArg, viewArg, detailArg);
         //}
 
-        internal override void InitEvent(Dictionary<string, string> eventInfoDic)
+        internal override void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, int detailArg,
+                                         double screenXArg, double screenYArg, double clientXArg, double clientYArg,
+                                         bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, int buttonArg,
+                                        int eventPhaseArg, bool scopedArg, double timeStampArg,
+                                         Dictionary<string, string> eventInfoDic)
         {
-            base.InitEvent(eventInfoDic);
-            string value = null;
+            base.InitEvent(eventTypeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg,
+                           ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, eventPhaseArg, scopedArg, timeStampArg,
+                           eventInfoDic);
 
-            if (eventInfoDic.TryGetValue("detail", out value))
-            {
-                Detail = Convert.ToInt32(value);
-            }
+            Detail = detailArg;
 
         }
 

@@ -26,14 +26,8 @@ namespace WebAssembly.Browser.DOM.Events
         public double DomKeyLocationStandard { get; internal set; }
         [Export("altKey")]
         public bool AltKey { get; internal set; }
-        [Export("char")]
-        public string Char { get; internal set; }
-        [Export("charCode")]
-        public double CharCode { get; internal set; }
         [Export("ctrlKey")]
         public bool CtrlKey { get; internal set; }
-        [Export("key")]
-        public string Key { get; internal set; }
         [Export("keyCode")]
         public double KeyCode { get; internal set; }
         [Export("locale")]
@@ -61,37 +55,20 @@ namespace WebAssembly.Browser.DOM.Events
         //    InvokeMethod<object>("initKeyboardEvent", typeArg, canBubbleArg, cancelableArg, viewArg, keyArg, locationArg, modifiersListArg, repeat, locale);
         //}
 
-        internal override void InitEvent(Dictionary<string, string> eventInfoDic)
+        internal override void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg, Window viewArg, int detailArg,
+                                         double screenXArg, double screenYArg, double clientXArg, double clientYArg,
+                                         bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, int buttonArg,
+                                        int eventPhaseArg, bool scopedArg, double timeStampArg,
+                                         Dictionary<string, string> eventInfoDic)
         {
-            base.InitEvent(eventInfoDic);
+            base.InitEvent(eventTypeArg, canBubbleArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg,
+                           ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, eventPhaseArg, scopedArg, timeStampArg, eventInfoDic);
             string value = null;
 
-            if (eventInfoDic.TryGetValue("altKey", out value))
-            {
-                AltKey = Convert.ToBoolean(value);
-            }
-
-            if (eventInfoDic.TryGetValue("char", out value))
-            {
-                Char = Convert.ToString(value);
-            }
-
-
-            if (eventInfoDic.TryGetValue("charCode", out value))
-            {
-                CharCode = Convert.ToInt32(value);
-            }
-
-            if (eventInfoDic.TryGetValue("ctrlKey", out value))
-            {
-                CtrlKey = Convert.ToBoolean(value);
-            }
-
-
-            if (eventInfoDic.TryGetValue("key", out value))
-            {
-                Key = Convert.ToString(value);
-            }
+            AltKey = altKeyArg;
+            CtrlKey = ctrlKeyArg;
+            MetaKey = metaKeyArg;
+            ShiftKey = shiftKeyArg;
 
             if (eventInfoDic.TryGetValue("keyCode", out value))
             {
@@ -108,19 +85,9 @@ namespace WebAssembly.Browser.DOM.Events
                 Location = Convert.ToInt32(value);
             }
 
-            if (eventInfoDic.TryGetValue("metaKey", out value))
-            {
-                MetaKey = Convert.ToBoolean(value);
-            }
-
             if (eventInfoDic.TryGetValue("repeat", out value))
             {
                 Repeat = Convert.ToBoolean(value);
-            }
-
-            if (eventInfoDic.TryGetValue("shiftKey", out value))
-            {
-                ShiftKey = Convert.ToBoolean(value);
             }
 
             if (eventInfoDic.TryGetValue("which", out value))

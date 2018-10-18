@@ -26,7 +26,8 @@ namespace HelloDotNetStandard
             button.OnWheel += (DOMObject sender, DOMEventArgs args1) => {
 
                 var evt = (WheelEvent)args1.EventObject;
-                Console.WriteLine($"We got a wheel wwwhhheeeeee! {evt.CurrentTarget}");
+                Console.WriteLine($"We got a wheel wwwhhheeeeee! {evt.TimeStamp}");
+
             };
 
             document.Body.AppendChild(button);
@@ -34,10 +35,10 @@ namespace HelloDotNetStandard
             button.OnClick += async (DOMObject sender, DOMEventArgs args1) => {
 
                 var evt = args1.EventObject;
+                //Console.WriteLine(args1.ClientX);
+                //Console.WriteLine(args1.ClientY);
 
-                Console.WriteLine("before await");
                 await Task.Run(() => UpdateButton(((HTMLButtonElement)sender) )).ConfigureAwait(false); 
-                Console.WriteLine("after await");
 
             };
 

@@ -51,13 +51,33 @@ namespace WebAssembly.Browser.DOM
 
         }
 
-        Func<string, string, JSObject, JSObject, string, int> dispather()
+        public delegate int DOMEventDelegate(string eventType, string typeOfEvent, JSObject eventTarget, JSObject eventHandle,
+                      bool evAltKey,
+                      bool evBubbles,
+                      bool evCancelable,
+                      bool evCtrlKey,
+                      int evDetail,
+                      int evEventPhase,
+                      bool evMetaKey,
+                      bool evShitKey,
+                      int evKeyCode,
+                      int evPointerId,
+                      string evPointerType,
+                      double evScreenX,
+                      double evScreenY,
+                      double timeStamp,
+                      bool evIsTrusted,
+                      bool evScoped,
+                      double evClientX,
+                      double evClientY,
+                      int evButton,
+
+                      string eventInfo = null);
+
+
+        DOMEventDelegate dispather()
         {
-            return (eventType, typeOfEvent, eventId, eventHandle, eventInfo) =>
-            {
-                DispatchDOMEvent(eventType, typeOfEvent, eventId.ToString(), eventHandle, eventInfo);
-                return 0;
-            };
+            return new DOMEventDelegate(DispatchDOMEvent);
         }
 
         [Export("dispatchEvent")]
