@@ -708,11 +708,11 @@ namespace WebAssembly.Browser.DOM
         {
             InvokeMethod<object>("releaseEvents");
         }
-        // [Export("requestAnimationFrame")]
-        // public double RequestAnimationFrame(FrameRequestCallback callback)
-        // {
-        //     return InvokeMethod<double>("requestAnimationFrame", callback);
-        // }
+        [Export("requestAnimationFrame")]
+        public double RequestAnimationFrame(FrameRequestCallback callback)
+        {
+         return InvokeMethod<double>("requestAnimationFrame", callback);
+        }
         [Export("resizeBy")]
         public void ResizeBy(double x, double y)
         {
