@@ -214,9 +214,12 @@ namespace WebAssembly.Browser.DOM
             InvokeMethod<object>("setTransform", m11, m12, m21, m22, dx, dy);
         }
         [Export("stroke")]
-        public void Stroke(Path2D path)
+        public void Stroke(Path2D path = null)
         {
-            InvokeMethod<object>("stroke", path);
+            if (path == null)
+                InvokeMethod<object>("stroke");
+            else
+                InvokeMethod<object>("stroke", path);
         }
         [Export("strokeRect")]
         public void StrokeRect(double x, double y, double w, double h)
