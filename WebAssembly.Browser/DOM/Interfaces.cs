@@ -2704,6 +2704,244 @@ namespace WebAssembly.Browser.DOM
         DocumentFragment GetCueAsHtml();
     }
 
+    public interface IHTMLCanvasElement : IHTMLElement
+    {
+        [Export("height")]
+        double Height { get; set; }
+        [Export("width")]
+        double Width { get; set; }
+        //[Export("getContext")]
+        //CanvasRenderingContext2D GetContext(string contextId, Canvas2DContextAttributes contextAttributes);
+        //[Export("getContext")]
+        //WebGLRenderingContext GetContext(object contextId, WebGLContextAttributes contextAttributes);
+        [Export("getContext")]
+        object GetContext(string contextId, object contextAttributes);
+        //[Export("msToBlob")]
+        //Blob MsToBlob();
+        [Export("toBlob")]
+        void ToBlob(Action callback, string type, params Object[] arguments);
+        [Export("toDataURL")]
+        string ToDataUrl(string type, params Object[] args);
+    }
+
+    public interface ICanvasPathMethods
+    {
+        [Export("arc")]
+        void Arc(double x, double y, double radius, double startAngle, double endAngle, bool anticlockwise);
+        [Export("arcTo")]
+        void ArcTo(double x1, double y1, double x2, double y2, double radius);
+        [Export("arcTo")]
+        void ArcTo(double x1, double y1, double x2, double y2, double radiusX, double radiusY, double rotation);
+        [Export("bezierCurveTo")]
+        void BezierCurveTo(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y);
+        [Export("closePath")]
+        void ClosePath();
+        [Export("ellipse")]
+        void Ellipse(double x, double y, double radiusX, double radiusY, double rotation, double startAngle, double endAngle, bool anticlockwise);
+        [Export("lineTo")]
+        void LineTo(double x, double y);
+        [Export("moveTo")]
+        void MoveTo(double x, double y);
+        [Export("quadraticCurveTo")]
+        void QuadraticCurveTo(double cpx, double cpy, double x, double y);
+        [Export("rect")]
+        void Rect(double x, double y, double w, double h);
+    }
+
+    public interface ICanvasRenderingContext2D : ICanvasPathMethods
+    {
+        [Export("canvas")]
+        HTMLCanvasElement Canvas { get; }
+        [Export("fillStyle")]
+        object FillStyle { get; set; }
+        [Export("font")]
+        string Font { get; set; }
+        [Export("globalAlpha")]
+        double GlobalAlpha { get; set; }
+        [Export("globalCompositeOperation")]
+        string GlobalCompositeOperation { get; set; }
+        [Export("imageSmoothingEnabled")]
+        bool ImageSmoothingEnabled { get; set; }
+        [Export("lineCap")]
+        string LineCap { get; set; }
+        [Export("lineDashOffset")]
+        double LineDashOffset { get; set; }
+        [Export("lineJoin")]
+        string LineJoin { get; set; }
+        [Export("lineWidth")]
+        double LineWidth { get; set; }
+        [Export("miterLimit")]
+        double MiterLimit { get; set; }
+        [Export("mozImageSmoothingEnabled")]
+        bool MozImageSmoothingEnabled { get; set; }
+        [Export("msFillRule")]
+        CanvasFillRule MsFillRule { get; set; }
+        [Export("oImageSmoothingEnabled")]
+        bool OImageSmoothingEnabled { get; set; }
+        [Export("shadowBlur")]
+        double ShadowBlur { get; set; }
+        [Export("shadowColor")]
+        string ShadowColor { get; set; }
+        [Export("shadowOffsetX")]
+        double ShadowOffsetX { get; set; }
+        [Export("shadowOffsetY")]
+        double ShadowOffsetY { get; set; }
+        [Export("strokeStyle")]
+        object StrokeStyle { get; set; }
+        [Export("textAlign")]
+        TextAlign TextAlign { get; set; }
+        [Export("textBaseline")]
+        TextBaseline TextBaseline { get; set; }
+        [Export("webkitImageSmoothingEnabled")]
+        bool WebkitImageSmoothingEnabled { get; set; }
+        [Export("beginPath")]
+        void BeginPath();
+        [Export("clearRect")]
+        void ClearRect(double x, double y, double w, double h);
+        [Export("clip")]
+        void Clip(CanvasFillRule fillRule);
+        [Export("clip")]
+        void Clip(Path2D path, CanvasFillRule fillRule);
+        [Export("createImageData")]
+        ImageData CreateImageData(object imageDataOrSw, double sh);
+        [Export("createLinearGradient")]
+        CanvasGradient CreateLinearGradient(double x0, double y0, double x1, double y1);
+        [Export("createPattern")]
+        CanvasPattern CreatePattern(object image, string repetition);
+        [Export("createRadialGradient")]
+        CanvasGradient CreateRadialGradient(double x0, double y0, double r0, double x1, double y1, double r1);
+        [Export("drawFocusIfNeeded")]
+        void DrawFocusIfNeeded(Element element);
+        [Export("drawFocusIfNeeded")]
+        void DrawFocusIfNeeded(Path2D path, Element element);
+        [Export("drawImage")]
+        void DrawImage(object image, double dstX, double dstY);
+        [Export("drawImage")]
+        void DrawImage(object image, double dstX, double dstY, double dstW, double dstH);
+        [Export("drawImage")]
+        void DrawImage(object image, double srcX, double srcY, double srcW, double srcH, double dstX, double dstY, double dstW, double dstH);
+        [Export("fill")]
+        void Fill(CanvasFillRule fillRule);
+        [Export("fill")]
+        void Fill(Path2D path, CanvasFillRule fillRule);
+        [Export("fillRect")]
+        void FillRect(double x, double y, double w, double h);
+        [Export("fillText")]
+        void FillText(string text, double x, double y, double maxWidth);
+        [Export("getImageData")]
+        ImageData GetImageData(double sx, double sy, double sw, double sh);
+        [Export("getLineDash")]
+        double[] GetLineDash();
+        [Export("isPointInPath")]
+        bool IsPointInPath(double x, double y, CanvasFillRule fillRule);
+        [Export("isPointInPath")]
+        bool IsPointInPath(Path2D path, double x, double y, CanvasFillRule fillRule);
+        [Export("isPointInStroke")]
+        bool IsPointInStroke(double x, double y, CanvasFillRule fillRule);
+        [Export("isPointInStroke")]
+        bool IsPointInStroke(Path2D path, double x, double y, CanvasFillRule fillRule);
+        [Export("measureText")]
+        TextMetrics MeasureText(string text);
+        [Export("putImageData")]
+        void PutImageData(ImageData imagedata, double dx, double dy, double dirtyX, double dirtyY, double dirtyWidth, double dirtyHeight);
+        [Export("restore")]
+        void Restore();
+        [Export("rotate")]
+        void Rotate(double angle);
+        [Export("save")]
+        void Save();
+        [Export("scale")]
+        void Scale(double x, double y);
+        [Export("setLineDash")]
+        void SetLineDash(double[] segments);
+        [Export("setTransform")]
+        void SetTransform(double m11, double m12, double m21, double m22, double dx, double dy);
+        [Export("stroke")]
+        void Stroke(Path2D path);
+        [Export("strokeRect")]
+        void StrokeRect(double x, double y, double w, double h);
+        [Export("strokeText")]
+        void StrokeText(string text, double x, double y, double maxWidth);
+        [Export("transform")]
+        void Transform(double m11, double m12, double m21, double m22, double dx, double dy);
+        [Export("translate")]
+        void Translate(double x, double y);
+    }
+
+    public interface IPath2D : ICanvasPathMethods
+    {
+    }
+
+    public interface ICanvasGradient
+    {
+        [Export("addColorStop")]
+        void AddColorStop(double offset, string color);
+    }
+
+    // experimental technology https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern/setTransform
+    // do not use for now
+    public interface ISVGMatrix
+    {
+        [Export("a")]
+        double A { get; set; }
+        [Export("b")]
+        double B { get; set; }
+        [Export("c")]
+        double C { get; set; }
+        [Export("d")]
+        double D { get; set; }
+        [Export("e")]
+        double E { get; set; }
+        [Export("f")]
+        double F { get; set; }
+        [Export("flipX")]
+        ISVGMatrix FlipX();
+        [Export("flipY")]
+        ISVGMatrix FlipY();
+        [Export("inverse")]
+        ISVGMatrix Inverse();
+        [Export("multiply")]
+        ISVGMatrix Multiply(ISVGMatrix secondMatrix);
+        [Export("rotate")]
+        ISVGMatrix Rotate(double angle);
+        [Export("rotateFromVector")]
+        ISVGMatrix RotateFromVector(double x, double y);
+        [Export("scale")]
+        ISVGMatrix Scale(double scaleFactor);
+        [Export("scaleNonUniform")]
+        ISVGMatrix ScaleNonUniform(double scaleFactorX, double scaleFactorY);
+        [Export("skewX")]
+        ISVGMatrix SkewX(double angle);
+        [Export("skewY")]
+        ISVGMatrix SkewY(double angle);
+        [Export("translate")]
+        ISVGMatrix Translate(double x, double y);
+    }
+
+    public interface ICanvasPattern
+    {
+        // experimental technology https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern/setTransform
+        //[Export("setTransform")]
+        //void SetTransform(SVGMatrix matrix);
+    }
+
+    public interface IImageData
+    {
+        [Export("data")]
+        byte[] Data { get; }
+        [Export("height")]
+        double Height { get; }
+        [Export("width")]
+        double Width { get; }
+    }
+
+    public interface ITextMetrics
+    {
+        [Export("width")]
+        double Width { get; }
+    }
+
+
 
 
 }
