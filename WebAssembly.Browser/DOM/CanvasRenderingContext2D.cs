@@ -66,12 +66,12 @@ namespace WebAssembly.Browser.DOM
             InvokeMethod<object>("clearRect", x, y, w, h);
         }
         [Export("clip")]
-        public void Clip(CanvasFillRule fillRule)
+        public void Clip(CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             InvokeMethod<object>("clip", fillRule);
         }
         [Export("clip")]
-        public void Clip(Path2D path, CanvasFillRule fillRule)
+        public void Clip(Path2D path, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             InvokeMethod<object>("clip", path, fillRule);
         }
@@ -123,12 +123,12 @@ namespace WebAssembly.Browser.DOM
 
 
         [Export("fill")]
-        public void Fill(CanvasFillRule fillRule)
+        public void Fill(CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
-            InvokeMethod<object>("fill", fillRule);
+            InvokeMethod<object>("fill", fillRule = CanvasFillRule.NonZero);
         }
         [Export("fill")]
-        public void Fill(Path2D path, CanvasFillRule fillRule)
+        public void Fill(Path2D path, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             InvokeMethod<object>("fill", path, fillRule);
         }
@@ -154,22 +154,22 @@ namespace WebAssembly.Browser.DOM
             return InvokeMethod<double[]>("getLineDash");
         }
         [Export("isPointInPath")]
-        public bool IsPointInPath(double x, double y, CanvasFillRule fillRule)
+        public bool IsPointInPath(double x, double y, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             return InvokeMethod<bool>("isPointInPath", x, y, fillRule);
         }
         [Export("isPointInPath")]
-        public bool IsPointInPath(Path2D path, double x, double y, CanvasFillRule fillRule)
+        public bool IsPointInPath(Path2D path, double x, double y, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             return InvokeMethod<bool>("isPointInPath", path, x, y, fillRule);
         }
         [Export("isPointInStroke")]
-        public bool IsPointInStroke(double x, double y, CanvasFillRule fillRule)
+        public bool IsPointInStroke(double x, double y, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             return InvokeMethod<bool>("isPointInStroke", x, y, fillRule);
         }
         [Export("isPointInStroke")]
-        public bool IsPointInStroke(Path2D path, double x, double y, CanvasFillRule fillRule)
+        public bool IsPointInStroke(Path2D path, double x, double y, CanvasFillRule fillRule = CanvasFillRule.NonZero)
         {
             return InvokeMethod<bool>("isPointInStroke", path, x, y, fillRule);
         }
