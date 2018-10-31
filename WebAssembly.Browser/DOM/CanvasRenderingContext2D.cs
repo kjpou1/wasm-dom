@@ -242,7 +242,7 @@ namespace WebAssembly.Browser.DOM
             InvokeMethod<object>("translate", x, y);
         }
         [Export("arc")]
-        public void Arc(double x, double y, double radius, double startAngle, double endAngle, bool anticlockwise)
+        public void Arc(double x, double y, double radius, double startAngle, double endAngle, bool anticlockwise = false)
         {
             InvokeMethod<object>("arc", x, y, radius, startAngle, endAngle, anticlockwise);
         }
@@ -267,7 +267,7 @@ namespace WebAssembly.Browser.DOM
             InvokeMethod<object>("closePath");
         }
         [Export("ellipse")]
-        public void Ellipse(double x, double y, double radiusX, double radiusY, double rotation, double startAngle, double endAngle, bool anticlockwise)
+        public void Ellipse(double x, double y, double radiusX, double radiusY, double rotation, double startAngle, double endAngle, bool anticlockwise = false)
         {
             InvokeMethod<object>("ellipse", x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
         }
