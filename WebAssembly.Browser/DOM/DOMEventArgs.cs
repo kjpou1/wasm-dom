@@ -90,7 +90,8 @@ namespace WebAssembly.Browser.DOM
 
             var eventInfoDic = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(eventInfo))
+            // an empty json string still has a length of two "{}"
+            if (!string.IsNullOrEmpty(eventInfo) && eventInfo.Length > 2)
             {
                 var ei = eventInfo.Substring(1, eventInfo.Length - 2).Split(',');
                 string value = null;
