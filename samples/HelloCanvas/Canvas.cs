@@ -22,9 +22,6 @@ namespace HelloCanvas
             var ctx = canvas.GetContext2D();
             ctx.FillStyle = "green";
             ctx.FillRect(0, 0, canvas.Width, canvas.Height);
-            //ctx.StrokeText("Hello", )
-            //ctx.TextAlign
-            Console.WriteLine(ctx.TextAlign);
             ctx.TextAlign = TextAlign.Center;
             ctx.TextBaseline = TextBaseline.Middle;
             ctx.Font = "48px serif";
