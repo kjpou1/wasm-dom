@@ -67,7 +67,19 @@ namespace WebAssembly.Browser.DOM
 
         protected void SetProperty<T>(string expr, T value, bool createIfNotExists = true, bool hasOwnProperty = false)
         {
-            ManagedJSObject.SetObjectProperty(expr, value, createIfNotExists, hasOwnProperty);
+            if (value == null)
+                ManagedJSObject.SetObjectProperty(expr, value, createIfNotExists, hasOwnProperty);
+            else
+            {
+                var valueType = value.GetType();
+
+                if (valueType.IsSubclassOf(typeof(DOMObject)) || valueType == typeof(DOMObject))
+                {
+                    ManagedJSObject.SetObjectProperty(expr, ((DOMObject)(object)value).ManagedJSObject, createIfNotExists, hasOwnProperty);
+                }
+                else
+                    ManagedJSObject.SetObjectProperty(expr, value, createIfNotExists, hasOwnProperty);
+            }
         }
 
         object UnWrapObject(Type type, object obj)
