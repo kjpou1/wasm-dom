@@ -9,6 +9,7 @@ namespace WebAssembly.Browser.DOM
     public class DOMObject : IDisposable
     {
         static readonly JSObject domBrowserInterface = (JSObject)((JSObject)Runtime.GetGlobalObject("WebAssembly_Browser_DOM")).GetObjectProperty("prototype");
+        bool disposed = false;
 
         public JSObject ManagedJSObject { get; private set; }
 
@@ -57,9 +58,9 @@ namespace WebAssembly.Browser.DOM
 
             var propertyValue = ManagedJSObject.GetObjectProperty(expr);
 
-            #if DEBUG
-                    Console.WriteLine($"CS::DOMObject::GetProperty return type {propertyValue.GetType()}");
-            #endif
+            //#if DEBUG
+            //        Console.WriteLine($"CS::DOMObject::GetProperty return type {propertyValue.GetType()}");
+            //#endif
 
             return UnWrapObject<T>(propertyValue);
 
@@ -88,9 +89,9 @@ namespace WebAssembly.Browser.DOM
             if (type.IsSubclassOf(typeof(JSObject)) || type == typeof(JSObject))
             {
 
-#if DEBUG
-                Console.WriteLine($"CS::DOMObject::UnWrapObject::JSObject");
-#endif
+//#if DEBUG
+//                Console.WriteLine($"CS::DOMObject::UnWrapObject::JSObject");
+//#endif
                 var jsobjectconstructor = type.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                                 null, new Type[] { typeof(Int32) }, null);
 
@@ -101,14 +102,14 @@ namespace WebAssembly.Browser.DOM
             else if (type.IsSubclassOf(typeof(DOMObject)) || type == typeof(DOMObject))
             {
 
-#if DEBUG
-                Console.WriteLine($"CS::DOMObject::UnWrapObject::DOMObject");
-#endif
+//#if DEBUG
+//                Console.WriteLine($"CS::DOMObject::UnWrapObject::DOMObject");
+//#endif
                 var jsobjectconstructor = type.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                                 null, new Type[] { typeof(JSObject) }, null);
 
-                var jsobjectnew = jsobjectconstructor.Invoke(new object[] { obj });
-                return jsobjectnew;
+                //var jsobjectnew = jsobjectconstructor.Invoke(new object[] { obj });
+                return jsobjectconstructor.Invoke(new object[] { obj }); ;
 
             }
             else if (type.IsPrimitive || typeof(Decimal) == type)
@@ -199,6 +200,7 @@ namespace WebAssembly.Browser.DOM
 
         }
 
+
         public void Dispose()
         {
             // Dispose of unmanaged resources.
@@ -210,20 +212,32 @@ namespace WebAssembly.Browser.DOM
         // Protected implementation of Dispose pattern.
         protected virtual void Dispose(bool disposing)
         {
-
-            if (disposing)
+            if (!disposed)
             {
+                if (disposing)
+                {
 
-                // Free any other managed objects here.
+                    // Free any other managed objects here.
+                    //
+                }
+                //#if DEBUG
+                //            Console.WriteLine($"CS::DOMObject::Dispose {ManagedJSObject}");
+                //#endif
+                // Free any unmanaged objects here.
                 //
+                ManagedJSObject?.Dispose();
+                ManagedJSObject = null;
+
+                disposed = true;
             }
-//#if DEBUG
-//            Console.WriteLine($"CS::DOMObject::Dispose {ManagedJSObject}");
-//#endif
-            // Free any unmanaged objects here.
-            //
-            ManagedJSObject?.Dispose();
-            ManagedJSObject = null;
+        }
+
+        // We are hanging onto JavaScript objects and pointers.
+        // Make sure the object sticks around long enough or those
+        // same objects may get disposed out from under you.
+        ~DOMObject()
+        {
+            Dispose(false);
         }
     }
 
