@@ -2763,11 +2763,11 @@ namespace WebAssembly.Browser.DOM
         [Export("imageSmoothingEnabled")]
         bool ImageSmoothingEnabled { get; set; }
         [Export("lineCap")]
-        string LineCap { get; set; }
+        LineCap LineCap { get; set; }
         [Export("lineDashOffset")]
         double LineDashOffset { get; set; }
         [Export("lineJoin")]
-        string LineJoin { get; set; }
+        LineJoin LineJoin { get; set; }
         [Export("lineWidth")]
         double LineWidth { get; set; }
         [Export("miterLimit")]

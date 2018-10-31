@@ -24,11 +24,11 @@ namespace WebAssembly.Browser.DOM
         [Export("imageSmoothingEnabled")]
         public bool ImageSmoothingEnabled { get => GetProperty<bool>("imageSmoothingEnabled"); set => SetProperty<bool>("imageSmoothingEnabled", value); }
         [Export("lineCap")]
-        public string LineCap { get => GetProperty<string>("lineCap"); set => SetProperty<string>("lineCap", value); }
+        public LineCap LineCap { get => GetProperty<LineCap>("lineCap"); set => SetProperty<LineCap>("lineCap", value); }
         [Export("lineDashOffset")]
         public double LineDashOffset { get => GetProperty<double>("lineDashOffset"); set => SetProperty<double>("lineDashOffset", value); }
         [Export("lineJoin")]
-        public string LineJoin { get => GetProperty<string>("lineJoin"); set => SetProperty<string>("lineJoin", value); }
+        public LineJoin LineJoin { get => GetProperty<LineJoin>("lineJoin"); set => SetProperty<LineJoin>("lineJoin", value); }
         [Export("lineWidth")]
         public double LineWidth { get => GetProperty<double>("lineWidth"); set => SetProperty<double>("lineWidth", value); }
         [Export("miterLimit")]
@@ -139,7 +139,7 @@ namespace WebAssembly.Browser.DOM
             InvokeMethod<object>("fillRect", x, y, w, h);
         }
         [Export("fillText")]
-        public void FillText(string text, double x, double y, double maxWidth)
+        public void FillText(string text, double x, double y, double maxWidth = Double.MaxValue)
         {
             InvokeMethod<object>("fillText", text, x, y, maxWidth);
         }
