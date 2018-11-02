@@ -64,6 +64,7 @@ namespace CanvasDrawing
 
             var width = (int)window.InnerWidth;
             var height = (int)window.InnerHeight;
+
             for (var i = 0; i < 100; i++)
             {
                 var x = random.Next(0, width);
@@ -77,6 +78,8 @@ namespace CanvasDrawing
                 ctx.Stroke();
                 ctx.ClosePath();
             }
+
+            ctx.Save();
 
             // Quadratric curves example
             ctx.BeginPath();
@@ -92,8 +95,12 @@ namespace CanvasDrawing
             ctx.Stroke();
             ctx.ClosePath();
 
+            ctx.Restore();
+
+
             // Cubic curves example
-            ctx.Translate(100, 100);
+            ctx.Save();
+            ctx.Translate(200, 150);
             ctx.BeginPath();
             ctx.MoveTo(75, 40);
             ctx.BezierCurveTo(75, 37, 70, 25, 50, 25);
@@ -106,9 +113,14 @@ namespace CanvasDrawing
             ctx.Fill();
             ctx.ClosePath();
 
-            // Combination
+            ctx.Restore();
 
-            ctx.Translate(100, 200);
+            // Combination
+            ctx.Save();
+
+            ctx.Translate(200, 300);
+
+            ctx.StrokeStyle = "black";
 
             roundedRect(ctx, 12, 12, 150, 150, 15);
             roundedRect(ctx, 19, 19, 150, 150, 9);
@@ -176,6 +188,45 @@ namespace CanvasDrawing
             ctx.Arc(89, 102, 2, 0, Math.PI * 2, true);
             ctx.Fill();
 
+            ctx.Restore();
+
+
+
+            // shows four elements: a red rectangle, a gradient rectangle, a multicolor rectangle, and a multicolor text.
+
+            ctx.Save();
+            ctx.Translate(400, 300);
+
+            ctx.FillStyle = "#FF0000";
+            ctx.FillRect(20, 20, 100, 50);
+
+            var grd = ctx.CreateLinearGradient(140, 20, 240, 70);
+            grd.AddColorStop(0, "black");
+            grd.AddColorStop(1, "white");
+            ctx.FillStyle = grd;
+            ctx.FillRect(140, 20, 100, 50);
+
+            var grd2 = ctx.CreateLinearGradient(20, 90, 120, 90);
+            grd2.AddColorStop(0, "black");
+            grd2.AddColorStop(0.3, "magenta");
+            grd2.AddColorStop(0.5, "blue");
+            grd2.AddColorStop(0.6, "green");
+            grd2.AddColorStop(0.8, "yellow");
+            grd2.AddColorStop(1, "red");
+            ctx.FillStyle = grd2;
+            ctx.FillRect(20, 90, 100, 50);
+
+            ctx.Font = "30px Verdana";
+            var grd3 = ctx.CreateLinearGradient(140, 20, 240, 90);
+            grd3.AddColorStop(0, "black");
+            grd3.AddColorStop(0.3, "magenta");
+            grd3.AddColorStop(0.6, "blue");
+            grd3.AddColorStop(0.8, "green");
+            grd3.AddColorStop(1, "red");
+            ctx.StrokeStyle = grd3;
+            ctx.StrokeText("Smile!", 140, 120);
+
+            ctx.Restore();
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
